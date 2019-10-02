@@ -10,7 +10,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-// getting-started.js
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://AppUser:MilkShake@it2810-30.idi.ntnu.no/db01', {useNewUrlParser: true});
 

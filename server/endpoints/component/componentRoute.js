@@ -47,10 +47,9 @@ router.post('/', function (req, res) {
 })
 
 
-//TODO: Add put and/or patch request(s) to update components by id and values
 router.put('/:id', function(req, res) {
   console.log("in components put request. id: " + req.params.id);
-  componentModel.findByIdAndUpdate(req.params.id)
+  componentModel.findById(req.params.id)
     .then(dbResComponent => {
       let component;
       // If there is no component with this id, create a new one as per PUT request definition
@@ -93,6 +92,10 @@ router.put('/:id', function(req, res) {
       res.status(500).send(err);
     });
 });
+
+
+  
+
 
 // Get request to get some simple info
 router.get('/about', function (req, res) {

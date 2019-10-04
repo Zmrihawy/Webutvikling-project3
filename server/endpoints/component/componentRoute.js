@@ -8,7 +8,10 @@ router.use(function timeLog (req, res, next) {
   next();
 })
 
-// Get request to get all components
+
+// TYPE: GET
+// ROUTE: /component
+// DESC: Get request to get all components
 router.get('/', function (req, res) {
   componentModel.find()
     .then(components => res.send(components))
@@ -18,6 +21,9 @@ router.get('/', function (req, res) {
     })
 })
 
+
+// TYPE: GET
+// ROUTE: /component/{id}
 // Get request to get component by id
 router.get('/:id', function(req, res) {
   componentModel.findById(req.params.id)
@@ -28,6 +34,9 @@ router.get('/:id', function(req, res) {
     });
 });
 
+
+// TYPE: POST
+// ROUTE /component/{id}
 // Post request to create a new component
 router.post('/', function (req, res) {
   let component = new componentModel({
@@ -47,6 +56,10 @@ router.post('/', function (req, res) {
 })
 
 
+// TYPE: PUT
+// ROUTE: /component/id
+// DESC: Update a component with all new values. Created a new one 
+// if id does not already exist
 router.put('/:id', function(req, res) {
   let component = {
     name: req.body.name, 
@@ -70,6 +83,10 @@ router.put('/:id', function(req, res) {
 });
 
 
+// TYPE: PATCH
+// ROUTE: /component/id
+// DESC: Updates a certain field, or several fields, of a component. Does not create a 
+// new one if id does not exist
 router.patch('/:id', function (req, res) {
   // Get only the required values
   let newObject = req.body;
@@ -90,6 +107,9 @@ router.patch('/:id', function (req, res) {
 });
 
 
+// TYPE: DELETE
+// ROUTE: /component/id
+// DESC: Delete component by id
 router.delete('/:id', function (req, res) {
   componentModel.findByIdAndRemove(req.params.id)
     .then(dbRes => res.send(dbRes))
@@ -99,17 +119,5 @@ router.delete('/:id', function (req, res) {
     })
 });
 
-
-// Get request to get some simple info
-router.get('/about', function (req, res) {
-  res.send('This is the endpoint for components');
-})
-
-
-
-
-//TODO: Add delete request to delete a component
-//
-//
 
 module.exports = router

@@ -1,7 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import '../styles/search-bar.css'
 
+/* Custom styles from material-Ui */
 const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
@@ -9,7 +11,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function OutlinedTextFields() {
+/* SearchBar component begins here. */
+export default function SearchBar() {
+    
   const classes = useStyles();
 
   return (
@@ -18,9 +22,9 @@ export default function OutlinedTextFields() {
           
       <TextField
         id="outlined-full-width"
-        label="Category Search"
+        label="Search Item"
         style={{ margin: 20 }}
-        placeholder="Placeholder"
+        placeholder="Type something ... "
         fullWidth
         margin="normal"
         variant="outlined"
@@ -29,5 +33,6 @@ export default function OutlinedTextFields() {
         }}
       />
     </form>
+          
   );
 }

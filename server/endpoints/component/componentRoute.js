@@ -90,6 +90,16 @@ router.patch('/:id', function (req, res) {
 });
 
 
+router.delete('/:id', function (req, res) {
+  componentModel.findByIdAndRemove(req.params.id)
+    .then(dbRes => res.send(dbRes))
+    .catch(err => {
+      console.log(err);
+      res.status(404).send(err);
+    })
+});
+
+
 // Get request to get some simple info
 router.get('/about', function (req, res) {
   res.send('This is the endpoint for components');

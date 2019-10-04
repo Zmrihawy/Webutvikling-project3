@@ -94,7 +94,34 @@ router.put('/:id', function(req, res) {
 });
 
 
-  
+router.patch('/:id', function (req, res) {
+  console.log('in components put request. id: ' + req.params.id);
+
+  // Get only the required values
+  let newObject;
+  if (req.body.name) {
+    newObject.name = req.body.name;
+  }
+  if (req.body.category) {
+    newObject.category = req.body.category;
+  }
+  if (req.body.description) {
+    newObject.description = req.body.description;
+  }
+  if (req.body.producer) {
+    newObject.producer = req.body.producer;
+  }
+  if (req.body.specs) {
+    newObject.specs = JSON.parse(req.body.specs);
+  }
+
+  componentModel.findByIdAndUpdate(
+    req.params.id,
+    newObject,
+    {new: true},
+  )
+  // .then etc etc
+});
 
 
 // Get request to get some simple info

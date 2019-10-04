@@ -49,44 +49,22 @@ router.post('/', function (req, res) {
 
 router.put('/:id', function(req, res) {
   console.log("in components put request. id: " + req.params.id);
-  componentModel.findById(req.params.id)
-    .then(dbResComponent => {
-      let component;
-      // If there is no component with this id, create a new one as per PUT request definition
-      if (!dbResComponent) {
-        console.log("component was not found, creating a new one");
-        component = new componentModel({
-          name: req.body.name, 
-          category: req.body.category, 
-          description: req.body.description, 
-          producer: req.body.producer,
-          specs: JSON.parse(req.body.specs)
-        }) 
-        component.save()
-          .then(updatedComponent => (
-            res.status(201).send(JSON.stringify(updatedComponent))))
-          .catch(err => {
-            console.log(err);
-            res.status(500).send(err);
-          })
-      // If there is a component with this id, update that component
-      } else {
-        console.log("component was found, updateing with new values");
-        dbResComponent.name = req.body.name, 
-        dbResComponent.category = req.body.category, 
-        dbResComponent.description = req.body.description, 
-        dbResComponent.producer = req.body.producer,
-        dbResComponent.specs = JSON.parse(req.body.specs)
-        dbResComponent.save()
-          .then(updatedComponent => (
-            res.status(201).send(JSON.stringify(updatedComponent))))
-          .catch(err => {
-            console.log(err);
-            res.status(500).send(err);
-          })
-      }
+  let component = {
+    name: req.body.name, 
+    category: req.body.category, 
+    description: req.body.description, 
+    producer: req.body.producer,
+    specs: JSON.parse(req.body.specs)
+  }
 
-    })
+  // Find the object with given id and update. The third argument is an object containing 
+  // options where upsert is whether to create a new object if the id was not found, new means
+  // that it will return the updated object not the old one, and runValidators just tells 
+  // mongoose to run validator functions.
+  componentModel.findByIdAndUpdate(req.params.id, component, {upsert: true, new: true, runValidators: true})
+    .then(updatedComponent => (
+      res.send(updatedComponent)
+    ))
     .catch(err => {
       console.log(err);
       res.status(500).send(err);

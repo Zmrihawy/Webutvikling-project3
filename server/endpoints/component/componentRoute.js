@@ -48,7 +48,6 @@ router.post('/', function (req, res) {
 
 
 router.put('/:id', function(req, res) {
-  console.log("in components put request. id: " + req.params.id);
   let component = {
     name: req.body.name, 
     category: req.body.category, 
@@ -56,7 +55,6 @@ router.put('/:id', function(req, res) {
     producer: req.body.producer,
     specs: JSON.parse(req.body.specs)
   }
-
   // Find the object with given id and update. The third argument is an object containing 
   // options where upsert is whether to create a new object if the id was not found, new means
   // that it will return the updated object not the old one, and runValidators just tells 
@@ -73,32 +71,22 @@ router.put('/:id', function(req, res) {
 
 
 router.patch('/:id', function (req, res) {
-  console.log('in components put request. id: ' + req.params.id);
-
   // Get only the required values
-  let newObject;
-  if (req.body.name) {
-    newObject.name = req.body.name;
-  }
-  if (req.body.category) {
-    newObject.category = req.body.category;
-  }
-  if (req.body.description) {
-    newObject.description = req.body.description;
-  }
-  if (req.body.producer) {
-    newObject.producer = req.body.producer;
-  }
+  let newObject = req.body;
+  // Need to handle specs individually since it needs to be parsed
   if (req.body.specs) {
     newObject.specs = JSON.parse(req.body.specs);
   }
-
   componentModel.findByIdAndUpdate(
     req.params.id,
     newObject,
-    {new: true},
+    {new: true, runValidators: true}
   )
-  // .then etc etc
+    .then(updatedComponent => res.send(updatedComponent))
+    .catch(err => {
+      console.log(err);
+      res.status(404).send(err);
+    });
 });
 
 

@@ -20,8 +20,8 @@ db.once("open", function() {
   console.log("Succesfully connected to mongodb server");
 });
 
-app.use("/example", example);
-app.use("/component", componentRoute);
+app.use("/api/example", example);
+app.use("/api/component", componentRoute);
 
 app.get("/", (req, res) => res.send("Hello World!"));
 

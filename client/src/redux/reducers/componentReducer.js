@@ -1,5 +1,4 @@
-import { GET_COMPONENTS } from '../actions/types';
-
+import { GET_COMPONENTS } from "../actions/types";
 
 const initialState = [];
 
@@ -14,4 +13,3 @@ export default function(state = initialState, action) {
       return state;
   }
 }
-

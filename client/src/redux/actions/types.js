@@ -1,1 +1,1 @@
-export const GET_COMPONENTS = 'GET_COMPONENTS';
+export const GET_COMPONENTS = "GET_COMPONENTS";

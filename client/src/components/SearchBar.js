@@ -1,25 +1,22 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import '../styles/search-bar.css'
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import "../styles/search-bar.css";
 
 /* Custom styles from material-Ui */
 const useStyles = makeStyles(theme => ({
   container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
+    display: "flex",
+    flexWrap: "wrap"
+  }
 }));
 
 /* SearchBar component begins here. */
 export default function SearchBar() {
-    
   const classes = useStyles();
 
   return (
-          
     <form className={classes.container} noValidate autoComplete="off">
-          
       <TextField
         id="outlined-full-width"
         label="Search Item"
@@ -29,10 +26,9 @@ export default function SearchBar() {
         margin="normal"
         variant="outlined"
         InputLabelProps={{
-          shrink: true,
+          shrink: true
         }}
       />
     </form>
-          
   );
 }

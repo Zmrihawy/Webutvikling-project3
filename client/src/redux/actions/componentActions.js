@@ -1,8 +1,7 @@
-import { GET_COMPONENTS } from './types';
-
+import { GET_COMPONENTS } from "./types";
 
 export const getComponents = () => dispatch => {
-  return fetch('api/component')
+  return fetch("api/component")
     .then(res => {
       return dispatch({
         type: GET_COMPONENTS,

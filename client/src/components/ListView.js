@@ -36,16 +36,16 @@ const useStyles = makeStyles(theme => ({
 
 const ListView = (props) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState({});
 
-  const handleClick = () => {
-    setOpen(!open);
+  const handleClick = (componentId) => {
+    let tmpOpen = JSON.parse(JSON.stringify(open));
+    tmpOpen[componentId] = tmpOpen[componentId] === undefined ? true : !tmpOpen[componentId];
+    setOpen(tmpOpen);
   };
 
-  console.log(props);
 
   useEffect(() => {
-    console.log("fetching components");
     props.getComponents();
   }, [JSON.stringify(props.components)])
 
@@ -53,23 +53,31 @@ const ListView = (props) => {
   
   const mappedComponents = props.components.map(component => (
     <React.Fragment key={component._id}>
-      <ListItem button onClick={handleClick}>
+      <Divider />
+      <ListItem button onClick={() => handleClick(component._id)}>
         <ListItemText primary={component.name}/>
-        <ListItemText primary={component.category}/>
-        <ListItemText primary={component.producer}/>
-        {open ? <ExpandLess /> : <ExpandMore />}
+
+        <ListItemIcon>
+          <StarBorder />
+        </ListItemIcon>
+        {open[component._id] ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
+        <Collapse in={open[component._id] === undefined ? false : open[component._id]} timeout="auto" unmountOnExit>
+          <ListItemText primary={"Category: " + component.category}/>
+          <ListItemText primary={"Procuder: " + component.producer}/>
+          <List component="div" disablePadding
+            aria-labelledby="nested-list-subheader"
+            subheader={
+              <ListSubheader component="div" id="nested-list-subheader">
+                Specs
+              </ListSubheader>
+            }
+            className={classes.root}
+            >
             { component.specs.map(spec => (
-              <ListItem className={classes.nested}>
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText primary={spec.name}/>
-                <ListItemText primary={spec.value} />
-                <ListItemText primary={spec.description} />
+              <ListItem className={classes.nested} key={spec._id}>
+                <ListItemText primary={spec.name + ": " + spec.value}/>
               </ListItem>
             ))
             }

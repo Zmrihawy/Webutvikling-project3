@@ -1,0 +1,16 @@
+._homepage_feautured {
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 260px 260px 260px;
+    grid-template-rows: 400px;
+    grid-gap: 14px;
+}
+
+.MuiButtonBase-root {
+    height: 220px;
+}
+
+.MuiCardActions-root {
+    height: 200px;
+    justify-content: center;
+}

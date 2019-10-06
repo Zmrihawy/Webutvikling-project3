@@ -6,6 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import "../styles/item.css"
 
 const useStyles = makeStyles({
     card: {
@@ -20,32 +21,34 @@ export default function Item(props) {
     const {img} = props;
 
     return (
-        <Card className={classes.card}>
-            <CardActionArea>
-                <CardMedia
-                    component="img"
-                    alt="Item Image will go here"
-                    height="220"
-                    image={img}
-                    title="Item Image Name"
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        Item Title here
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        Item description here
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <p color="primary">
-                    Rating
-                </p>
-                <p color="primary">
-                    Price
-                </p>
-            </CardActions>
-        </Card>
+     <div className="_item">
+            <Card className={classes.card}>
+                     <CardActionArea>
+                         <CardMedia
+                             component="img"
+                             alt="Item Image will go here"
+                             height="100%"
+                             image={img}
+                             title="Item Image Name"
+                         />
+                         <CardContent>
+                             <Typography gutterBottom variant="h5" component="h2">
+                                 Item Title here
+                             </Typography>
+                             <Typography variant="body2" color="textSecondary" component="p">
+                                 Item description here
+                             </Typography>
+                         </CardContent>
+                     </CardActionArea>
+                     <CardActions>
+                         <p color="primary">
+                             Rating
+                         </p>
+                         <p color="primary">
+                             Price
+                         </p>
+                     </CardActions>
+                 </Card>
+     </div>
     );
 }

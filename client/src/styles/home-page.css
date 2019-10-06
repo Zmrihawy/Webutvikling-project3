@@ -1,7 +1,7 @@
 ._homepage_feautured {
     justify-content: center;
     display: grid;
-    grid-template-columns: 260px 260px 260px;
+    grid-template-columns: repeat(3, 260px);
     grid-template-rows: 400px;
     grid-gap: 14px;
 }
@@ -13,4 +13,18 @@
 .MuiCardActions-root {
     height: 200px;
     justify-content: center;
+}
+
+
+@media only screen and (max-width: 840px) {
+    ._homepage_feautured {
+        grid-template-columns: repeat(3, 200px);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    ._homepage_feautured {
+        grid-template-columns: repeat(2, 200px);
+        grid-template-rows: repeat(2, 400px);
+    }
 }

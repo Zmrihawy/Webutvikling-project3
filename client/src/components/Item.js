@@ -16,6 +16,7 @@ const useStyles = makeStyles({
 
 export default function Item(props) {
     const classes = useStyles();
+    /* We can pass other props here like description and price */
     const {img} = props;
 
     return (

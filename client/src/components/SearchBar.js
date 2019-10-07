@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import "../styles/search-bar.css";
 
 /* Custom styles from material-Ui */
 const useStyles = makeStyles(theme => ({

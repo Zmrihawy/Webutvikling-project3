@@ -6,8 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import '../styles/home-page.css'
 
+/* Sample Images to use */
 import airpods from '../media/images/items/Airpods.jpg';
-import mac from '../media/images/items/mbp-15.jpg';
+import mac from '../media/images/items/MBP-15.jpg';
 import iphone from '../media/images/items/iphone.jpg';
 import ListView from "../components/ListView";
 

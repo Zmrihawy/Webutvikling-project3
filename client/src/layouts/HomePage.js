@@ -23,19 +23,19 @@ export default class HomePage extends React.Component {
             /* Outer Container */
             <React.Fragment>
 
-                <CssBaseline/>
                 <Container maxWidth="lg">
+                    <SearchBar />
+                    <ListView />
+                    <CssBaseline/>
                     <Typography component="div" style={{
                         backgroundColor: '',
                         height: '100vh',
                         marginTop: '20px',
                         borderRadius: '4px'
                     }}>
-			<SearchBar />
-			<ListView />
+
                         { /* HOMEPAGE Components go here */ }
                         <div className='_homepage'>
-                            <SearchBar/>
                             <h3> Feautured Items </h3>
                             <div className="_homepage_feautured">
                                 <Item img={airpods} />

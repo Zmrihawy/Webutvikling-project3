@@ -70,14 +70,17 @@ const ListView = props => {
         </ListItemIcon>
         {open[component._id] ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <ListItem>
         <Collapse
           in={open[component._id] === undefined ? false : open[component._id]}
           timeout="auto"
           unmountOnExit
-        >
-          <ListItemText primary={"Category: " + component.category} />
-          <ListItemText primary={"Procuder: " + component.producer} />
+        >         
+          <ListItem>
+            <ListItemText primary={"Category: " + component.category} />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary={"Procuder: " + component.producer} />
+          </ListItem>
           <List
             component="div"
             disablePadding
@@ -96,7 +99,6 @@ const ListView = props => {
             ))}
           </List>
         </Collapse>
-      </ListItem>
     </React.Fragment>
   ));
 

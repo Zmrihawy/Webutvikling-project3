@@ -7,11 +7,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
 
 import Collapse from '@material-ui/core/Collapse';
-import SendIcon from '@material-ui/icons/Send';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
@@ -25,7 +22,6 @@ import { getComponents } from '../redux/actions/componentActions';
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    // maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
@@ -36,21 +32,37 @@ const useStyles = makeStyles(theme => ({
 
 const ListView = (props) => {
   const classes = useStyles();
+
+  // State for details toggle for each component list element
+  // Open is an object where each component id is a key to its boolean
   const [open, setOpen] = React.useState({});
 
+  // Handle event that a component list item was clicked. If component is
+  // open it should be closed and vice versa.
   const handleClick = (componentId) => {
+    // Deep copy open to new variable tmpOpen. This is done to make setOpen() actually
+    // trigger a rerender. If only shallow copying is done, it will not trigger a rerender
+    // even if the object is changed, because it only checks if the reference has changed.
     let tmpOpen = JSON.parse(JSON.stringify(open));
+    // Since default value is false, set to true if it is undefined (since that means
+    // this was the first time the component was clicked), else change it from whatever 
+    // the previous value was.
     tmpOpen[componentId] = tmpOpen[componentId] === undefined ? true : !tmpOpen[componentId];
     setOpen(tmpOpen);
   };
 
 
+  // Tell redux to get components on inital render and when redux state changes.
+  // The second argument is a value that React will use to determine if it should
+  // fire this function on an update. We need to JSON.stringify() this object so 
+  // it actually checks the values, not only the references.
   useEffect(() => {
     props.getComponents();
   }, [JSON.stringify(props.components)])
 
-
   
+  // Map component to material list elements, with collapse functionality
+  // React.Fragment is used to return more than one JSX node
   const mappedComponents = props.components.map(component => (
     <React.Fragment key={component._id}>
       <Divider />
@@ -87,6 +99,7 @@ const ListView = (props) => {
   </React.Fragment>
   ))
 
+  // Return a list with all components
   return (
       <List
       component="nav"
@@ -104,14 +117,12 @@ const ListView = (props) => {
 }
 
 
+// Map redux state and actionCreators to props
 function mapStateToProps(state) {
   const { component } = state
   return { components: component.components };
 }
-
 const actionCreators = {
   getComponents
 }
-
 export default connect(mapStateToProps, actionCreators)(ListView);
-

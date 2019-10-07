@@ -1,36 +1,33 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import Divider from '@material-ui/core/Divider';
+import { makeStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import Divider from "@material-ui/core/Divider";
 
-import Collapse from '@material-ui/core/Collapse';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import StarBorder from "@material-ui/icons/StarBorder";
 
+import { connect } from "react-redux";
 
-import { connect } from 'react-redux';
-
-import { getComponents } from '../redux/actions/componentActions';
-
+import { getComponents } from "../redux/actions/componentActions";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
+    width: "100%",
+    backgroundColor: theme.palette.background.paper
   },
   nested: {
-    paddingLeft: theme.spacing(4),
-  },
+    paddingLeft: theme.spacing(4)
+  }
 }));
 
-
-const ListView = (props) => {
+const ListView = props => {
   const classes = useStyles();
 
   // State for details toggle for each component list element
@@ -39,35 +36,34 @@ const ListView = (props) => {
 
   // Handle event that a component list item was clicked. If component is
   // open it should be closed and vice versa.
-  const handleClick = (componentId) => {
+  const handleClick = componentId => {
     // Deep copy open to new variable tmpOpen. This is done to make setOpen() actually
     // trigger a rerender. If only shallow copying is done, it will not trigger a rerender
     // even if the object is changed, because it only checks if the reference has changed.
     let tmpOpen = JSON.parse(JSON.stringify(open));
     // Since default value is false, set to true if it is undefined (since that means
-    // this was the first time the component was clicked), else change it from whatever 
+    // this was the first time the component was clicked), else change it from whatever
     // the previous value was.
-    tmpOpen[componentId] = tmpOpen[componentId] === undefined ? true : !tmpOpen[componentId];
+    tmpOpen[componentId] =
+      tmpOpen[componentId] === undefined ? true : !tmpOpen[componentId];
     setOpen(tmpOpen);
   };
 
-
   // Tell redux to get components on inital render and when redux state changes.
   // The second argument is a value that React will use to determine if it should
-  // fire this function on an update. We need to JSON.stringify() this object so 
+  // fire this function on an update. We need to JSON.stringify() this object so
   // it actually checks the values, not only the references.
   useEffect(() => {
     props.getComponents();
-  }, [JSON.stringify(props.components)])
+  }, [JSON.stringify(props.components)]);
 
-  
   // Map component to material list elements, with collapse functionality
   // React.Fragment is used to return more than one JSX node
   const mappedComponents = props.components.map(component => (
     <React.Fragment key={component._id}>
       <Divider />
       <ListItem button onClick={() => handleClick(component._id)}>
-        <ListItemText primary={component.name}/>
+        <ListItemText primary={component.name} />
 
         <ListItemIcon>
           <StarBorder />
@@ -75,10 +71,16 @@ const ListView = (props) => {
         {open[component._id] ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <ListItem>
-        <Collapse in={open[component._id] === undefined ? false : open[component._id]} timeout="auto" unmountOnExit>
-          <ListItemText primary={"Category: " + component.category}/>
-          <ListItemText primary={"Procuder: " + component.producer}/>
-          <List component="div" disablePadding
+        <Collapse
+          in={open[component._id] === undefined ? false : open[component._id]}
+          timeout="auto"
+          unmountOnExit
+        >
+          <ListItemText primary={"Category: " + component.category} />
+          <ListItemText primary={"Procuder: " + component.producer} />
+          <List
+            component="div"
+            disablePadding
             aria-labelledby="nested-list-subheader"
             subheader={
               <ListSubheader component="div" id="nested-list-subheader">
@@ -86,22 +88,21 @@ const ListView = (props) => {
               </ListSubheader>
             }
             className={classes.root}
-            >
-            { component.specs.map(spec => (
+          >
+            {component.specs.map(spec => (
               <ListItem className={classes.nested} key={spec._id}>
-                <ListItemText primary={spec.name + ": " + spec.value}/>
+                <ListItemText primary={spec.name + ": " + spec.value} />
               </ListItem>
-            ))
-            }
+            ))}
           </List>
         </Collapse>
       </ListItem>
-  </React.Fragment>
-  ))
+    </React.Fragment>
+  ));
 
   // Return a list with all components
   return (
-      <List
+    <List
       component="nav"
       aria-labelledby="nested-list-subheader"
       subheader={
@@ -110,19 +111,21 @@ const ListView = (props) => {
         </ListSubheader>
       }
       className={classes.root}
-      >
+    >
       {mappedComponents}
     </List>
-  )
-}
-
+  );
+};
 
 // Map redux state and actionCreators to props
 function mapStateToProps(state) {
-  const { component } = state
+  const { component } = state;
   return { components: component.components };
 }
 const actionCreators = {
   getComponents
-}
-export default connect(mapStateToProps, actionCreators)(ListView);
+};
+export default connect(
+  mapStateToProps,
+  actionCreators
+)(ListView);

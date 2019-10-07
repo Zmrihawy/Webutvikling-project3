@@ -29,10 +29,11 @@ const useStyles = makeStyles(theme => ({
 
 const ListView = props => {
   const classes = useStyles();
+  const { getComponents, components } = props;
 
   // State for details toggle for each component list element
   // Open is an object where each component id is a key to its boolean
-  const [open, setOpen] = React.useState({});
+  const [open, setOpen] = useState({});
 
   // Handle event that a component list item was clicked. If component is
   // open it should be closed and vice versa.
@@ -50,16 +51,15 @@ const ListView = props => {
   };
 
   // Tell redux to get components on inital render and when redux state changes.
-  // The second argument is a value that React will use to determine if it should
-  // fire this function on an update. We need to JSON.stringify() this object so
-  // it actually checks the values, not only the references.
+  // The second argument is an array of dependencied for useEffect(). The array also
+  // plays a part in determining when the compomnent should update.
   useEffect(() => {
-    props.getComponents();
-  }, [JSON.stringify(props.components)]);
+    getComponents();
+  }, [getComponents]);
 
   // Map component to material list elements, with collapse functionality
   // React.Fragment is used to return more than one JSX node
-  const mappedComponents = props.components.map(component => (
+  const mappedComponents = components.map(component => (
     <React.Fragment key={component._id}>
       <Divider />
       <ListItem button onClick={() => handleClick(component._id)}>
@@ -70,14 +70,17 @@ const ListView = props => {
         </ListItemIcon>
         {open[component._id] ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <ListItem>
         <Collapse
           in={open[component._id] === undefined ? false : open[component._id]}
           timeout="auto"
           unmountOnExit
-        >
-          <ListItemText primary={"Category: " + component.category} />
-          <ListItemText primary={"Procuder: " + component.producer} />
+        >         
+          <ListItem>
+            <ListItemText primary={"Category: " + component.category} />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary={"Procuder: " + component.producer} />
+          </ListItem>
           <List
             component="div"
             disablePadding
@@ -96,7 +99,6 @@ const ListView = props => {
             ))}
           </List>
         </Collapse>
-      </ListItem>
     </React.Fragment>
   ));
 

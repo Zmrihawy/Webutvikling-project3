@@ -9,7 +9,6 @@ import '../styles/home-page.css'
 import airpods from '../media/images/items/Airpods.jpg';
 import mac from '../media/images/items/mbp-15.jpg';
 import iphone from '../media/images/items/iphone.jpg';
-import MainBar from "../components/MainBar.js";
 import ListView from "../components/ListView";
 
 

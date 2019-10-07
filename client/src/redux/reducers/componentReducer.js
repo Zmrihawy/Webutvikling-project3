@@ -1,6 +1,8 @@
 import { GET_COMPONENTS } from "../actions/types";
 
-const initialState = [];
+const initialState = {
+  components: []
+};
 
 export default function(state = initialState, action) {
   switch (action.type) {

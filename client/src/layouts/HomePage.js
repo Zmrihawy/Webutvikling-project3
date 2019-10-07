@@ -9,6 +9,8 @@ import '../styles/home-page.css'
 import airpods from '../media/images/items/Airpods.jpg';
 import mac from '../media/images/items/mbp-15.jpg';
 import iphone from '../media/images/items/iphone.jpg';
+import MainBar from "../components/MainBar.js";
+import ListView from "../components/ListView";
 
 
 
@@ -20,6 +22,7 @@ export default class HomePage extends React.Component {
         return (
             /* Outer Container */
             <React.Fragment>
+
                 <CssBaseline/>
                 <Container maxWidth="lg">
                     <Typography component="div" style={{
@@ -28,7 +31,8 @@ export default class HomePage extends React.Component {
                         marginTop: '20px',
                         borderRadius: '4px'
                     }}>
-
+			<SearchBar />
+			<ListView />
                         { /* HOMEPAGE Components go here */ }
                         <div className='_homepage'>
                             <SearchBar/>

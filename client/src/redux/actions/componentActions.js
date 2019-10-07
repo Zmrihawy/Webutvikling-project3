@@ -2,11 +2,17 @@ import { GET_COMPONENTS } from "./types";
 
 export const getComponents = () => dispatch => {
   return fetch("api/component")
+    .then(res => res.json())
     .then(res => {
       return dispatch({
         type: GET_COMPONENTS,
-        payload: res.data
+        payload: (res ? res : [])
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      return dispatch({
+        type: GET_COMPONENTS,
+        payload: []
+      })
+    });
 };

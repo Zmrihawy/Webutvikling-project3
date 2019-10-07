@@ -1,5 +1,6 @@
 import React from "react";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../components/SearchBar.js";
+import MainBar from "../components/MainBar.js";
 import ListView from "../components/ListView";
 
 /* HomePage layout here */

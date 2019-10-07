@@ -12,7 +12,7 @@ class MainBar extends Component {
       <div>
        <AppBar color="primary" position="static">
           <Toolbar>
-            <TypoGraphy variant="title"
+            <TypoGraphy variant="subtitle1"
               color="inherit"
             >
               My NavBar

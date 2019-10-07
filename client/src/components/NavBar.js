@@ -13,13 +13,13 @@ function NavBar(props) {
         <List component="nav">
             <ListItem component="div">
                 <Button color = "inherit">
-                    <TypoGraphy color="inherit" variant="title">
+                    <TypoGraphy color="inherit" variant="subtitle1">
                         Home
                     </TypoGraphy>
                 </Button>
                 
                 <Button color = "inherit">
-                    <TypoGraphy color="inherit" variant="title">
+                    <TypoGraphy color="inherit" variant="subtitle1">
                         Categories
                     </TypoGraphy>
                </Button>

@@ -50,5 +50,5 @@ export default class HomePage extends React.Component {
                 </Container>
             </React.Fragment>
         );
-    };
+    }
 }

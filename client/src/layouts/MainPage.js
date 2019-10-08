@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ItemDetails from "./ItemDetails";
 import HomePage from './HomePage';
 
 class MainPage extends Component {

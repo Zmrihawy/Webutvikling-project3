@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import MainPage from "./layouts/MainPage";
 import MainBar from './components/MainBar';
 import ItemDetails from "./layouts/ItemDetails";
+import ComponentListPage from './layouts/ComponentListPage';
 import "./App.css";
 
 
@@ -14,11 +15,12 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <MainBar/>
         <Router>
+          <MainBar/>
           <Switch>
             <Route exact path="/" component={MainPage} />
-            <Route path="/itemDetails" component={ItemDetails} />
+            <Route path="/item-details" component={ItemDetails} />
+            <Route path="/component-list" component={ComponentListPage} />
             <Route component={() => (<Typography variant="h1"> Sorry, page not found </Typography>)}/>
           </Switch>
         </Router>

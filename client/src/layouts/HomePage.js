@@ -4,6 +4,7 @@ import Item from "../components/Item";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import Divider from '@material-ui/core/Divider';
 import '../styles/home-page.css'
 
 /* Sample Images to use */
@@ -24,19 +25,14 @@ export default class HomePage extends React.Component {
             <React.Fragment>
 
                 <Container maxWidth="lg">
-                    <SearchBar />
-                    <ListView />
                     <CssBaseline/>
-                    <Typography component="div" style={{
-                        backgroundColor: '',
-                        height: '100vh',
-                        marginTop: '20px',
-                        borderRadius: '4px'
-                    }}>
-
                         { /* HOMEPAGE Components go here */ }
+                        <Typography variant="h3" style={{margin: "20px"}}>
+                          Welcome to our website
+                        </Typography>
+                        <Divider />
                         <div className='_homepage'>
-                            <h3> Feautured Items </h3>
+                            <Typography variant="subtitle1" style={{marginTop: "20px"}}> Feautured Items </Typography>
                             <div className="_homepage_feautured">
                                 <Item img={airpods} />
                                 <Item img={mac} />
@@ -45,8 +41,6 @@ export default class HomePage extends React.Component {
                                 <Item img={iphone} />
                             </div>
                         </div>
-
-                    </Typography>
                 </Container>
             </React.Fragment>
         );

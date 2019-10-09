@@ -14,6 +14,9 @@ class MainBar extends Component {
           <Toolbar>
             <TypoGraphy variant="subtitle1"
               color="inherit"
+              style={{paddingRight: '1.5em',
+                  marginRight: '1em',
+                  borderRight: '0.05em solid rgba(255, 255, 255, 0.5)'}}
             >
               My NavBar
               

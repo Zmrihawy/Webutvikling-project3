@@ -5,7 +5,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import "../styles/home-page.css";
 
 /* Sample Images to use */
 import airpods from "../media/images/items/Airpods.jpg";

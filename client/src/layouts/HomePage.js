@@ -1,16 +1,16 @@
 import React from "react";
-import SearchBar from "../components/SearchBar";
 import Item from "../components/Item";
+
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+import Divider from "@material-ui/core/Divider";
 
 /* Sample Images to use */
 import airpods from "../media/images/items/Airpods.jpg";
 import mac from "../media/images/items/mbp-15.jpg";
 import iphone from "../media/images/items/iphone.jpg";
-import ListView from "../components/ListView";
 
 /* HomePage layout here */
 export default class HomePage extends React.Component {
@@ -19,8 +19,6 @@ export default class HomePage extends React.Component {
       /* Outer Container */
       <React.Fragment>
         <Container maxWidth="lg">
-          <SearchBar />
-          <ListView />
           <CssBaseline />
           <Typography
             component="div"
@@ -32,8 +30,15 @@ export default class HomePage extends React.Component {
             }}
           >
             {/* HOMEPAGE Components go here */}
+            <Typography variant="h3" style={{ margin: "20px" }}>
+              Welcome to our website
+            </Typography>
+            <Divider />
             <div className="_homepage">
-              <h3> Feautured Items </h3>
+              <Typography variant="subtitle1" style={{ marginTop: "20px" }}>
+                {" "}
+                Feautured Items{" "}
+              </Typography>
 
               <Grid
                 container

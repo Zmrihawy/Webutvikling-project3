@@ -1,5 +1,4 @@
 import React from "react";
-import SearchBar from "../components/SearchBar";
 import Item from "../components/Item";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
@@ -11,7 +10,6 @@ import '../styles/home-page.css'
 import airpods from '../media/images/items/Airpods.jpg';
 import mac from '../media/images/items/mbp-15.jpg';
 import iphone from '../media/images/items/iphone.jpg';
-import ListView from "../components/ListView";
 
 
 

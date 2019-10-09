@@ -4,7 +4,7 @@ import ListView from '../components/ListView';
 import SearchBar from '../components/SearchBar';
 
 
-const ComponentListPage = (props) => {
+const ComponentListPage = () => {
   return (
     <div>
       <SearchBar />

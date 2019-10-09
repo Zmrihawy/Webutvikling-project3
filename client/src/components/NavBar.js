@@ -1,11 +1,9 @@
 import React from "react";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 import TypoGraphy from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 
-function NavBar(props) {
+function NavBar() {
   return (
     <React.Fragment>
 

@@ -9,7 +9,6 @@ import Paper from '@material-ui/core/Paper';
 
 
 
-import '../styles/item-details.css';
 import airpods from '../media/images/items/Airpods.jpg';
 
 

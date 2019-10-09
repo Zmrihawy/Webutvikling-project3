@@ -2,7 +2,7 @@ import React from "react";
 import Typography from '@material-ui/core/Typography'
 import { Provider } from "react-redux";
 import store from "./store";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import MainPage from "./layouts/MainPage";
 import MainBar from './components/MainBar';

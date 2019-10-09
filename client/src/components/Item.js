@@ -10,8 +10,10 @@ import "../styles/item.css"
 
 const useStyles = makeStyles({
     card: {
-        maxWidth: 400,
-        maxHeight: 345,
+        maxWidth: 200,
+    },
+    media: {
+      height: 140,
     },
 });
 
@@ -24,17 +26,19 @@ export default function Item(props) {
      <div className="_item">
             <Card className={classes.card}>
                      <CardActionArea>
-                         <CardMedia
-                             component="img"
-                             alt="Item Image will go here"
-                             height="100%"
-                             image={img}
-                             title="Item Image Name"
-                         />
                          <CardContent>
                              <Typography gutterBottom variant="h5" component="h2">
                                  Item Title here
                              </Typography>
+                        </CardContent>
+                         <CardMedia
+                            className={classes.media}
+                             component="img"
+                             alt="Item Image will go here"
+                             image={img}
+                             title="Item Image Name"
+                         />
+                          <CardContent>
                              <Typography variant="body2" color="textSecondary" component="p">
                                  Item description here
                              </Typography>
@@ -49,6 +53,6 @@ export default function Item(props) {
                          </p>
                      </CardActions>
                  </Card>
-     </div>
+    </div>
     );
 }

@@ -4,6 +4,7 @@ import Item from "../components/Item";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import '../styles/home-page.css'
 
 /* Sample Images to use */
@@ -37,13 +38,25 @@ export default class HomePage extends React.Component {
                         { /* HOMEPAGE Components go here */ }
                         <div className='_homepage'>
                             <h3> Feautured Items </h3>
-                            <div className="_homepage_feautured">
+
+                            <Grid container spacing={2} justify='center' className="_homepage_feautured">
+                              <Grid item>
                                 <Item img={airpods} />
+                              </Grid>
+                              <Grid item>
                                 <Item img={mac} />
+                              </Grid>
+                              <Grid item>
                                 <Item img={iphone} />
+                              </Grid>
+                              <Grid item>
                                 <Item img={mac} />
+                              </Grid>
+                              <Grid item>
                                 <Item img={iphone} />
-                            </div>
+                              </Grid>
+                            </Grid>
+
                         </div>
 
                     </Typography>

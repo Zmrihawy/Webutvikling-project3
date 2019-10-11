@@ -5,7 +5,7 @@ class MainPage extends Component {
   render() {
     return (
       <div className="MainPage">
-        <HomePage/ >
+        <HomePage />
       </div>
     );
   }

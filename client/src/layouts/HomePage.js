@@ -29,22 +29,14 @@ const HomePage = props => {
 
     // eslint-disable-next-line react/prop-types
     const mappedItems = components.map(component => (
-        <div className="_homepage" key={component.id}>
-            <Typography variant="subtitle1" style={{marginTop: "20px"}}>
-                {" "} Featured Items {" "}
-            </Typography>
-
-            <Grid container spacing={2} justify="center" className="_homepage_featured">
-                <Grid item>
-                    <Item
-                        img={component.pictureURL}
-                        title={component.name}
-                        description={component.description}
-                        category={component.category}
-                        price={component.price}/>
-                </Grid>
-            </Grid>
-        </div>
+        <Grid key={component.id}>
+            <Item
+                img={component.pictureURL}
+                title={component.name}
+                description={component.description}
+                category={component.category}
+                price={component.price}/>
+        </Grid>
     ));
 
 
@@ -61,8 +53,16 @@ const HomePage = props => {
                     </Typography>
 
                     <Divider/>
-                    {mappedItems}
+                    <div className="_homepage">
+                        <Typography variant="subtitle1" style={{marginTop: "20px"}}>
+                            {" "} Featured Items {" "}
+                        </Typography>
 
+                      <Grid container spacing={2} justify="center" className="_homepage_featured">
+                        {mappedItems}
+                      </Grid>
+
+                    </div>
                 </Typography>
             </Container>
         </React.Fragment>

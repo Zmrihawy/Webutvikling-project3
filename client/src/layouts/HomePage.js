@@ -12,6 +12,7 @@ import Divider from "@material-ui/core/Divider";
 import {useEffect} from "react";
 import {connect} from "react-redux";
 import {getComponents} from "../redux/actions/componentActions";
+import {Link} from "react-router-dom";
 
 // Styles
 import '../styles/homepage.css'
@@ -33,11 +34,13 @@ const HomePage = props => {
     // eslint-disable-next-line react/prop-types
     const mappedItems = components.map(component => (
         <Grid key={component.name} className='_featured_item'>
-            <Item
-                img={component.pictureURL}
-                title={component.name}
-                description={component.description}
-                price={component.price} />
+            <Link to="/item-details" style={{textDecoration: "none"}}>
+                <Item
+                    img={component.pictureURL}
+                    title={component.name}
+                    description={component.description}
+                    price={component.price}/>
+            </Link>
         </Grid>
     ));
 
@@ -52,17 +55,18 @@ const HomePage = props => {
 
                     <Typography variant="h3" style={{margin: "20px"}}>
                         E.Catalog
-                        <Typography variant="subtitle1" style={{marginTop: "2px"}}>
-                            {" "} home for electronics {" "}
-                        </Typography>
+                    </Typography>
+
+                    <Typography variant="subtitle1" style={{marginTop: "2px"}}>
+                        {" "} home for electronics {" "}
                     </Typography>
 
                     <Divider/>
 
                     <div className="_homepage">
-                      <Grid container justify="center" className="_homepage_featured">
-                        {mappedItems}
-                      </Grid>
+                        <Grid container justify="center" className="_homepage_featured">
+                            {mappedItems}
+                        </Grid>
                     </div>
 
                 </Typography>

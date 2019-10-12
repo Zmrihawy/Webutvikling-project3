@@ -13,6 +13,9 @@ import {useEffect} from "react";
 import {connect} from "react-redux";
 import {getComponents} from "../redux/actions/componentActions";
 
+// Styles
+import '../styles/homepage.css'
+
 
 // HomePage layout
 const HomePage = props => {
@@ -29,13 +32,12 @@ const HomePage = props => {
 
     // eslint-disable-next-line react/prop-types
     const mappedItems = components.map(component => (
-        <Grid key={component.id}>
+        <Grid key={component.name} className='_featured_item'>
             <Item
                 img={component.pictureURL}
                 title={component.name}
                 description={component.description}
-                category={component.category}
-                price={component.price}/>
+                price={component.price} />
         </Grid>
     ));
 
@@ -49,20 +51,20 @@ const HomePage = props => {
                     style={{backgroundColor: "", height: "100vh", marginTop: "20px", borderRadius: "4px"}}>
 
                     <Typography variant="h3" style={{margin: "20px"}}>
-                        Welcome to our website
+                        E.Catalog
+                        <Typography variant="subtitle1" style={{marginTop: "2px"}}>
+                            {" "} home for electronics {" "}
+                        </Typography>
                     </Typography>
 
                     <Divider/>
-                    <div className="_homepage">
-                        <Typography variant="subtitle1" style={{marginTop: "20px"}}>
-                            {" "} Featured Items {" "}
-                        </Typography>
 
-                      <Grid container spacing={2} justify="center" className="_homepage_featured">
+                    <div className="_homepage">
+                      <Grid container justify="center" className="_homepage_featured">
                         {mappedItems}
                       </Grid>
-
                     </div>
+
                 </Typography>
             </Container>
         </React.Fragment>

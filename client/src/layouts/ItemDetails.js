@@ -34,7 +34,7 @@ export default function ItemDetails() {
                             component="img"
                             alt="Component Image"
                             height="100%"
-                            image
+                            image='https://dummyimage.com/600x400/000/fff'
                             title="Image name here"
                         />
                     </div>

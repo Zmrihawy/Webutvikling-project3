@@ -66,6 +66,8 @@ router.put("/:id", function(req, res) {
     category: req.body.category,
     description: req.body.description,
     producer: req.body.producer,
+    price: req.body.price,
+    pictureURL: req.body.pictureURL,
     specs: JSON.parse(req.body.specs)
   };
   // Find the object with given id and update. The third argument is an object containing

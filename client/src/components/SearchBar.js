@@ -1,33 +1,33 @@
 import React from "react";
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
 // Custom styles from material-Ui
-const useStyles = makeStyles(({
-    container: {
-        display: "flex",
-        flexWrap: "wrap"
-    }
-}));
-
+const useStyles = makeStyles({
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  }
+});
 
 // SearchBar component
 export default function SearchBar() {
-    const classes = useStyles();
+  const classes = useStyles();
 
-    return (
-        <form className={classes.container} noValidate autoComplete="off">
-            <TextField
-                id="outlined-full-width"
-                label="Search Item"
-                style={{margin: 20}}
-                placeholder="Type something ... "
-                fullWidth
-                margin="normal"
-                variant="outlined"
-                InputLabelProps={{
-                    shrink: true
-                }}/>
-        </form>
-    );
+  return (
+    <form className={classes.container} noValidate autoComplete="off">
+      <TextField
+        id="outlined-full-width"
+        label="Search Item"
+        style={{ margin: 20 }}
+        placeholder="Type something ... "
+        fullWidth
+        margin="normal"
+        variant="outlined"
+        InputLabelProps={{
+          shrink: true
+        }}
+      />
+    </form>
+  );
 }

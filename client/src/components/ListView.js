@@ -70,35 +70,35 @@ const ListView = props => {
         </ListItemIcon>
         {open[component._id] ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-        <Collapse
-          in={open[component._id] === undefined ? false : open[component._id]}
-          timeout="auto"
-          unmountOnExit
-        >         
-          <ListItem>
-            <ListItemText primary={"Category: " + component.category} />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary={"Procuder: " + component.producer} />
-          </ListItem>
-          <List
-            component="div"
-            disablePadding
-            aria-labelledby="nested-list-subheader"
-            subheader={
-              <ListSubheader component="div" id="nested-list-subheader">
-                Specs
-              </ListSubheader>
-            }
-            className={classes.root}
-          >
-            {component.specs.map(spec => (
-              <ListItem className={classes.nested} key={spec._id}>
-                <ListItemText primary={spec.name + ": " + spec.value} />
-              </ListItem>
-            ))}
-          </List>
-        </Collapse>
+      <Collapse
+        in={open[component._id] === undefined ? false : open[component._id]}
+        timeout="auto"
+        unmountOnExit
+      >
+        <ListItem>
+          <ListItemText primary={"Category: " + component.category} />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary={"Procuder: " + component.producer} />
+        </ListItem>
+        <List
+          component="div"
+          disablePadding
+          aria-labelledby="nested-list-subheader"
+          subheader={
+            <ListSubheader component="div" id="nested-list-subheader">
+              Specs
+            </ListSubheader>
+          }
+          className={classes.root}
+        >
+          {component.specs.map(spec => (
+            <ListItem className={classes.nested} key={spec._id}>
+              <ListItemText primary={spec.name + ": " + spec.value} />
+            </ListItem>
+          ))}
+        </List>
+      </Collapse>
     </React.Fragment>
   ));
 

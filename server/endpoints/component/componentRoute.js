@@ -21,6 +21,45 @@ router.get("/", function(req, res) {
     });
 });
 
+
+// TYPE: GET
+// ROUTE: /component/pagination/params
+// Get requests with pagination and paramaters
+router.get("/pagination/", function(req, res) {
+
+  const { pageNum, objectsPerPage, sortBy, isAsc } = req.params;
+
+
+  if (objectsPerPage < 5 || objectsPerPage > 30) {
+    res.status(500).send("Bad number of pages: " + objectsPerPage);
+  }
+
+  let sortByObj = {}
+  if (sortBy) {
+    sortByObj.sortBy = (isAsc === undefined ? 1 : isAsc)
+  } else {
+    sortByObj.price = 1
+  }
+
+  componentModel.countDocuments()
+    .then(count => {
+      return componentModel.find()
+        .limit(objectsPerPage ? objectsPerPage : 10)
+        .skip(pageNum ? pageNum : 0)
+        .sort(sortByObj)
+        .then(components => {
+          let pageinationRes = { totalPages: count/objectsPerPage, components }
+          res.send(pageinationRes);
+        })
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err);
+    })
+})
+
+
+
 // TYPE: GET
 // ROUTE: /component/{id}
 // Get request to get component by id
@@ -34,6 +73,7 @@ router.get("/:id", function(req, res) {
     });
 });
 
+
 // TYPE: POST
 // ROUTE /component/{id}
 // Post request to create a new component
@@ -43,6 +83,8 @@ router.post("/", function(req, res) {
     category: req.body.category,
     description: req.body.description,
     producer: req.body.producer,
+    price: req.body.price,
+    pictureURL: req.body.pictureURL,
     specs: JSON.parse(req.body.specs)
   });
   component

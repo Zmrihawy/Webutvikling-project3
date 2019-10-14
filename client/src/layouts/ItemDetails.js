@@ -7,6 +7,8 @@ import CardContent from '@material-ui/core/CardContent';
 import {makeStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import Grid from "@material-ui/core/Grid";
+
 
 // Material Ui styling
 const useStyles = makeStyles(theme => ({
@@ -21,42 +23,48 @@ const useStyles = makeStyles(theme => ({
 // ItemDetails layout
 export default function ItemDetails(props) {
     const classes = useStyles();
+
     // eslint-disable-next-line react/prop-types
     const {img, description, price, title} = props;
 
     return (
-        <Typography component="div" style={{backgroundColor: 'inherit', height: '100vh',}}>
+        <Grid container justify="center" className='_item_container'>
 
-            <Paper className="_content">
-                <div className="_item_image">
+            <Grid className="_content">
+                <Paper className="_item_image">
                     <CardMedia component="img" alt="Component Image" height="100%"
                                image={img ? img : 'https://dummyimage.com/600x400/000/fff'}/>
-                </div>
-            </Paper>
+                </Paper>
+            </Grid>
 
-            <div className="_item_description">
-                <CardContent>
+            <Grid className="_item_description">
+                <Paper>
+                    <CardContent>
 
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {title}
-                    </Typography>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            Item Title
+                            {title}
+                        </Typography>
 
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {description}
-                    </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            Item Description
+                            {description}
+                        </Typography>
 
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {price}
-                    </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            Item price
+                            {price}
+                        </Typography>
 
-                    <Button variant="outlined" color="primary" className={classes.button}>
-                        Add to Basket
-                    </Button>
+                        <Button variant="outlined" color="primary" className={classes.button}>
+                            Add to Basket
+                        </Button>
 
-                </CardContent>
-            </div>
+                    </CardContent>
+                </Paper>
+            </Grid>
 
-        </Typography>
+        </Grid>
 
     );
 }

@@ -20,7 +20,7 @@ function App() {
           <MainBar />
           <Switch>
             <Route exact path="/" component={MainPage} />
-            <Route path="/item-details/:name" component={ItemDetails} />
+            <Route path="/item-details/:id" component={ItemDetails} />
             <Route path="/component-list" component={ComponentListPage} />
             <Route path="/shopping-cart" component={ShoppingCartPage} />
             <Route path="/user" component={UserPage} />

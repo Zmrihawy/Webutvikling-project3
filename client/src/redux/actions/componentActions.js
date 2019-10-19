@@ -1,4 +1,4 @@
-import { GET_PAGINATION_COMPONENTS, GET_FEATURED_COMPONENTS } from "./types";
+import { GET_PAGINATION_COMPONENTS, GET_FEATURED_COMPONENTS, GET_CURRENT_COMPONENT } from "./types";
 
 const createQueryFromParams = queryParams => {
   const {
@@ -46,7 +46,22 @@ export const getPaginationComponents = queryParams => dispatch => {
     .catch(err => console.log(err));
 };
 
+export const getCurrentComponent = id => dispatch => {
+  console.log("in current component action ", id);
+  return fetch("/api/component/" + id)
+    .then(res => res.json())
+    .then(res => {
+      console.log(res)
+      return dispatch({
+        type: GET_CURRENT_COMPONENT,
+        payload: res
+      });
+    })
+    .catch(err => console.log(err))
+}
+
 export const getFeaturedComponents = () => dispatch => {
+  console.log("featured")
   return fetch("api/component/featuredComponents")
     .then(res => res.json())
     .then(res => {

@@ -45,7 +45,7 @@ const ItemDetails = (props) => {
       </Grid>
       <Grid item>
         <Paper>
-        <img src={currentComponent.pictureURL} />
+          <img src={currentComponent.pictureURL} style={{maxWidth: "100%", maxHeight: "500px"}}/>
         </Paper>
       </Grid>    
       <Grid item>

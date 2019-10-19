@@ -1,0 +1,12 @@
+._item_description {
+    height: 300px;
+    width: 300px;
+}
+
+._content {
+    height: 100%;
+}
+
+._item_container {
+    margin-top: 30px;
+}

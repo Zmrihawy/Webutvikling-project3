@@ -1,4 +1,5 @@
 import React from "react";
+import '../styles/item-details.css'
 
 // Material Ui elements
 import Typography from "@material-ui/core/Typography";
@@ -9,64 +10,86 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
-// Material Ui styling
-const useStyles = makeStyles(theme => ({
-  button: {
-    margin: theme.spacing(1)
-  },
-  input: {
-    display: "none"
-  }
-}));
 
 // ItemDetails layout
-export default function ItemDetails(props) {
-  const classes = useStyles();
+export default class ItemDetail extends React.Component {
+  constructor(props){
+    super(props);
 
-  // eslint-disable-next-line react/prop-types
-  const { img, description, price, title } = props;
+    this.state = {
+      image: null,
+      name: null,
+      des: null,
+      amount: null
+    }
+  }
 
-  return (
-    <Grid container justify="center" className="_item_container">
-      <Grid className="_content">
-        <Paper className="_item_image">
-          <CardMedia
-            component="img"
-            alt="Component Image"
-            height="100%"
-            image={img ? img : "https://dummyimage.com/600x400/000/fff"}
-          />
-        </Paper>
-      </Grid>
 
-      <Grid className="_item_description">
-        <Paper>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              Item Title
-              {title}
-            </Typography>
+  componentDidMount(){
 
-            <Typography variant="body2" color="textSecondary" component="p">
-              Item Description
-              {description}
-            </Typography>
+    // eslint-disable-next-line react/prop-types
+    const { img, description, title, price } = this.props.location.state;
 
-            <Typography variant="body2" color="textSecondary" component="p">
-              Item price
-              {price}
-            </Typography>
+    this.setState({
+      image: img,
+      name: title,
+      des: description,
+      amount: price
+    }
+   )
+  }
 
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.button}
-            >
-              Add to Basket
-            </Button>
-          </CardContent>
-        </Paper>
-      </Grid>
-    </Grid>
-  );
+  render() {
+
+    // Material Ui styling
+    const useStyles = makeStyles(theme => ({
+      button: {
+        margin: theme.spacing(1)
+      },
+      input: {
+        display: "none"
+      }
+    }));
+
+    return (
+        <Grid container justify="center" className="_item_container">
+
+          <Grid className="_content">
+            <Paper className="_item_image">
+              <CardMedia
+                  component="img"
+                  alt="Component Image"
+                  height="300"
+                  width='300'
+                  image={this.state.image ? this.state.image : "https://dummyimage.com/600x400/000/fff"}
+              />
+            </Paper>
+          </Grid>
+
+          <Paper className="_item_description">
+              <CardContent className='_content'>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {this.state.name}
+                </Typography>
+
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {this.state.des}
+                </Typography>
+
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {this.state.amount}
+                </Typography>
+
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    className={useStyles.button}
+                >
+                  Add to Basket
+                </Button>
+              </CardContent>
+          </Paper>
+        </Grid>
+    );
+  }
 }

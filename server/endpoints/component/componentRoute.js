@@ -27,8 +27,7 @@ router.get("/", function(req, res) {
 // Get requests with pagination and paramaters
 router.get("/pagination/", function(req, res) {
 
-  const { pageNum, objectsPerPage, sortBy, isAsc } = req.params;
-
+  const { pageNum, objectsPerPage, sortBy, isAsc } = req.query;
 
   if (objectsPerPage < 5 || objectsPerPage > 30) {
     res.status(500).send("Bad number of pages: " + objectsPerPage);
@@ -44,11 +43,11 @@ router.get("/pagination/", function(req, res) {
   componentModel.countDocuments()
     .then(count => {
       return componentModel.find()
-        .limit(objectsPerPage ? objectsPerPage : 10)
-        .skip(pageNum ? pageNum : 0)
+        .limit(parseInt(objectsPerPage) ? parseInt(objectsPerPage) : 10)
+        .skip(parseInt(pageNum) ? parseInt(pageNum) : 0)
         .sort(sortByObj)
         .then(components => {
-          let pageinationRes = { totalPages: count/objectsPerPage, components }
+          let pageinationRes = { page: pageNum ? pageNum : 0, totalPages: Math.ceil(count/(objectsPerPage ? objectsPerPage : 10)), components }
           res.send(pageinationRes);
         })
     })

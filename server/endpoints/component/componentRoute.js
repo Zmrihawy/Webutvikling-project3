@@ -97,13 +97,13 @@ router.get("/pagination/", function(req, res) {
           // Paginated, filtered and sorted components should now be in the
           // components variable. Send result back and include pagination
           // metadata in result
-          let pageinationRes = {
+          let paginationRes = {
             components,
             objectsPerPage,
             pageNum,
             totPages
           };
-          res.send(pageinationRes);
+          res.send(paginationRes);
         })
         .catch(err => {
           console.log("Error fetching components", err);

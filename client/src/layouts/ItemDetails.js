@@ -7,7 +7,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
 
@@ -55,18 +54,18 @@ export default class ItemDetail extends React.Component {
         <Grid container justify="center" className="_item_container">
 
           <Grid className="_content">
-            <Paper className="_item_image">
+            <div className="_item_image">
               <CardMedia
                   component="img"
                   alt="Component Image"
-                  height="300"
-                  width='300'
+                  height="100%"
+                  width="100%"
                   image={this.state.image ? this.state.image : "https://dummyimage.com/600x400/000/fff"}
               />
-            </Paper>
+            </div>
           </Grid>
 
-          <Paper className="_item_description">
+          <div className="_item_description">
               <CardContent className='_content'>
                 <Typography gutterBottom variant="h5" component="h2">
                   {this.state.name}
@@ -88,7 +87,7 @@ export default class ItemDetail extends React.Component {
                   Add to Basket
                 </Button>
               </CardContent>
-          </Paper>
+          </div>
         </Grid>
     );
   }

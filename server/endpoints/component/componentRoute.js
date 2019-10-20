@@ -21,10 +21,9 @@ router.get("/", function(req, res) {
     });
 });
 
-
 // TYPE: GET
 // ROUTE: /component/pagination/params
-// PARAMS: 
+// PARAMS:
 //    pageNum: Which page to get
 //    objectsPerPage: Num of objects pr page
 //    sortBy: What field to sort by
@@ -35,12 +34,18 @@ router.get("/", function(req, res) {
 // Get requests with pagination and paramaters. Paramters are optional, if none
 // are provided, it just returns the 10 first objects sorted by price ascending.
 router.get("/pagination/", function(req, res) {
-
   // Get and parse URL query params
-  let { pageNum, objectsPerPage, sortBy, isAsc, filterField, filterVal } = req.query;
+  let {
+    pageNum,
+    objectsPerPage,
+    sortBy,
+    isAsc,
+    filterField,
+    filterVal
+  } = req.query;
   pageNum = parseInt(pageNum) ? parseInt(pageNum) : 0;
   objectsPerPage = parseInt(objectsPerPage) ? parseInt(objectsPerPage) : 10;
-  isAsc = (isAsc === "false") ? -1 : 1;
+  isAsc = isAsc === "false" ? -1 : 1;
 
   // If pagination params are set, check that they are in ranger
   if (objectsPerPage < 1 || objectsPerPage > 50) {
@@ -48,45 +53,56 @@ router.get("/pagination/", function(req, res) {
   }
 
   // Configure filter object if the query param is set
-  let filter = {}
+  let filter = {};
   if (filterField && filterVal) {
-    filter[filterField] = { "$regex": filterVal, "$options": "i" };
+    filter[filterField] = { $regex: filterVal, $options: "i" };
   }
 
   // Configure sort object if the query param is set. Otherwise, set it to default
   // This could be done in one if sentence, but doing it in two to achieve
   // good and correct error reporting
-  let sortByObj = {}
+  let sortByObj = {};
   if (sortBy) {
     // Check if sortby is a valid sort query, if it isnt we return error
-    console.log(componentModel)
     if (componentModel.schema.paths[sortBy]) {
       sortByObj[sortBy] = isAsc;
     } else {
       console.log("Error! Sortby param not correct");
       // We could set sort to price here, but it is most likely a bug that should
       // be sorted out, so just return and send error
-      return res.status(500).send("Sort by param not found! Not executing as this is probably a bug");
-    } 
+      return res
+        .status(500)
+        .send(
+          "Sort by param not found! Not executing as this is probably a bug"
+        );
+    }
   } else {
+    // Set default sort value
     sortByObj.price = isAsc;
   }
 
-
   // Mongoose query. Get a count of all component objects from db, this is used for pagination metadata
-  componentModel.countDocuments()
+  componentModel
+    .countDocuments()
     .then(count => {
-      let totPages = Math.ceil(count/objectsPerPage)
+      // Compute the total number of pages for this pagination query. Used for metadata.
+      let totPages = Math.ceil(count / objectsPerPage);
       // This is the main mongoose query. pagination is done with .skip() and .limit() methods
-      return componentModel.find(filter)
+      return componentModel
+        .find(filter)
         .limit(objectsPerPage)
         .skip(pageNum * objectsPerPage)
         .sort(sortByObj)
         .then(components => {
-          // Paginated, filtered and sorted components should now be in the 
-          // components variable. Send result back and include pagination 
+          // Paginated, filtered and sorted components should now be in the
+          // components variable. Send result back and include pagination
           // metadata in result
-          let pageinationRes = { components, objectsPerPage, pageNum, totPages}
+          let pageinationRes = {
+            components,
+            objectsPerPage,
+            pageNum,
+            totPages
+          };
           res.send(pageinationRes);
         })
         .catch(err => {
@@ -97,10 +113,8 @@ router.get("/pagination/", function(req, res) {
     .catch(err => {
       console.log("Error getting component count", err);
       res.status(500).send(err);
-    })
-})
-
-
+    });
+});
 
 // TYPE: GET
 // ROUTE: /component/{id}
@@ -114,7 +128,6 @@ router.get("/:id", function(req, res) {
       res.status(404).send(err);
     });
 });
-
 
 // TYPE: POST
 // ROUTE /component/{id}

@@ -7,14 +7,16 @@ export const getComponents = () => dispatch => {
       if (Array.isArray(res)) {
         return dispatch({
           type: GET_COMPONENTS,
-          payload: (res ? res : [])
+          payload: res ? res : []
         });
-      } 
-      console.log("Error: components object was not an array, setting components to empty array and printing components, please inspect:");
+      }
+      console.log(
+        "Error: components object was not an array, setting components to empty array and printing components, please inspect:"
+      );
       console.log(res);
       return dispatch({
         type: GET_COMPONENTS,
-        payload: ([])
+        payload: []
       });
     })
     .catch(err => {
@@ -22,6 +24,6 @@ export const getComponents = () => dispatch => {
       return dispatch({
         type: GET_COMPONENTS,
         payload: []
-      })
+      });
     });
 };

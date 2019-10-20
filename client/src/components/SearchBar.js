@@ -2,15 +2,15 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
-/* Custom styles from material-Ui */
-const useStyles = makeStyles(theme => ({
+// Custom styles from material-Ui
+const useStyles = makeStyles({
   container: {
     display: "flex",
     flexWrap: "wrap"
   }
-}));
+});
 
-/* SearchBar component begins here. */
+// SearchBar component
 export default function SearchBar() {
   const classes = useStyles();
 

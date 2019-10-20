@@ -1,51 +1,45 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: 200
+    maxWidth: 350
   },
   media: {
-    height: 140
+    height: 300
   }
 });
 
 export default function Item(props) {
   const classes = useStyles();
-  /* We can pass other props here like description and price */
-  const { img } = props;
+
+  // We can pass other props here like description and price
+  // eslint-disable-next-line react/prop-types
+  const { img, description, price, title } = props;
 
   return (
     <div className="_item">
       <Card className={classes.card}>
-        <CardActionArea>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              Item Title here
-            </Typography>
-          </CardContent>
+        <div className='_head'>
           <CardMedia
             className={classes.media}
             component="img"
-            alt="Item Image will go here"
-            image={img}
-            title="Item Image Name"
+            alt="Item Image"
+            image={img ? img : "https://dummyimage.com/600x400/000/fff"}
           />
-          <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Item description here
-            </Typography>
-          </CardContent>
-        </CardActionArea>
+
+          <h2 className="_title">{title}</h2>
+
+          <div className="_description" color="textSecondary">
+            {description}
+          </div>
+        </div>
+
         <CardActions>
-          <p color="primary">Rating</p>
-          <p color="primary">Price</p>
+          <p id="_price">{price},-</p>
         </CardActions>
       </Card>
     </div>

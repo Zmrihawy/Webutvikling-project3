@@ -1,71 +1,103 @@
 import React from "react";
 import Item from "../components/Item";
+import SearchBar from "../components/SearchBar";
 
+// Material Ui elements
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 
-/* Sample Images to use */
-import airpods from "../media/images/items/Airpods.jpg";
-import mac from "../media/images/items/mbp-15.jpg";
-import iphone from "../media/images/items/iphone.jpg";
+// Database linking
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { getComponents } from "../redux/actions/componentActions";
+import { Link } from "react-router-dom";
 
-/* HomePage layout here */
-export default class HomePage extends React.Component {
-  render() {
-    return (
-      /* Outer Container */
-      <React.Fragment>
-        <Container maxWidth="lg">
-          <CssBaseline />
-          <Typography
-            component="div"
-            style={{
-              backgroundColor: "",
-              height: "100vh",
-              marginTop: "20px",
-              borderRadius: "4px"
-            }}
-          >
-            {/* HOMEPAGE Components go here */}
-            <Typography variant="h3" style={{ margin: "20px" }}>
-              Welcome to our website
-            </Typography>
-            <Divider />
-            <div className="_homepage">
-              <Typography variant="subtitle1" style={{ marginTop: "20px" }}>
-                {" "}
-                Feautured Items{" "}
-              </Typography>
+// Styles
+import "../styles/homepage.css";
 
-              <Grid
-                container
-                spacing={2}
-                justify="center"
-                className="_homepage_feautured"
-              >
-                <Grid item>
-                  <Item img={airpods} />
-                </Grid>
-                <Grid item>
-                  <Item img={mac} />
-                </Grid>
-                <Grid item>
-                  <Item img={iphone} />
-                </Grid>
-                <Grid item>
-                  <Item img={mac} />
-                </Grid>
-                <Grid item>
-                  <Item img={iphone} />
-                </Grid>
-              </Grid>
-            </div>
+// HomePage layout
+const HomePage = props => {
+  // eslint-disable-next-line react/prop-types
+  const { getComponents, components } = props;
+  // const [open, setOpen] = useState({}); didnt need this ? maybe ? - Rahim
+
+  useEffect(() => {
+    getComponents();
+  }, [getComponents]);
+
+  // eslint-disable-next-line react/prop-types
+  const mappedItems = components.map(component => (
+    <Grid key={component.name} className="_featured_item">
+
+      <Link to={{ pathname: "/item-details/" + component.name, state: {
+          img: component.pictureURL, title: component.name,
+          description: component.description,
+          price: component.price} }} style={{ textDecoration: "none" }}
+      >
+        <Item
+          img={component.pictureURL}
+          title={component.name}
+          description={component.description}
+          price={component.price}
+        />
+
+      </Link>
+    </Grid>
+  ));
+
+  return (
+    <React.Fragment>
+      <Container maxWidth="lg">
+        <CssBaseline />
+        <Typography
+          component="div"
+          style={{
+            backgroundColor: "",
+            height: "100vh",
+            marginTop: "20px",
+            borderRadius: "4px"
+          }}
+        >
+          <Typography variant="h3" style={{ margin: "20px" }}>
+            E.Catalog
           </Typography>
-        </Container>
-      </React.Fragment>
-    );
-  }
+
+          <Typography variant="subtitle1" style={{ marginTop: "2px" }}>
+            {" "}
+            home for electronics{" "}
+          </Typography>
+
+          <Divider />
+
+          <div className="_search_bar">
+            <SearchBar />
+          </div>
+
+          <div className="_homepage">
+            <Grid container justify="center" className="_homepage_featured">
+              {mappedItems}
+            </Grid>
+          </div>
+        </Typography>
+      </Container>
+    </React.Fragment>
+  );
+};
+
+// Map redux state and actionCreators to props
+function mapStateToProps(state) {
+  const { component } = state;
+  return { components: component.components };
 }
+
+const actionCreators = {
+  getComponents
+};
+
+export default connect(
+  mapStateToProps,
+  actionCreators
+)(HomePage);

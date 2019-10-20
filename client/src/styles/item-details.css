@@ -1,0 +1,20 @@
+._item_description {
+    height: 300px;
+    width: 300px;
+}
+
+._content {
+    padding: 6px;
+    height: 300px;
+    width: 300px;
+}
+
+._head {
+    padding: 3px;
+}
+
+._item_container {
+    margin-top: 30px;
+    border-top: darkgray solid 1px;
+    border-bottom: darkgray solid 1px ;
+}

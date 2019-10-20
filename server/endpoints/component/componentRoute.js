@@ -27,29 +27,48 @@ router.get("/", function(req, res) {
 // Get requests with pagination and paramaters
 router.get("/pagination/", function(req, res) {
 
-  const { pageNum, objectsPerPage, sortBy, isAsc } = req.query;
+  let { pageNum, objectsPerPage, sortBy, isAsc } = req.query;
+  pageNum = parseInt(pageNum) ? parseInt(pageNum) : 0;
+  objectsPerPage = parseInt(objectsPerPage) ? parseInt(objectsPerPage) : 10;
 
-  if (objectsPerPage < 5 || objectsPerPage > 30) {
-    res.status(500).send("Bad number of pages: " + objectsPerPage);
+  if (objectsPerPage < 2 || objectsPerPage > 30) {
+    res.status(500).send("Bad number of objects per page: " + objectsPerPage);
   }
 
   let sortByObj = {}
+  // This could be done in one if sentence, but doing it in two to achieve
+  // good and correct error reporting
   if (sortBy) {
-    sortByObj.sortBy = (isAsc === undefined ? 1 : isAsc)
+    // Check if sortby is a valid sort query, if it isnt we return error
+    if (Object.keys(componentModel.toObject()).indexOf(sortBy) > -1) {
+      sortByObj[sortBy] = (isAsc === undefined ? 1 : isAsc)
+    } else {
+      console.log("Error! Sortby param not correct");
+      // We could set sort to price here, but it is most likely a bug that should
+      // be sorted out, so just return and send error
+      return res.status(500).send("Sort by param not found! Not executing as this is probably a bug");
+    } 
   } else {
     sortByObj.price = 1
   }
 
   componentModel.countDocuments()
     .then(count => {
+      let totPages = Math.ceil(count/objectsPerPage)
+      // Mongoose query, pagination is done with .skip() and .limit() methods
       return componentModel.find()
-        .limit(parseInt(objectsPerPage) ? parseInt(objectsPerPage) : 10)
-        .skip(parseInt(pageNum) ? parseInt(pageNum) : 0)
+        .limit(objectsPerPage)
+        .skip(pageNum * objectsPerPage)
         .sort(sortByObj)
         .then(components => {
-          let pageinationRes = { page: pageNum ? pageNum : 0, totalPages: Math.ceil(count/(objectsPerPage ? objectsPerPage : 10)), components }
+          // Include pagination metadata in result
+          let pageinationRes = { components, objectsPerPage, pageNum, totPages}
           res.send(pageinationRes);
         })
+        .catch(err => {
+          console.log("error fetching components", err);
+          res.status(404).send(err);
+        });
     })
     .catch(err => {
       console.log(err);

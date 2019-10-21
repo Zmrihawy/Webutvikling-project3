@@ -1,1 +1,3 @@
 export const GET_COMPONENTS = "GET_COMPONENTS";
+export const GET_USERS = "GET_USERS";
+export const SET_LOGGED_IN_USER = "SET_LOGGED_IN_USER";

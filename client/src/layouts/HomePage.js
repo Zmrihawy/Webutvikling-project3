@@ -33,7 +33,7 @@ const HomePage = props => {
   const mappedItems = featuredComponents.map(component => (
     <Grid key={component.name} className="_featured_item">
 
-      <Link to={{ pathname: "/item-details/" + component.name, state: {
+      <Link to={{ pathname: "/item-details/" + component._id, state: {
           img: component.pictureURL, title: component.name,
           description: component.description,
           price: component.price} }} style={{ textDecoration: "none" }}
@@ -72,10 +72,6 @@ const HomePage = props => {
           </Typography>
 
           <Divider />
-
-          <div className="_search_bar">
-            <SearchBar />
-          </div>
 
           <div className="_homepage">
             <Grid container justify="center" className="_homepage_featured">

@@ -1,7 +1,13 @@
 import { GET_COMPONENTS } from "./types";
 
-export const getComponents = () => dispatch => {
-  return fetch("api/component")
+export const getComponents = (filterVal, filterField, sortBy, pageNum, objectsPerPage, isAsc,) => dispatch => {
+
+  let query = (filterVal ? "filterVal=" + filterVal + "&" : "" )
+  + (filterField ? "filterField=" + filterField  + "&" : "" ) + (sortBy ? "sortBy=" + sortBy : "" )
+      + ( pageNum ? "pageNum=" + pageNum : "") + ( objectsPerPage ? "objectsPerPage=" + objectsPerPage : "")
+      + (sortBy ? "sortBy=" + sortBy : "") + (isAsc ? "isAcc=" + isAsc : "");
+
+  return fetch("api/component/pagination/" + query)
     .then(res => res.json())
     .then(res => {
       if (Array.isArray(res)) {

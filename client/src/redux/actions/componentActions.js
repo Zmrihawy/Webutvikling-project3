@@ -1,8 +1,7 @@
-import { GET_COMPONENTS, GET_FEATURED_COMPONENTS } from "./types";
+import { GET_PAGINATION_COMPONENTS, GET_FEATURED_COMPONENTS } from "./types";
 
-export const getComponents = (queryParams) => dispatch => {
-    queryParams = queryParams ? queryParams : {};
-    console.log(queryParams);
+export const getPaginationComponents = (queryParams) => dispatch => {
+  queryParams = queryParams ? queryParams : {};
   const { filterVal, filterField, sortBy, pageNum, objectsPerPage, isAsc } = queryParams;
 
   let query = (filterVal ? "filterVal=" + filterVal + "&" : "" )
@@ -10,63 +9,36 @@ export const getComponents = (queryParams) => dispatch => {
       + ( pageNum ? "pageNum=" + pageNum : "") + ( objectsPerPage ? "objectsPerPage=" + objectsPerPage : "")
       + (sortBy ? "sortBy=" + sortBy : "") + (isAsc ? "isAcc=" + isAsc : "");
 
- console.log(query);
-
   return fetch("api/component/pagination?" + query)
     .then(res => res.json())
     .then(res => {
-        console.log(res);
-        res = res.components;
-      if (Array.isArray(res)) {
-        return dispatch({
-          type: GET_COMPONENTS,
-          payload: res ? res : []
-        });
+      const { pageNum, totPages, objectsPerPage, components } = res;
+      let paginationComponents = {
+        paginationMetaData: {
+            queryParams,
+            pageNum,
+            totPages,
+            objectsPerPage
+        },
+        components
       }
-      console.log(
-        "Error: components object was not an array, setting components to empty array and printing components, please inspect:"
-      );
-      console.log(res);
       return dispatch({
-        type: GET_COMPONENTS,
-        payload: []
+        type: GET_PAGINATION_COMPONENTS,
+        payload: paginationComponents
       });
     })
-    .catch(err => {
-      console.log(err);
-      return dispatch({
-        type: GET_COMPONENTS,
-        payload: []
-      });
-    });
+    .catch(err => console.log(err));
 };
 
 
 export const getFeaturedComponents = () => dispatch => {
-  console.log("in getFeaturedComponents");
   return fetch("api/component/featuredComponents")
     .then(res => res.json())
     .then(res => {
-      if (Array.isArray(res)) {
-        return dispatch({
-          type: GET_FEATURED_COMPONENTS,
-          payload: res ? res : []
-        });
-      }
-      console.log(
-        "Error: featured components object was not an array, setting components to empty array and printing components, please inspect:"
-      );
-      console.log(res);
       return dispatch({
         type: GET_FEATURED_COMPONENTS,
-        payload: []
+        payload: res
       });
     })
-    .catch(err => {
-      console.log(err);
-      return dispatch({
-        type: GET_FEATURED_COMPONENTS,
-        payload: []
-      });
-    });
+    .catch(err => console.log(err))
 }

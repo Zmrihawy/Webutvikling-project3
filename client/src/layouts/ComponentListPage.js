@@ -3,12 +3,12 @@ import React from "react";
 import ListView from "../components/ListView";
 import SearchBar from "../components/SearchBar";
 import { connect } from "react-redux";
-import {getComponents} from "../redux/actions/componentActions";
+import { getPaginationComponents } from "../redux/actions/componentActions";
 
 const ComponentListPage = (props) => {
   return (
     <div>
-      <SearchBar getComponents={props.getComponents} />
+      <SearchBar getPaginationComponents={props.getPaginationComponents} />
       <ListView />
     </div>
   );
@@ -18,11 +18,11 @@ const ComponentListPage = (props) => {
 // Map redux state and actionCreators to props
 function mapStateToProps(state) {
     const { component } = state;
-    return { components: component.components };
+    return { paginationComponents: component.paginationComponents };
 }
 
 const actionCreators = {
-    getComponents
+    getPaginationComponents
 };
 
 export default connect(

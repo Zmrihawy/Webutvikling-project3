@@ -1,5 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
+
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
@@ -20,10 +22,9 @@ export default class SearchBar extends React.Component{
 
     handleSubmitClick() {
         const {textState} = this.state;
-        const {getComponents} = this.props;
-        console.log(textState)
+        const {getPaginationComponents} = this.props;
         const tmp = {filterField: "name", filterVal: textState};
-        getComponents(tmp);
+        getPaginationComponents(tmp);
     }
 
     handleTextChange(e) {
@@ -76,4 +77,6 @@ export default class SearchBar extends React.Component{
     }
 }
 
-
+SearchBar.propTypes = {
+  getPaginationComponents: PropTypes.func
+}

@@ -15,7 +15,7 @@ import StarBorder from "@material-ui/icons/StarBorder";
 
 import { connect } from "react-redux";
 
-import { getComponents } from "../redux/actions/componentActions";
+import { getPaginationComponents } from "../redux/actions/componentActions";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 
 const ListView = props => {
   const classes = useStyles();
-  const { getComponents, components } = props;
+  const { getPaginationComponents, paginationComponents } = props;
 
   // State for details toggle for each component list element
   // Open is an object where each component id is a key to its boolean
@@ -54,12 +54,12 @@ const ListView = props => {
   // The second argument is an array of dependencied for useEffect(). The array also
   // plays a part in determining when the compomnent should update.
   useEffect(() => {
-    getComponents();
-  }, [getComponents]);
+    getPaginationComponents();
+  }, [getPaginationComponents]);
 
   // Map component to material list elements, with collapse functionality
   // React.Fragment is used to return more than one JSX node
-  const mappedComponents = components.map(component => (
+  const mappedComponents = paginationComponents.components.map(component => (
     <React.Fragment key={component._id}>
       <Divider />
       <ListItem button onClick={() => handleClick(component._id)}>
@@ -122,10 +122,10 @@ const ListView = props => {
 // Map redux state and actionCreators to props
 function mapStateToProps(state) {
   const { component } = state;
-  return { components: component.components };
+  return { paginationComponents: component.paginationComponents };
 }
 const actionCreators = {
-  getComponents
+  getPaginationComponents
 };
 export default connect(
   mapStateToProps,

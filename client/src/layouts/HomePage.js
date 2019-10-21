@@ -12,7 +12,7 @@ import Divider from "@material-ui/core/Divider";
 // Database linking
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { getComponents, getFeaturedComponents } from "../redux/actions/componentActions";
+import { getFeaturedComponents } from "../redux/actions/componentActions";
 import { Link } from "react-router-dom";
 
 // Styles
@@ -21,13 +21,12 @@ import "../styles/homepage.css";
 // HomePage layout
 const HomePage = props => {
   // eslint-disable-next-line react/prop-types
-  const { getComponents, getFeaturedComponents, components, featuredComponents } = props;
+  const { getFeaturedComponents, featuredComponents } = props;
   // const [open, setOpen] = useState({}); didnt need this ? maybe ? - Rahim
 
   useEffect(() => {
-    getComponents();
     getFeaturedComponents();
-  }, [getComponents, getFeaturedComponents]);
+  }, [getFeaturedComponents]);
 
   // eslint-disable-next-line react/prop-types
   const mappedItems = featuredComponents.map(component => (
@@ -87,11 +86,10 @@ const HomePage = props => {
 // Map redux state and actionCreators to props
 function mapStateToProps(state) {
   const { component } = state;
-  return { components: component.components, featuredComponents: component.featuredComponents };
+  return { featuredComponents: component.featuredComponents };
 }
 
 const actionCreators = {
-  getComponents,
   getFeaturedComponents
 };
 

@@ -10,9 +10,26 @@ export default class SearchBar extends React.Component{
         super(props);
 
         this.state = {
-            query: '',
-        }
+            textState: '',
+        };
+
+        this.handleSubmitClick = this.handleSubmitClick.bind(this);
+        this.handleTextChange = this.handleTextChange.bind(this);
+
     }
+
+    handleSubmitClick() {
+        const {textState} = this.state;
+        const {getComponents} = this.props;
+        console.log(textState)
+        const tmp = {filterField: "name", filterVal: textState};
+        getComponents(tmp);
+    }
+
+    handleTextChange(e) {
+        this.setState({textState: e.target.value})
+    }
+
 
     render() {
 
@@ -35,6 +52,7 @@ export default class SearchBar extends React.Component{
 
         return (
             <form>
+
                 <TextField
                     id="outlined-full-width"
                     label="Label"
@@ -47,9 +65,11 @@ export default class SearchBar extends React.Component{
                     InputLabelProps={{
                         shrink: true,
                     }}
+                    onChange={this.handleTextChange}
                 />
-                <Button variant="contained" color="primary" className={useStyles.menu}>
-                    Theme Provider
+
+                <Button variant="contained" color="primary" className={useStyles.menu} onClick={this.handleSubmitClick}>
+                    SEARCH
                 </Button>
             </form>
         );

@@ -1,6 +1,7 @@
 const express = require("express");
 const componentModel = require("./componentModel.js");
 const router = express.Router();
+const _ = require("lodash");
 
 // On every hit, log the time
 router.use(function timeLog(req, res, next) {
@@ -20,6 +21,33 @@ router.get("/", function(req, res) {
       res.status(500).send(err);
     });
 });
+
+
+// TYPE: GET
+// ROUTE: /component/featuredItems
+// DESC: Get request to get some featuredItems. It gets random items, number of
+// items returned depend on the size query param (default is 6). It also checks
+// if items have imgURL but if to few have it, it will stop trying to enforce
+// this and just return random.
+router.get("/featuredItems", function(req, res) {
+  const paramSize = parseInt(req.query.size);
+  let responseSize = paramSize ? paramSize : 6;
+  componentModel.aggregate([{ $sample: { size: responseSize*2 } }])
+    .then(components => {
+      // Try to filter on components having a image URL. If not enough are found, dont bother filtering as its just a nice to have.
+      let filteredComponents = components.filter(component => component.pictureURL != undefined && component.pictureURL != "");
+      if (filteredComponents.length >= responseSize) {
+        res.send(_.sampleSize(filteredComponents, responseSize))
+      } else {
+        res.send(_.sampleSize(components, responseSize));
+      }
+    })
+  .catch(err => {
+    console.log(err);
+    res.status(500).send(err);
+  });
+});
+
 
 // TYPE: GET
 // ROUTE: /component/pagination/params

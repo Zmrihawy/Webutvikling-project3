@@ -1,5 +1,6 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -13,9 +14,6 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import StarBorder from "@material-ui/icons/StarBorder";
 
-import { connect } from "react-redux";
-
-import { getComponents } from "../redux/actions/componentActions";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 
 const ListView = props => {
   const classes = useStyles();
-  const { getComponents, components } = props;
+  const { paginationComponents } = props;
 
   // State for details toggle for each component list element
   // Open is an object where each component id is a key to its boolean
@@ -50,16 +48,10 @@ const ListView = props => {
     setOpen(tmpOpen);
   };
 
-  // Tell redux to get components on inital render and when redux state changes.
-  // The second argument is an array of dependencied for useEffect(). The array also
-  // plays a part in determining when the compomnent should update.
-  useEffect(() => {
-    getComponents();
-  }, [getComponents]);
 
   // Map component to material list elements, with collapse functionality
   // React.Fragment is used to return more than one JSX node
-  const mappedComponents = components.map(component => (
+  const mappedComponents = paginationComponents.components.map(component => (
     <React.Fragment key={component._id}>
       <Divider />
       <ListItem button onClick={() => handleClick(component._id)}>
@@ -119,15 +111,11 @@ const ListView = props => {
   );
 };
 
-// Map redux state and actionCreators to props
-function mapStateToProps(state) {
-  const { component } = state;
-  return { components: component.components };
+ListView.propTypes = {
+  paginationComponents: PropTypes.shape({
+    paginationMetaData: PropTypes.object,
+    components: PropTypes.array
+  })
 }
-const actionCreators = {
-  getComponents
-};
-export default connect(
-  mapStateToProps,
-  actionCreators
-)(ListView);
+
+export default ListView;

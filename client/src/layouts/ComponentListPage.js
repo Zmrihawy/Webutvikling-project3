@@ -2,7 +2,7 @@ import React from "react";
 
 import ListView from "../components/ListView";
 import SearchBar from "../components/SearchBar";
-import connect from "react-redux/lib/connect/connect";
+import { connect } from "react-redux";
 import {getComponents} from "../redux/actions/componentActions";
 
 const ComponentListPage = (props) => {

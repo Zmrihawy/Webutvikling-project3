@@ -1,14 +1,19 @@
 import { GET_PAGINATION_COMPONENTS, GET_FEATURED_COMPONENTS } from "./types";
 
-export const getPaginationComponents = (queryParams) => dispatch => {
-  queryParams = queryParams ? queryParams : {};
-  const { filterVal, filterField, sortBy, pageNum, objectsPerPage, isAsc } = queryParams;
 
-  let query = (filterVal ? "filterVal=" + filterVal + "&" : "" )
+const createQueryFromParams = (queryParams) => {
+  const { filterVal, filterField, sortBy, pageNum, objectsPerPage, isAsc } = queryParams;
+  return (filterVal ? "filterVal=" + filterVal + "&" : "" )
   + (filterField ? "filterField=" + filterField  + "&" : "" ) + (sortBy ? "sortBy=" + sortBy : "" )
       + ( pageNum ? "pageNum=" + pageNum : "") + ( objectsPerPage ? "objectsPerPage=" + objectsPerPage : "")
       + (sortBy ? "sortBy=" + sortBy : "") + (isAsc ? "isAcc=" + isAsc : "");
+}
 
+  
+
+export const getPaginationComponents = (queryParams) => dispatch => {
+  queryParams = queryParams ? queryParams : {};
+  let query = createQueryFromParams(queryParams);
   return fetch("api/component/pagination?" + query)
     .then(res => res.json())
     .then(res => {

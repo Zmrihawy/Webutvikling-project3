@@ -1,5 +1,6 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -13,9 +14,6 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import StarBorder from "@material-ui/icons/StarBorder";
 
-import { connect } from "react-redux";
-
-import { getPaginationComponents } from "../redux/actions/componentActions";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 
 const ListView = props => {
   const classes = useStyles();
-  const { getPaginationComponents, paginationComponents } = props;
+  const { paginationComponents } = props;
 
   // State for details toggle for each component list element
   // Open is an object where each component id is a key to its boolean
@@ -50,12 +48,6 @@ const ListView = props => {
     setOpen(tmpOpen);
   };
 
-  // Tell redux to get components on inital render and when redux state changes.
-  // The second argument is an array of dependencied for useEffect(). The array also
-  // plays a part in determining when the compomnent should update.
-  useEffect(() => {
-    getPaginationComponents();
-  }, [getPaginationComponents]);
 
   // Map component to material list elements, with collapse functionality
   // React.Fragment is used to return more than one JSX node
@@ -119,15 +111,11 @@ const ListView = props => {
   );
 };
 
-// Map redux state and actionCreators to props
-function mapStateToProps(state) {
-  const { component } = state;
-  return { paginationComponents: component.paginationComponents };
+ListView.propTypes = {
+  paginationComponents: PropTypes.shape({
+    paginationMetaData: PropTypes.object,
+    components: PropTypes.array
+  })
 }
-const actionCreators = {
-  getPaginationComponents
-};
-export default connect(
-  mapStateToProps,
-  actionCreators
-)(ListView);
+
+export default ListView;

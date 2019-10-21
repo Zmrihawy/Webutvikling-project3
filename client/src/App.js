@@ -8,6 +8,7 @@ import MainPage from "./layouts/MainPage";
 import MainBar from "./components/MainBar";
 import ItemDetails from "./layouts/ItemDetails";
 import ComponentListPage from "./layouts/ComponentListPage";
+import UserPage from "./layouts/UserPage";
 import "./App.css";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Route exact path="/" component={MainPage} />
             <Route path="/item-details/:name" component={ItemDetails} />
             <Route path="/component-list" component={ComponentListPage} />
+            <Route path="/user" component={UserPage} />
             <Route
               component={() => (
                 <Typography variant="h1"> Sorry, page not found </Typography>

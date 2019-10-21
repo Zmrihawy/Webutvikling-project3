@@ -1,7 +1,8 @@
-import { GET_COMPONENTS } from "../actions/types";
+import { GET_COMPONENTS, GET_FEATURED_COMPONENTS } from "../actions/types";
 
 const initialState = {
-  components: []
+  components: [],
+  featuredComponents: []
 };
 
 export default function(state = initialState, action) {
@@ -11,6 +12,11 @@ export default function(state = initialState, action) {
         ...state,
         components: action.payload
       };
+    case GET_FEATURED_COMPONENTS:
+      return {
+        ...state,
+        featuredComponents: action.payload
+      }
     default:
       return state;
   }

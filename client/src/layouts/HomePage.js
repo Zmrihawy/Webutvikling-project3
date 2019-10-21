@@ -12,7 +12,7 @@ import Divider from "@material-ui/core/Divider";
 // Database linking
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { getComponents } from "../redux/actions/componentActions";
+import { getComponents, getFeaturedComponents } from "../redux/actions/componentActions";
 import { Link } from "react-router-dom";
 
 // Styles
@@ -21,15 +21,16 @@ import "../styles/homepage.css";
 // HomePage layout
 const HomePage = props => {
   // eslint-disable-next-line react/prop-types
-  const { getComponents, components } = props;
+  const { getComponents, getFeaturedComponents, components, featuredComponents } = props;
   // const [open, setOpen] = useState({}); didnt need this ? maybe ? - Rahim
 
   useEffect(() => {
     getComponents();
-  }, [getComponents]);
+    getFeaturedComponents();
+  }, [getComponents, getFeaturedComponents]);
 
   // eslint-disable-next-line react/prop-types
-  const mappedItems = components.map(component => (
+  const mappedItems = featuredComponents.map(component => (
     <Grid key={component.name} className="_featured_item">
 
       <Link to={{ pathname: "/item-details/" + component.name, state: {
@@ -90,11 +91,12 @@ const HomePage = props => {
 // Map redux state and actionCreators to props
 function mapStateToProps(state) {
   const { component } = state;
-  return { components: component.components };
+  return { components: component.components, featuredComponents: component.featuredComponents };
 }
 
 const actionCreators = {
-  getComponents
+  getComponents,
+  getFeaturedComponents
 };
 
 export default connect(

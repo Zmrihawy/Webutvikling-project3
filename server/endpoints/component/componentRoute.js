@@ -24,12 +24,12 @@ router.get("/", function(req, res) {
 
 
 // TYPE: GET
-// ROUTE: /component/featuredItems
-// DESC: Get request to get some featuredItems. It gets random items, number of
-// items returned depend on the size query param (default is 6). It also checks
-// if items have imgURL but if to few have it, it will stop trying to enforce
+// ROUTE: /component/featuredComponents
+// DESC: Get request to get some featuredComponents. It gets random components, number of
+// components returned depend on the size query param (default is 6). It also checks
+// if components have imgURL but if to few have it, it will stop trying to enforce
 // this and just return random.
-router.get("/featuredItems", function(req, res) {
+router.get("/featuredComponents", function(req, res) {
   const paramSize = parseInt(req.query.size);
   let responseSize = paramSize ? paramSize : 6;
   componentModel.aggregate([{ $sample: { size: responseSize*2 } }])

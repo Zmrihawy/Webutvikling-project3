@@ -9,6 +9,7 @@ import MainBar from './components/MainBar';
 import ItemDetails from "./layouts/ItemDetails";
 import ComponentListPage from './layouts/ComponentListPage';
 import "./App.css";
+import ShoppingCartPage from "./layouts/ShoppingCartPage";
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
             <Route exact path="/" component={MainPage} />
             <Route path="/item-details" component={ItemDetails} />
             <Route path="/component-list" component={ComponentListPage} />
-            <Route component={() => (<Typography variant="h1"> Sorry, page not found </Typography>)}/>
+            <Route path = "/shopping-cart" component={ShoppingCartPage}/>
           </Switch>
         </Router>
       </div>

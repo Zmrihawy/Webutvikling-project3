@@ -12,7 +12,7 @@ import Divider from "@material-ui/core/Divider";
 // Database linking
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { getComponents } from "../redux/actions/componentActions";
+import { getFeaturedComponents } from "../redux/actions/componentActions";
 import { Link } from "react-router-dom";
 
 // Styles
@@ -21,27 +21,20 @@ import "../styles/homepage.css";
 // HomePage layout
 const HomePage = props => {
   // eslint-disable-next-line react/prop-types
-  const { getComponents, components } = props;
+  const { getFeaturedComponents, featuredComponents } = props;
   // const [open, setOpen] = useState({}); didnt need this ? maybe ? - Rahim
 
   useEffect(() => {
-    getComponents();
-  }, [getComponents]);
+    getFeaturedComponents();
+  }, [getFeaturedComponents]);
 
   // eslint-disable-next-line react/prop-types
-  const mappedItems = components.map(component => (
+  const mappedItems = featuredComponents.map(component => (
     <Grid key={component.name} className="_featured_item">
-      <Link
-        to={{
-          pathname: "/item-details/" + component.name,
-          state: {
-            img: component.pictureURL,
-            title: component.name,
-            description: component.description,
-            price: component.price
-          }
-        }}
-        style={{ textDecoration: "none" }}
+      <Link to={{ pathname: "/item-details/" + component._id, state: {
+          img: component.pictureURL, title: component.name,
+          description: component.description,
+          price: component.price} }} style={{ textDecoration: "none" }}
       >
         <Item
           img={component.pictureURL}
@@ -77,10 +70,6 @@ const HomePage = props => {
 
           <Divider />
 
-          <div className="_search_bar">
-            <SearchBar />
-          </div>
-
           <div className="_homepage">
             <Grid container justify="center" className="_homepage_featured">
               {mappedItems}
@@ -95,11 +84,11 @@ const HomePage = props => {
 // Map redux state and actionCreators to props
 function mapStateToProps(state) {
   const { component } = state;
-  return { components: component.components };
+  return { featuredComponents: component.featuredComponents };
 }
 
 const actionCreators = {
-  getComponents
+  getFeaturedComponents
 };
 
 export default connect(

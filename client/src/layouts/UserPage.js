@@ -1,11 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { connect } from "react-redux";
 
-import { getUsers } from "../redux/actions/userActions";
+import { getUsers, setLoggedInUser, createNewUser } from "../redux/actions/userActions";
+
+import UserLogin from "../components/UserLogin";
 
 
 const UserPage = (props) => {
+  const { users, getUsers, setLoggedInUser, createNewUser } = props;
 
   useEffect(() => {
     getUsers()
@@ -13,11 +17,18 @@ const UserPage = (props) => {
 
   return (
     <div>
-      Hello from user page
+      <UserLogin users={users} setLoggedInUser={setLoggedInUser} createNewUser={createNewUser}/>
     </div>
   )
 }
 
+
+UserPage.propTypes = {
+  users: PropTypes.array,
+  getUsers: PropTypes.func,
+  setLoggedInUser: PropTypes.func,
+  createNewUser: PropTypes.func
+}
 
 // Map redux state and actionCreators to props
 function mapStateToProps(state) {
@@ -26,7 +37,9 @@ function mapStateToProps(state) {
 }
 
 const actionCreators = {
-  getUsers
+  getUsers,
+  setLoggedInUser,
+  createNewUser
 };
 
 export default connect(

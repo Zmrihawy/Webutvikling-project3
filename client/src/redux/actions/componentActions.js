@@ -13,7 +13,6 @@ export const getComponents = () => dispatch => {
       console.log(
         "Error: components object was not an array, setting components to empty array and printing components, please inspect:"
       );
-      console.log(res);
       return dispatch({
         type: GET_COMPONENTS,
         payload: []

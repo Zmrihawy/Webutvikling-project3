@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 import TypoGraphy from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
@@ -48,14 +48,12 @@ function NavBar(props) {
         </Button>
       </Link>
 
-      <div style={{ flex: 1}}/>
+      <div style={{ flex: 1 }} />
 
-      <TypoGraphy justify='space-between'>
-      { loggedInUser && loggedInUser.username ? 
-        "Logged in as " + props.loggedInUser.username
-          :
-          "Not logged in"
-      }
+      <TypoGraphy justify="space-between">
+        {loggedInUser && loggedInUser.username
+          ? "Logged in as " + props.loggedInUser.username
+          : "Not logged in"}
       </TypoGraphy>
     </React.Fragment>
   );
@@ -66,6 +64,6 @@ NavBar.propTypes = {
     username: PropTypes.string,
     shoppingBasket: PropTypes.array
   })
-}
+};
 
 export default NavBar;

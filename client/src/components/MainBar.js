@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import TypoGraphy from "@material-ui/core/Typography";
@@ -33,20 +33,18 @@ class MainBar extends Component {
   }
 }
 
-
 MainBar.propTypes = {
   loggedInUser: PropTypes.shape({
     username: PropTypes.string,
     shoppingBasket: PropTypes.array
   })
-}
+};
 
 // Map redux state and actionCreators to props
 function mapStateToProps(state) {
   const { user } = state;
   return { loggedInUser: user.loggedInUser };
 }
-
 
 export default connect(
   mapStateToProps,

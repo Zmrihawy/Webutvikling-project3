@@ -31,11 +31,17 @@ const HomePage = props => {
   // eslint-disable-next-line react/prop-types
   const mappedItems = components.map(component => (
     <Grid key={component.name} className="_featured_item">
-
-      <Link to={{ pathname: "/item-details/" + component.name, state: {
-          img: component.pictureURL, title: component.name,
-          description: component.description,
-          price: component.price} }} style={{ textDecoration: "none" }}
+      <Link
+        to={{
+          pathname: "/item-details/" + component.name,
+          state: {
+            img: component.pictureURL,
+            title: component.name,
+            description: component.description,
+            price: component.price
+          }
+        }}
+        style={{ textDecoration: "none" }}
       >
         <Item
           img={component.pictureURL}
@@ -43,7 +49,6 @@ const HomePage = props => {
           description={component.description}
           price={component.price}
         />
-
       </Link>
     </Grid>
   ));

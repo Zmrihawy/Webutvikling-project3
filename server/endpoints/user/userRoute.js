@@ -2,7 +2,6 @@ const express = require("express");
 const userModel = require("./userModel.js");
 const router = express.Router();
 
-
 // On every hit, log the time
 router.use(function timeLog(req, res, next) {
   console.log("User endpoint hit:", new Date(Date.now()).toString());
@@ -35,7 +34,6 @@ router.get("/:id", function(req, res) {
     });
 });
 
-
 // TYPE: POST
 // ROUTE /component/{id}
 // Post request to create a new component
@@ -47,15 +45,12 @@ router.post("/", function(req, res) {
   });
   user
     .save()
-    .then(updatedUser =>
-      res.status(201).json(updatedUser)
-    )
+    .then(updatedUser => res.status(201).json(updatedUser))
     .catch(err => {
       console.log(err);
       res.status(500).send(err);
     });
 });
-
 
 // TYPE: PATCH
 // ROUTE: /component/id
@@ -79,7 +74,6 @@ router.patch("/:id", function(req, res) {
       res.status(404).send(err);
     });
 });
-
 
 // TYPE: DELETE
 // ROUTE: /component/id

@@ -1,15 +1,14 @@
+// This tests that if someone searches input words "MacBook" should get a hit on the "13-inch MacBook Pro" from the backend
 describe('Search bar functionality', () => {
-    it('Confirms the search on Macbook Pro', () => {
-
-        // Go to this page
+    it('Confirms the search on MacBook Pro', () => {
         cy.visit('http://localhost:3000/component-list')
             .get('input')
-            .type('MacBook')
             .click()
+            .type('MacBook')
             .should('have.value', 'MacBook')
             .get('.MuiButton-containedPrimary')
             .click()
             .get('.App')
-            .contains("13-inch MacBook Pro");
+            .should("contain", "13-inch MacBook Pro");
     })
 });

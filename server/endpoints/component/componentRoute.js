@@ -22,7 +22,6 @@ router.get("/", function(req, res) {
     });
 });
 
-
 // TYPE: GET
 // ROUTE: /component/featuredComponents
 // DESC: Get request to get some featuredComponents. It gets random components, number of
@@ -32,22 +31,25 @@ router.get("/", function(req, res) {
 router.get("/featuredComponents", function(req, res) {
   const paramSize = parseInt(req.query.size);
   let responseSize = paramSize ? paramSize : 6;
-  componentModel.aggregate([{ $sample: { size: responseSize*2 } }])
+  componentModel
+    .aggregate([{ $sample: { size: responseSize * 2 } }])
     .then(components => {
       // Try to filter on components having a image URL. If not enough are found, dont bother filtering as its just a nice to have.
-      let filteredComponents = components.filter(component => component.pictureURL != undefined && component.pictureURL != "");
+      let filteredComponents = components.filter(
+        component =>
+          component.pictureURL != undefined && component.pictureURL != ""
+      );
       if (filteredComponents.length >= responseSize) {
-        res.send(_.sampleSize(filteredComponents, responseSize))
+        res.send(_.sampleSize(filteredComponents, responseSize));
       } else {
         res.send(_.sampleSize(components, responseSize));
       }
     })
-  .catch(err => {
-    console.log(err);
-    res.status(500).send(err);
-  });
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err);
+    });
 });
-
 
 // TYPE: GET
 // ROUTE: /component/pagination/params
@@ -85,12 +87,11 @@ router.get("/pagination/", function(req, res) {
   // Build filter object if the corresponding query params are set
   let filter = {};
   if (nameSearch) {
-    filter.name = { $regex: nameSearch, $options: "i" }
+    filter.name = { $regex: nameSearch, $options: "i" };
   }
   if (filterField && filterVal) {
     filter[filterField] = { $regex: filterVal, $options: "i" };
   }
-
 
   // Configure sort object if the query param is set. Otherwise, set it to default
   // This could be done in one if sentence, but doing it in two to achieve

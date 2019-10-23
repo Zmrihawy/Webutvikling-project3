@@ -1,4 +1,7 @@
-import { GET_PAGINATION_COMPONENTS, GET_FEATURED_COMPONENTS } from "../actions/types";
+import {
+  GET_PAGINATION_COMPONENTS,
+  GET_FEATURED_COMPONENTS
+} from "../actions/types";
 
 const initialState = {
   paginationComponents: {
@@ -19,7 +22,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         featuredComponents: action.payload
-      }
+      };
     default:
       return state;
   }

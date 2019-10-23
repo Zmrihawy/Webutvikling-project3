@@ -9,7 +9,10 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Checkbox from "@material-ui/core/Checkbox";
 
-import { VALID_FILTER_FIELDS, VALID_SORTBY_FIELDS } from "../../utility/constants"
+import {
+  VALID_FILTER_FIELDS,
+  VALID_SORTBY_FIELDS
+} from "../../utility/constants";
 
 export default class SearchBar extends React.Component {
   constructor(props) {
@@ -48,8 +51,8 @@ export default class SearchBar extends React.Component {
   }
 
   handleFilterMenuClose(filter) {
-    this.setState({ 
-      filterAnchorEl: null, 
+    this.setState({
+      filterAnchorEl: null,
       filterFieldState: filter
     });
   }
@@ -59,54 +62,80 @@ export default class SearchBar extends React.Component {
   }
 
   handleSortbyMenuClose(sortby) {
-    this.setState({ 
-      sortbyAnchorEl: null, 
+    this.setState({
+      sortbyAnchorEl: null,
       sortbyFieldState: sortby
     });
   }
 
   handleSubmit() {
-    const { searchTextState, filterTextState, filterFieldState, sortDesc, sortbyFieldState } = this.state;
+    const {
+      searchTextState,
+      filterTextState,
+      filterFieldState,
+      sortDesc,
+      sortbyFieldState
+    } = this.state;
     const { getPaginationComponents } = this.props;
     // Build queryparams based on state
     let queryParams = {};
     // Add filter if it is set and is valid
     if (VALID_FILTER_FIELDS.indexOf(filterFieldState) > -1) {
-      queryParams = { ...queryParams, ...{ filterField: filterFieldState, filterVal: filterTextState }};
+      queryParams = {
+        ...queryParams,
+        ...{ filterField: filterFieldState, filterVal: filterTextState }
+      };
     } else {
       if (filterFieldState !== "") {
-        console.log("Error! " + filterFieldState + " is not a valid field to sort by");
+        console.log(
+          "Error! " + filterFieldState + " is not a valid field to sort by"
+        );
       }
     }
-    
+
     // Add sortby field if it is set and is valid
-    if (VALID_SORTBY_FIELDS.indexOf(sortbyFieldState) > -1) {  
-      queryParams = sortbyFieldState ? {...queryParams, ...{ sortBy: sortbyFieldState}} : queryParams;
+    if (VALID_SORTBY_FIELDS.indexOf(sortbyFieldState) > -1) {
+      queryParams = sortbyFieldState
+        ? { ...queryParams, ...{ sortBy: sortbyFieldState } }
+        : queryParams;
     } else {
       if (filterFieldState !== "") {
-        console.log("Error! " + sortbyFieldState + " is not a valid field to sort by");
+        console.log(
+          "Error! " + sortbyFieldState + " is not a valid field to sort by"
+        );
       }
     }
 
     // Add nameSearch if it is set
-    queryParams = searchTextState ? {...queryParams, ...{ nameSearch: searchTextState}} : queryParams;
+    queryParams = searchTextState
+      ? { ...queryParams, ...{ nameSearch: searchTextState } }
+      : queryParams;
     // Add sort dir if it is set
-    queryParams = sortDesc === false ? queryParams : {...queryParams, ...{ isAsc: "false" }};
+    queryParams =
+      sortDesc === false
+        ? queryParams
+        : { ...queryParams, ...{ isAsc: "false" } };
     // Fire the query
     getPaginationComponents(queryParams);
   }
 
   handleSortDirChange(e) {
-    this.setState({sortDesc: e.target.checked});
+    this.setState({ sortDesc: e.target.checked });
   }
 
   render() {
     return (
-      <Grid container justify="center" align="center" spacing={4} style={{margin: "30px"}}>
+      <Grid
+        container
+        justify="center"
+        align="center"
+        spacing={4}
+        style={{ margin: "30px" }}
+      >
         <Grid item>
           <Grid container justify="center" align="center" spacing={2}>
             <Grid item>
-              <TextField 
+              <TextField
                 label="search"
                 placeholder="Search by name"
                 onChange={this.handleSearchTextChange}
@@ -124,13 +153,21 @@ export default class SearchBar extends React.Component {
                 open={Boolean(this.state.filterAnchorEl)}
                 onClose={this.handleFilterMenuClose}
               >
-                <MenuItem onClick={() => this.handleFilterMenuClose("category")}>
+                <MenuItem
+                  onClick={() => this.handleFilterMenuClose("category")}
+                >
                   Categories
                 </MenuItem>
-                <MenuItem onClick={() => this.handleFilterMenuClose("producer")}>
+                <MenuItem
+                  onClick={() => this.handleFilterMenuClose("producer")}
+                >
                   Producer
                 </MenuItem>
-                <MenuItem onClick={() => this.handleFilterMenuClose("INVALID_FILTER")}>None</MenuItem>
+                <MenuItem
+                  onClick={() => this.handleFilterMenuClose("INVALID_FILTER")}
+                >
+                  None
+                </MenuItem>
               </Menu>
             </Grid>
             <Grid item>
@@ -168,16 +205,28 @@ export default class SearchBar extends React.Component {
                 <MenuItem onClick={() => this.handleSortbyMenuClose("name")}>
                   Name
                 </MenuItem>
-                <MenuItem onClick={() => this.handleSortbyMenuClose("category")}>
+                <MenuItem
+                  onClick={() => this.handleSortbyMenuClose("category")}
+                >
                   Categories
                 </MenuItem>
-                <MenuItem onClick={() => this.handleSortbyMenuClose("producer")}>
+                <MenuItem
+                  onClick={() => this.handleSortbyMenuClose("producer")}
+                >
                   Producer
                 </MenuItem>
-                <MenuItem onClick={() => this.handleSortbyMenuClose("description")}>
+                <MenuItem
+                  onClick={() => this.handleSortbyMenuClose("description")}
+                >
                   Description
                 </MenuItem>
-                <MenuItem onClick={() => this.handleSortbyMenuClose("INVALID_SORT_FIELD")}>None</MenuItem>
+                <MenuItem
+                  onClick={() =>
+                    this.handleSortbyMenuClose("INVALID_SORT_FIELD")
+                  }
+                >
+                  None
+                </MenuItem>
               </Menu>
             </Grid>
             <Grid item>
@@ -186,21 +235,27 @@ export default class SearchBar extends React.Component {
                 aria-haspopup="true"
                 onClick={this.handleSortbyMenuClick}
                 variant="outlined"
-              > 
+              >
                 Sort by?
               </Button>
             </Grid>
           </Grid>
         </Grid>
         <Grid item>
-         <Checkbox
+          <Checkbox
             checked={this.state.sortDesc}
             onChange={this.handleSortDirChange}
           />
           Sort descending
         </Grid>
         <Grid item>
-          <Button onClick={this.handleSubmit} variant="contained" color="primary">Submit</Button>
+          <Button
+            onClick={this.handleSubmit}
+            variant="contained"
+            color="primary"
+          >
+            Submit
+          </Button>
         </Grid>
       </Grid>
     );

@@ -68,6 +68,7 @@ router.get("/pagination/", function(req, res) {
     objectsPerPage,
     sortBy,
     isAsc,
+    nameSearch,
     filterField,
     filterVal
   } = req.query;
@@ -80,11 +81,15 @@ router.get("/pagination/", function(req, res) {
     res.status(500).send("Bad number of objects per page: " + objectsPerPage);
   }
 
-  // Configure filter object if the query param is set
+  // Build filter object if the corresponding query params are set
   let filter = {};
+  if (nameSearch) {
+    filter.name = { $regex: nameSearch, $options: "i" }
+  }
   if (filterField && filterVal) {
     filter[filterField] = { $regex: filterVal, $options: "i" };
   }
+
 
   // Configure sort object if the query param is set. Otherwise, set it to default
   // This could be done in one if sentence, but doing it in two to achieve
@@ -113,9 +118,9 @@ router.get("/pagination/", function(req, res) {
   componentModel
     .find(filter)
     .countDocuments()
-    .then(count => {
+    .then(totObjects => {
       // Compute the total number of pages for this pagination query. Used for metadata.
-      let totPages = Math.ceil(count / objectsPerPage);
+      let totPages = Math.ceil(totObjects / objectsPerPage);
       // This is the main mongoose query. pagination is done with .skip() and .limit() methods
       return componentModel
         .find(filter)
@@ -130,7 +135,8 @@ router.get("/pagination/", function(req, res) {
             components,
             objectsPerPage,
             pageNum,
-            totPages
+            totPages,
+            totObjects
           };
           res.send(paginationRes);
         })

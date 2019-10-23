@@ -1,82 +1,202 @@
 import React from "react";
+
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
 
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Checkbox from "@material-ui/core/Checkbox";
 
+import { VALID_FILTER_FIELDS } from "../utility/constants"
 
-// SearchBar component
-export default class SearchBar extends React.Component{
-    constructor(props) {
-        super(props);
+export default class SearchBar extends React.Component {
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            textState: '',
-        };
+    this.state = {
+      searchTextState: "",
+      filterTextState: "",
+      filterFieldState: "",
+      filterAnchorEl: null,
+      sortbyFieldState: "",
+      sortbyAnchorEl: null,
+      sortDesc: false
+    };
 
-        this.handleSubmitClick = this.handleSubmitClick.bind(this);
-        this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
+    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+    this.handleFilterMenuClick = this.handleFilterMenuClick.bind(this);
+    this.handleFilterMenuClose = this.handleFilterMenuClose.bind(this);
+    this.handleSortbyMenuClick = this.handleSortbyMenuClick.bind(this);
+    this.handleSortbyMenuClose = this.handleSortbyMenuClose.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSortDirChange = this.handleSortDirChange.bind(this);
+  }
 
+  handleSearchTextChange(e) {
+    this.setState({ searchTextState: e.target.value });
+  }
+
+  handleFilterTextChange(e) {
+    this.setState({ filterTextState: e.target.value });
+  }
+
+  handleFilterMenuClick(e) {
+    this.setState({ filterAnchorEl: e.currentTarget });
+  }
+
+  handleFilterMenuClose(filter) {
+    this.setState({ 
+      filterAnchorEl: null, 
+      filterFieldState: filter
+    });
+  }
+
+  handleSortbyMenuClick(e) {
+    this.setState({ sortbyAnchorEl: e.currentTarget });
+  }
+
+  handleSortbyMenuClose(sortby) {
+    this.setState({ 
+      sortbyAnchorEl: null, 
+      sortbyFieldState: sortby
+    });
+  }
+
+  handleSubmit() {
+    const { searchTextState, filterTextState, filterFieldState, sortDesc } = this.state;
+    const { getPaginationComponents } = this.props;
+    // Build queryparams based on state
+    let queryParams = {};
+    // Add filter if it is set and is valid
+    if (VALID_FILTER_FIELDS.indexOf(filterFieldState) > -1) {
+      queryParams = { ...queryParams, ...{ filterField: filterFieldState, filterVal: filterTextState }};
+    } else {
+      if (filterFieldState !== "") {
+        console.log("Error! " + filterFieldState + " is not a valid field to sort by");
+      }
     }
+    // Add nameSearch if it is set
+    queryParams = searchTextState ? {...queryParams, ...{ nameSearch: searchTextState}} : queryParams;
+    // Add sort sort by
+    queryParams = 
+    // Add sort dir if it is set
+    queryParams = sortDesc ? queryParams : {...queryParams, ...{ isAsc: "false" }};
+    // Fire the query
+    getPaginationComponents(queryParams);
+  }
 
-    handleSubmitClick() {
-        const {textState} = this.state;
-        const {getPaginationComponents} = this.props;
-        const tmp = {filterField: "name", filterVal: textState};
-        getPaginationComponents(tmp);
-    }
+  handleSortDirChange(e) {
+    console.log("changing sort dir", e);
+    this.setState({sortDesc: e.target.checked});
+  }
 
-    handleTextChange(e) {
-        this.setState({textState: e.target.value})
-    }
-
-
-    render() {
-
-        const useStyles = makeStyles(theme => ({
-            container: {
-                display: 'flex',
-                flexWrap: 'wrap',
-            },
-            textField: {
-                marginLeft: theme.spacing(1),
-                marginRight: theme.spacing(1),
-            },
-            dense: {
-                marginTop: theme.spacing(2),
-            },
-            menu: {
-                width: 200,
-            },
-        }));
-
-        return (
-            <form>
-
-                <TextField
-                    id="outlined-full-width"
-                    label="Label"
-                    style={{ margin: 8 }}
-                    placeholder="Placeholder"
-                    helperText=""
-                    fullWidth
-                    margin="normal"
-                    variant="outlined"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    onChange={this.handleTextChange}
-                />
-
-                <Button variant="contained" color="primary" className={useStyles.menu} onClick={this.handleSubmitClick}>
-                    SEARCH
-                </Button>
-            </form>
-        );
-    }
+  render() {
+    return (
+      <Grid container justify="center" align="center" spacing={4} style={{margin: "30px"}}>
+        <Grid item>
+          <Grid container justify="center" align="center" spacing={2}>
+            <Grid item>
+              <TextField 
+                label="search"
+                placeholder="Search by name"
+                onChange={this.handleSearchTextChange}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item>
+          <Grid container justify="center" align="center" spacing={2}>
+            <Grid item>
+              <Menu
+                id="filter-menu"
+                anchorEl={this.state.filterAnchorEl}
+                keepMounted
+                open={Boolean(this.state.filterAnchorEl)}
+                onClose={this.handleFilterMenuClose}
+              >
+                <MenuItem onClick={() => this.handleFilterMenuClose("category")}>
+                  Categories
+                </MenuItem>
+                <MenuItem onClick={() => this.handleFilterMenuClose("producer")}>
+                  Producer
+                </MenuItem>
+                <MenuItem onClick={() => this.handleFilterMenuClose("INVALID_FILTER")}>None</MenuItem>
+              </Menu>
+            </Grid>
+            <Grid item>
+              <TextField
+                label="filter"
+                placeholder="Filter by value"
+                onChange={this.handleFilterTextChange}
+              />
+            </Grid>
+            <Grid item>
+              <Button
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={this.handleFilterMenuClick}
+                variant="outlined"
+              >
+                Filter By?
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item>
+          <Grid container justify="center" align="center" spacing={2}>
+            <Grid item>
+              <Menu
+                id="sortby-menu"
+                anchorEl={this.state.sortbyAnchorEl}
+                keepMounted
+                open={Boolean(this.state.sortbyAnchorEl)}
+                onClose={this.handleSortbyMenuClose}
+              >
+                <MenuItem onClick={() => this.handleFilterMenuClose("price")}>
+                  Price
+                </MenuItem>
+                <MenuItem onClick={() => this.handleFilterMenuClose("category")}>
+                  Categories
+                </MenuItem>
+                <MenuItem onClick={() => this.handleFilterMenuClose("producer")}>
+                  Producer
+                </MenuItem>
+                <MenuItem onClick={() => this.handleFilterMenuClose("description")}>
+                  Description
+                </MenuItem>
+                <MenuItem onClick={() => this.handleFilterMenuClose("INVALID_SORT_FIELD")}>None</MenuItem>
+              </Menu>
+            </Grid>
+            <Grid item>
+              <Button
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={this.handleSortbyMenuClick}
+                variant="outlined"
+              >
+                Sort by?
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item>
+         <Checkbox
+            checked={this.state.sortDesc}
+            onChange={this.handleSortDirChange}
+          />
+          sort desc
+        </Grid>
+        <Grid item>
+          <Button onClick={this.handleSubmit} variant="contained" color="primary">Submit</Button>
+        </Grid>
+      </Grid>
+    );
+  }
 }
 
 SearchBar.propTypes = {
   getPaginationComponents: PropTypes.func
-}
+};

@@ -1,11 +1,14 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import TypoGraphy from "@material-ui/core/Typography";
 import NavBar from "./NavBar";
+import { connect } from "react-redux";
 
 class MainBar extends Component {
   render() {
+    const { loggedInUser } = this.props;
     return (
       <div>
         <AppBar color="primary" position="static">
@@ -22,7 +25,7 @@ class MainBar extends Component {
               LOGO
             </TypoGraphy>
 
-            <NavBar />
+            <NavBar loggedInUser={loggedInUser} />
           </Toolbar>
         </AppBar>
       </div>
@@ -30,4 +33,20 @@ class MainBar extends Component {
   }
 }
 
-export default MainBar;
+MainBar.propTypes = {
+  loggedInUser: PropTypes.shape({
+    username: PropTypes.string,
+    shoppingBasket: PropTypes.array
+  })
+};
+
+// Map redux state and actionCreators to props
+function mapStateToProps(state) {
+  const { user } = state;
+  return { loggedInUser: user.loggedInUser };
+}
+
+export default connect(
+  mapStateToProps,
+  {}
+)(MainBar);

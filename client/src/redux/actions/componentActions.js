@@ -17,12 +17,13 @@ export const getPaginationComponents = (queryParams) => dispatch => {
   return fetch("api/component/pagination?" + query)
     .then(res => res.json())
     .then(res => {
-      const { pageNum, totPages, objectsPerPage, components } = res;
+      const { pageNum, totPages, totObjects, objectsPerPage, components } = res;
       let paginationComponents = {
         paginationMetaData: {
             queryParams,
             pageNum,
             totPages,
+            totObjects,
             objectsPerPage
         },
         components

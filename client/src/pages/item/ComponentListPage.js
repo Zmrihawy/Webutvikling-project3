@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types"
 import { useEffect } from "react";
 
-import ListView from "../components/ListView";
-import SearchBar from "../components/SearchBar";
-import PaginationControlBar from "../components/PaginationControlBar"
+import ListView from "../item/ListView";
+import SearchBar from "../item/SearchBar";
+import PaginationControlBar from "../item/PaginationControlBar"
 import { connect } from "react-redux";
-import { getPaginationComponents } from "../redux/actions/componentActions";
+import { getPaginationComponents } from "../../redux/actions/componentActions";
 
 const ComponentListPage = (props) => {
   const { getPaginationComponents, paginationComponents } = props;

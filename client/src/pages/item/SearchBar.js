@@ -9,7 +9,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Checkbox from "@material-ui/core/Checkbox";
 
-import { VALID_FILTER_FIELDS } from "../utility/constants"
+import { VALID_FILTER_FIELDS } from "../../utility/constants"
 
 export default class SearchBar extends React.Component {
   constructor(props) {

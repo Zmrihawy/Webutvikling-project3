@@ -12,3 +12,13 @@ describe('Search bar functionality', () => {
             .should("contain", "13-inch MacBook Pro");
     })
 });
+
+
+describe('Gets a component from the database.', () => {
+    it('Checks if a component exists in the database.', () => {
+        cy.request('http://localhost:5000/api/component/5dac9bc861f6230305dae0c4')
+            .its("body")
+            .its("name")
+            .should( "equal", "Iphone 11 Pro\n")
+    });
+});

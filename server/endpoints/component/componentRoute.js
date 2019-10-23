@@ -114,7 +114,7 @@ router.get("/pagination/", function(req, res) {
     .find(filter)
     .countDocuments()
     .then(count => {
-      // Compute the total number of components for this pagination query. Used for metadata.
+      // Compute the total number of pages for this pagination query. Used for metadata.
       let totPages = Math.ceil(count / objectsPerPage);
       // This is the main mongoose query. pagination is done with .skip() and .limit() methods
       return componentModel

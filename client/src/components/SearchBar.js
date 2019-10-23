@@ -79,4 +79,4 @@ export default class SearchBar extends React.Component{
 
 SearchBar.propTypes = {
   getPaginationComponents: PropTypes.func
-};
+}

@@ -12,7 +12,7 @@ const PaginationControlBar = (props) => {
     let { queryParams } = paginationMetaData;
     queryParams.pageNum = page;
     getPaginationComponents(queryParams)
-  };
+  }
 
   let buttons = [];
   if (totPages && totPages > 1) {
@@ -32,12 +32,12 @@ const PaginationControlBar = (props) => {
       {buttons}
     </ButtonGroup>
   )
-};
+}
 
 PaginationControlBar.propTypes = {
   paginationMetaData: PropTypes.object,
   getPaginationComponents: PropTypes.func
-};
+}
 
 export default PaginationControlBar;
 

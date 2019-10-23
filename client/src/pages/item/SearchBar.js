@@ -184,7 +184,7 @@ export default class SearchBar extends React.Component {
                 onClick={this.handleFilterMenuClick}
                 variant="outlined"
               >
-                { this.state.filterFieldState ? "Filter " + this.state.filterFieldState : 
+                { this.state.filterFieldState && (typeof this.state.filterFieldState) === "string" ? "Filter " + this.state.filterFieldState : 
                 "Filter By?" }
               </Button>
             </Grid>
@@ -237,7 +237,7 @@ export default class SearchBar extends React.Component {
                 onClick={this.handleSortbyMenuClick}
                 variant="outlined"
               >
-                { this.state.sortbyFieldState ? "Sort " + this.state.sortbyFieldState : 
+                { this.state.sortbyFieldState && (typeof this.state.sortbyFieldState) === "string" ? "Sort " + this.state.sortbyFieldState : 
                 "Sort by?" }
 
               </Button>

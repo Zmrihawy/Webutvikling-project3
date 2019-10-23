@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/item-details.css";
+import "../../styles/item-details.css";
 
 // Material Ui elements
 import Typography from "@material-ui/core/Typography";

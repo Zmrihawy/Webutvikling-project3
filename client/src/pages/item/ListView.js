@@ -94,7 +94,7 @@ const ListView = props => {
     </React.Fragment>
   ));
 
-  // Return a list with all components
+  // Return a list with all pages
   return (
     <List
       component="nav"
@@ -116,6 +116,6 @@ ListView.propTypes = {
     paginationMetaData: PropTypes.object,
     components: PropTypes.array
   })
-}
+};
 
 export default ListView;

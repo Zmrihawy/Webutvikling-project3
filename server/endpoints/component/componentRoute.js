@@ -11,7 +11,7 @@ router.use(function timeLog(req, res, next) {
 
 // TYPE: GET
 // ROUTE: /component
-// DESC: Get request to get all components
+// DESC: Get request to get all pages
 router.get("/", function(req, res) {
   componentModel
     .find()
@@ -25,16 +25,16 @@ router.get("/", function(req, res) {
 
 // TYPE: GET
 // ROUTE: /component/featuredComponents
-// DESC: Get request to get some featuredComponents. It gets random components, number of
-// components returned depend on the size query param (default is 6). It also checks
-// if components have imgURL but if to few have it, it will stop trying to enforce
+// DESC: Get request to get some featuredComponents. It gets random pages, number of
+// pages returned depend on the size query param (default is 6). It also checks
+// if pages have imgURL but if to few have it, it will stop trying to enforce
 // this and just return random.
 router.get("/featuredComponents", function(req, res) {
   const paramSize = parseInt(req.query.size);
   let responseSize = paramSize ? paramSize : 6;
   componentModel.aggregate([{ $sample: { size: responseSize*2 } }])
     .then(components => {
-      // Try to filter on components having a image URL. If not enough are found, dont bother filtering as its just a nice to have.
+      // Try to filter on pages having a image URL. If not enough are found, dont bother filtering as its just a nice to have.
       let filteredComponents = components.filter(component => component.pictureURL != undefined && component.pictureURL != "");
       if (filteredComponents.length >= responseSize) {
         res.send(_.sampleSize(filteredComponents, responseSize))
@@ -123,8 +123,8 @@ router.get("/pagination/", function(req, res) {
         .skip(pageNum * objectsPerPage)
         .sort(sortByObj)
         .then(components => {
-          // Paginated, filtered and sorted components should now be in the
-          // components variable. Send result back and include pagination
+          // Paginated, filtered and sorted pages should now be in the
+          // pages variable. Send result back and include pagination
           // metadata in result
           let paginationRes = {
             components,
@@ -135,7 +135,7 @@ router.get("/pagination/", function(req, res) {
           res.send(paginationRes);
         })
         .catch(err => {
-          console.log("Error fetching components", err);
+          console.log("Error fetching pages", err);
           res.status(500).send(err);
         });
     })

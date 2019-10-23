@@ -10,6 +10,7 @@ import ItemDetails from "./layouts/ItemDetails";
 import ComponentListPage from "./layouts/ComponentListPage";
 import UserPage from "./layouts/UserPage";
 import "./App.css";
+import ShoppingCartPage from "./layouts/ShoppingCartPage";
 
 function App() {
   return (
@@ -21,12 +22,14 @@ function App() {
             <Route exact path="/" component={MainPage} />
             <Route path="/item-details/:name" component={ItemDetails} />
             <Route path="/component-list" component={ComponentListPage} />
+            <Route path = "/shopping-cart" component={ShoppingCartPage}/>
             <Route path="/user" component={UserPage} />
             <Route
               component={() => (
                 <Typography variant="h1"> Sorry, page not found </Typography>
               )}
             />
+
           </Switch>
         </Router>
       </div>

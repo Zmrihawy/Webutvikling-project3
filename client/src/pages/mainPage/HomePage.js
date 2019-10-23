@@ -1,6 +1,5 @@
 import React from "react";
-import Item from "../components/Item";
-import SearchBar from "../components/SearchBar";
+import Item from "../item/Item";
 
 // Material Ui elements
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,11 +11,11 @@ import Divider from "@material-ui/core/Divider";
 // Database linking
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { getFeaturedComponents } from "../redux/actions/componentActions";
+import { getFeaturedComponents } from "../../redux/actions/componentActions";
 import { Link } from "react-router-dom";
 
 // Styles
-import "../styles/homepage.css";
+import "../../styles/homepage.css";
 
 // HomePage layout
 const HomePage = props => {

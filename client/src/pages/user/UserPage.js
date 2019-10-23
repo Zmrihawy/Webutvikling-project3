@@ -7,9 +7,9 @@ import {
   getUsers,
   setLoggedInUser,
   createNewUser
-} from "../redux/actions/userActions";
+} from "../../redux/actions/userActions";
 
-import UserLogin from "../components/UserLogin";
+import UserLogin from "../user/UserLogin";
 
 const UserPage = props => {
   const { users, getUsers, setLoggedInUser, createNewUser } = props;

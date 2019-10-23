@@ -4,11 +4,11 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import MainPage from "./layouts/MainPage";
-import MainBar from "./components/MainBar";
-import ItemDetails from "./layouts/ItemDetails";
-import ComponentListPage from "./layouts/ComponentListPage";
-import UserPage from "./layouts/UserPage";
+import MainPage from "./pages/mainPage/MainPage";
+import MainBar from "./pages/navbar/MainBar";
+import ItemDetails from "./pages/itemDetails/ItemDetails";
+import ComponentListPage from "./pages/item/ComponentListPage";
+import UserPage from "./pages/user/UserPage";
 import "./App.css";
 
 function App() {

@@ -124,6 +124,15 @@ export default class SearchBar extends React.Component {
   }
 
   render() {
+    const {
+      searchTextState,
+      filterTextState,
+      filterFieldState,
+      filterAnchorEl,
+      sortbyFieldState,
+      sortbyAnchorEl,
+      sortDesc
+    } = this.state;
     return (
       <Grid
         container
@@ -148,9 +157,9 @@ export default class SearchBar extends React.Component {
             <Grid item>
               <Menu
                 id="filter-menu"
-                anchorEl={this.state.filterAnchorEl}
+                anchorEl={filterAnchorEl}
                 keepMounted
-                open={Boolean(this.state.filterAnchorEl)}
+                open={Boolean(filterAnchorEl)}
                 onClose={this.handleFilterMenuClose}
               >
                 <MenuItem
@@ -163,9 +172,7 @@ export default class SearchBar extends React.Component {
                 >
                   Producer
                 </MenuItem>
-                <MenuItem
-                  onClick={() => this.handleFilterMenuClose("")}
-                >
+                <MenuItem onClick={() => this.handleFilterMenuClose("")}>
                   None
                 </MenuItem>
               </Menu>
@@ -184,8 +191,9 @@ export default class SearchBar extends React.Component {
                 onClick={this.handleFilterMenuClick}
                 variant="outlined"
               >
-                { this.state.filterFieldState && (typeof this.state.filterFieldState) === "string" ? "Filter " + this.state.filterFieldState : 
-                "Filter By?" }
+                {filterFieldState && typeof filterFieldState === "string"
+                  ? "Filter " + filterFieldState
+                  : "Filter By?"}
               </Button>
             </Grid>
           </Grid>
@@ -195,9 +203,9 @@ export default class SearchBar extends React.Component {
             <Grid item>
               <Menu
                 id="sortby-menu"
-                anchorEl={this.state.sortbyAnchorEl}
+                anchorEl={sortbyAnchorEl}
                 keepMounted
-                open={Boolean(this.state.sortbyAnchorEl)}
+                open={Boolean(sortbyAnchorEl)}
                 onClose={this.handleSortbyMenuClose}
               >
                 <MenuItem onClick={() => this.handleSortbyMenuClose("price")}>
@@ -221,11 +229,7 @@ export default class SearchBar extends React.Component {
                 >
                   Description
                 </MenuItem>
-                <MenuItem
-                  onClick={() =>
-                    this.handleSortbyMenuClose("")
-                  }
-                >
+                <MenuItem onClick={() => this.handleSortbyMenuClose("")}>
                   None
                 </MenuItem>
               </Menu>
@@ -237,18 +241,15 @@ export default class SearchBar extends React.Component {
                 onClick={this.handleSortbyMenuClick}
                 variant="outlined"
               >
-                { this.state.sortbyFieldState && (typeof this.state.sortbyFieldState) === "string" ? "Sort " + this.state.sortbyFieldState : 
-                "Sort by?" }
-
+                {sortbyFieldState && typeof sortbyFieldState === "string"
+                  ? "Sort " + sortbyFieldState
+                  : "Sort by?"}
               </Button>
             </Grid>
           </Grid>
         </Grid>
         <Grid item>
-          <Checkbox
-            checked={this.state.sortDesc}
-            onChange={this.handleSortDirChange}
-          />
+          <Checkbox checked={sortDesc} onChange={this.handleSortDirChange} />
           Sort descending
         </Grid>
         <Grid item>

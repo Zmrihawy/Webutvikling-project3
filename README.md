@@ -17,6 +17,18 @@ necessary REST API implementations needed for fetching data from the backend and
 actions like searching for an item, filtering of items and sorting of items.
 
 
+## Testing
+
+
+### CYPRESS
+For end to end testing we take advantage of cypress' functionality and test what would exactly happen in real time
+when a user searches for an item from the backend. The aim is to test that the item is fetched from the backed and 
+downloaded for the client. With cypress we test this and confirm that a user gets a search result containing at least 
+one component if the item is available in the backend. The test fails if the component is not available.
+
+To use cypress navigate to the client directory and the run the following command: `npx cypress open` 
+Then select a test file to begin running it.
+
 ## Design and Functionality
 Our catalog contains a search input field where users can search up items and get back a result in form of a list.
 The result is a list of all items that have a name, a category, or a producer of the item that contains the letters 

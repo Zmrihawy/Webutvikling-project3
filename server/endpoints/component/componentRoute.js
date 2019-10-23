@@ -74,6 +74,7 @@ router.get("/pagination/", function(req, res) {
   } = req.query;
   pageNum = parseInt(pageNum) ? parseInt(pageNum) : 0;
   objectsPerPage = parseInt(objectsPerPage) ? parseInt(objectsPerPage) : 10;
+  console.log(isAsc);
   isAsc = isAsc === "false" ? -1 : 1;
 
   // If pagination params are set, check that they are in ranger

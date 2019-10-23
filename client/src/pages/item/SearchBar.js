@@ -91,7 +91,7 @@ export default class SearchBar extends React.Component {
     // Add nameSearch if it is set
     queryParams = searchTextState ? {...queryParams, ...{ nameSearch: searchTextState}} : queryParams;
     // Add sort dir if it is set
-    queryParams = sortDesc ? queryParams : {...queryParams, ...{ isAsc: "false" }};
+    queryParams = sortDesc === false ? queryParams : {...queryParams, ...{ isAsc: "false" }};
     // Fire the query
     getPaginationComponents(queryParams);
   }

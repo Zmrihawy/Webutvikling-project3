@@ -7,10 +7,10 @@ const createQueryFromParams = (queryParams) => {
     + (nameSearch ? "nameSearch=" + nameSearch + "&" : "")
     + (filterField ? "filterField=" + filterField  + "&" : "" )
       + ( pageNum ? "pageNum=" + pageNum + "&" : "") + ( objectsPerPage ? "objectsPerPage=" + objectsPerPage + "&" : "")
-      + (sortBy ? "sortBy=" + sortBy + "&" : "") + (isAsc ? "isAcc=" + isAsc + "&" : "");
+      + (sortBy ? "sortBy=" + sortBy + "&" : "") + (isAsc === "false" ? "isAsc=false&" : "");
 }
 
-  
+
 
 export const getPaginationComponents = (queryParams) => dispatch => {
   queryParams = queryParams ? queryParams : {};

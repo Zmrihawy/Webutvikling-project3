@@ -110,7 +110,7 @@ export default class SearchBar extends React.Component {
     queryParams = searchTextState
       ? { ...queryParams, ...{ nameSearch: searchTextState } }
       : queryParams;
-    // Add sort dir if it is set
+    // Add sort direction if it is set
     queryParams =
       sortDesc === false
         ? queryParams
@@ -164,7 +164,7 @@ export default class SearchBar extends React.Component {
                   Producer
                 </MenuItem>
                 <MenuItem
-                  onClick={() => this.handleFilterMenuClose("INVALID_FILTER")}
+                  onClick={() => this.handleFilterMenuClose("")}
                 >
                   None
                 </MenuItem>
@@ -184,7 +184,8 @@ export default class SearchBar extends React.Component {
                 onClick={this.handleFilterMenuClick}
                 variant="outlined"
               >
-                Filter By?
+                { this.state.filterFieldState ? "Filter " + this.state.filterFieldState : 
+                "Filter By?" }
               </Button>
             </Grid>
           </Grid>
@@ -222,7 +223,7 @@ export default class SearchBar extends React.Component {
                 </MenuItem>
                 <MenuItem
                   onClick={() =>
-                    this.handleSortbyMenuClose("INVALID_SORT_FIELD")
+                    this.handleSortbyMenuClose("")
                   }
                 >
                   None
@@ -236,7 +237,9 @@ export default class SearchBar extends React.Component {
                 onClick={this.handleSortbyMenuClick}
                 variant="outlined"
               >
-                Sort by?
+                { this.state.sortbyFieldState ? "Sort " + this.state.sortbyFieldState : 
+                "Sort by?" }
+
               </Button>
             </Grid>
           </Grid>

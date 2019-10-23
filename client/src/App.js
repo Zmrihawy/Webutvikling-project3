@@ -22,14 +22,13 @@ function App() {
             <Route exact path="/" component={MainPage} />
             <Route path="/item-details/:name" component={ItemDetails} />
             <Route path="/component-list" component={ComponentListPage} />
-            <Route path = "/shopping-cart" component={ShoppingCartPage}/>
+            <Route path="/shopping-cart" component={ShoppingCartPage} />
             <Route path="/user" component={UserPage} />
             <Route
               component={() => (
                 <Typography variant="h1"> Sorry, page not found </Typography>
               )}
             />
-
           </Switch>
         </Router>
       </div>

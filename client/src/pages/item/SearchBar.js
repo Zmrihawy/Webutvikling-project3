@@ -97,7 +97,6 @@ export default class SearchBar extends React.Component {
   }
 
   handleSortDirChange(e) {
-    console.log("changing sort dir", e);
     this.setState({sortDesc: e.target.checked});
   }
 

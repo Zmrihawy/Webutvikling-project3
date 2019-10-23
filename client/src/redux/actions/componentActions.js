@@ -14,14 +14,11 @@ const createQueryFromParams = (queryParams) => {
 
 export const getPaginationComponents = (queryParams) => dispatch => {
   queryParams = queryParams ? queryParams : {};
-  console.log("query params", queryParams);
   let query = createQueryFromParams(queryParams);
-  console.log("firing query", query);
   return fetch("api/component/pagination?" + query)
     .then(res => res.json())
     .then(res => {
       const { pageNum, totPages, totObjects, objectsPerPage, components } = res;
-      console.log(components.map(x => x.name));
       let paginationComponents = {
         paginationMetaData: {
             queryParams,

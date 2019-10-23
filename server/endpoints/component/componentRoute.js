@@ -115,9 +115,6 @@ router.get("/pagination/", function(req, res) {
     sortByObj.price = isAsc;
   }
 
-  console.log(sortByObj);
-  console.log(sortBy);
-
   // Mongoose query. Get a count of all component objects of this query, this is used for pagination metadata
   componentModel
     .find(filter)

@@ -31,7 +31,6 @@ const HomePage = props => {
   // eslint-disable-next-line react/prop-types
   const mappedItems = featuredComponents.map(component => (
     <Grid key={component.name} className="_featured_item">
-
       <Link to={{ pathname: "/item-details/" + component._id, state: {
           img: component.pictureURL, title: component.name,
           description: component.description,
@@ -43,7 +42,6 @@ const HomePage = props => {
           description={component.description}
           price={component.price}
         />
-
       </Link>
     </Grid>
   ));

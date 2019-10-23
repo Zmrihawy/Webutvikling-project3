@@ -23,7 +23,7 @@ export default function Item(props) {
   return (
     <div className="_item">
       <Card className={classes.card}>
-        <div className='_head'>
+        <div className="_head">
           <CardMedia
             className={classes.media}
             component="img"

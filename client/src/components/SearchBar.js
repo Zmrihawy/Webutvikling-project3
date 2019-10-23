@@ -10,7 +10,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 import { VALID_FILTER_FIELDS } from "./utility/constants"
 
-// SearchBar component
 export default class SearchBar extends React.Component {
   constructor(props) {
     super(props);
@@ -23,18 +22,11 @@ export default class SearchBar extends React.Component {
 
     };
 
-    this.handleSearchSubmitClick = this.handleSearchSubmitClick.bind(this);
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
-    this.handleFilterSubmitClick = this.handleFilterSubmitClick.bind(this);
     this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
     this.handleFilterMenuClick = this.handleFilterMenuClick.bind(this);
     this.handleFilterMenuClose = this.handleFilterMenuClose.bind(this);
-  }
-
-  handleSearchSubmitClick() {
-    const { searchTextState } = this.state;
-    const { getPaginationComponents } = this.props;
-    getPaginationComponents({ filterField: "name", filterVal: searchTextState });
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSearchTextChange(e) {
@@ -56,21 +48,26 @@ export default class SearchBar extends React.Component {
     });
   }
 
-  handleFilterSubmitClick() {
-    const { filterTextState, filterFieldState } = this.state;
+  handleSubmit() {
+    const { searchTextState, filterTextState, filterFieldState } = this.state;
     const { getPaginationComponents } = this.props;
+    // Build queryparams based on state
+    let queryParams = {};
+    // Add filter if it is set and is valid
     if (VALID_FILTER_FIELDS.indexOf(filterFieldState) > -1) {
-      getPaginationComponents({ filterField: filterFieldState, filterVal: filterTextState });
+      queryParams = { ...queryParams, ...{ filterField: filterFieldState, filterVal: filterTextState }};
     } else {
-      alert("Please choose a filter and enter a filter value first");
       if (filterFieldState !== "") {
         console.log("Error! " + filterFieldState + " is not a valid field to sort by");
       }
     }
+    // Add nameSearch if it is set
+    queryParams = searchTextState ? {...queryParams, ...{ nameSearch: searchTextState}} : queryParams;
+    // Fire the query
+    getPaginationComponents(queryParams);
   }
 
   render() {
-
     return (
       <Grid container justify="center" align="center" spacing={4} style={{margin: "30px"}}>
         <Grid item>
@@ -81,23 +78,11 @@ export default class SearchBar extends React.Component {
                 placeholder="Search by name"
                 onChange={this.handleSearchTextChange}
               />
-
-            </Grid>
-
-            <Grid item>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={this.handleSearchSubmitClick}
-              >
-                SEARCH
-              </Button>
             </Grid>
           </Grid>
         </Grid>
         <Grid item>
           <Grid container justify="center" align="center" spacing={2}>
-
             <Grid item>
               <Menu
                 id="simple-menu"
@@ -112,7 +97,7 @@ export default class SearchBar extends React.Component {
                 <MenuItem onClick={() => this.handleFilterMenuClose("producer")}>
                   Producer
                 </MenuItem>
-                <MenuItem onClick={() => this.handleFilterMenuClose("name")}>Name</MenuItem>
+                <MenuItem onClick={() => this.handleFilterMenuClose("INVALID_FILTER")}>None</MenuItem>
               </Menu>
             </Grid>
             <Grid item>
@@ -132,10 +117,10 @@ export default class SearchBar extends React.Component {
                 Filter By?
               </Button>
             </Grid>
-            <Grid item>
-              <Button onClick={this.handleFilterSubmitClick} variant="contained" color="primary">Filter</Button>
-            </Grid>
           </Grid>
+        </Grid>
+        <Grid item>
+          <Button onClick={this.handleSubmit} variant="contained" color="primary">Submit</Button>
         </Grid>
       </Grid>
     );

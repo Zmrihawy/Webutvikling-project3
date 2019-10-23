@@ -2,8 +2,8 @@ import { GET_PAGINATION_COMPONENTS, GET_FEATURED_COMPONENTS } from "./types";
 
 
 const createQueryFromParams = (queryParams) => {
-  const { filterVal, filterField, sortBy, pageNum, objectsPerPage, isAsc } = queryParams;
-  return (filterVal ? "filterVal=" + filterVal + "&" : "" )
+  const { filterVal, filterField, nameSearch, sortBy, pageNum, objectsPerPage, isAsc } = queryParams;
+  return (filterVal ? "filterVal=" + filterVal + "&" : "" ) + (nameSearch ? "nameSearch=" + nameSearch + "&" : "")
   + (filterField ? "filterField=" + filterField  + "&" : "" ) + (sortBy ? "sortBy=" + sortBy : "" )
       + ( pageNum ? "pageNum=" + pageNum : "") + ( objectsPerPage ? "objectsPerPage=" + objectsPerPage : "")
       + (sortBy ? "sortBy=" + sortBy : "") + (isAsc ? "isAcc=" + isAsc : "");

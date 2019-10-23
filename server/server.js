@@ -1,8 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const example = require("./example/example.js");
 const componentRoute = require("./endpoints/component/componentRoute.js");
+const userRoute = require("./endpoints/user/userRoute.js");
 
 const app = express();
 const port = 5000;
@@ -20,8 +20,8 @@ db.once("open", function() {
   console.log("Succesfully connected to mongodb server");
 });
 
-app.use("/api/example", example);
 app.use("/api/component", componentRoute);
+app.use("/api/user", userRoute);
 
 app.get("/", (req, res) => res.send("Hello World!"));
 

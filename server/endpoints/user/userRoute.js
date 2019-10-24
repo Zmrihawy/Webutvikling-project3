@@ -26,7 +26,7 @@ router.get("/", function(req, res) {
 // Get request to get user by id
 router.get("/:id", function(req, res) {
   userModel
-    .findById(req.params.id)
+    .findById(req.params.id).populate("shoppingCart")
     .then(user => res.send(user))
     .catch(err => {
       console.log(err);

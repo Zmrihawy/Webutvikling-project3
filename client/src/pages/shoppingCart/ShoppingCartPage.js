@@ -38,10 +38,10 @@ class ShoppingCartPage extends Component {
         mappedItems = uniqueItems.map(item => {
             console.log(`mapping item ${item}`)
             return (  
-              <React.Fragment key={item._id}>
-                <Grid container  spacing={4}>
-                   <Grid item xs={12}>
-                      <Grid container justify="center" >
+              
+               
+                   <Grid item key={item._id}>
+                      
 
                         <Card style= {{maxWidth: 325}}>
                           <CardActionArea>
@@ -84,17 +84,16 @@ class ShoppingCartPage extends Component {
                     </CardActions>
                 </Card>
                  </Grid>
-                  </Grid>
-                  </Grid>
                 
-              </React.Fragment>
+                
+              
               )
         });
     }
     
 
 
-    return <div>{mappedItems }</div>;
+    return <div><h1 style={{margin:"50px"}}>shopping  Cart</h1><Grid container justify="center" spacing={4} alignItems="center">{mappedItems }</Grid></div>;
   }
 }
 

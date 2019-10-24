@@ -42,6 +42,7 @@ const UserLogin = props => {
   const { users, setLoggedInUser, createNewUser } = props;
 
   const [usernameText, setUsernameText] = useState("");
+  setLoggedInUser(_.find(users, user => user.username === "ruben"));
 
   const handleUsernameTextChange = e => {
     setUsernameText(e.target.value);

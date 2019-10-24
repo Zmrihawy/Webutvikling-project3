@@ -8,6 +8,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
 
 // Database linking
 import { useEffect } from "react";
@@ -20,26 +21,25 @@ import "../../styles/homepage.css";
 
 // HomePage layout
 const HomePage = props => {
-  // eslint-disable-next-line react/prop-types
   const { getFeaturedComponents, featuredComponents } = props;
-  // const [open, setOpen] = useState({}); didnt need this ? maybe ? - Rahim
 
   useEffect(() => {
     getFeaturedComponents();
   }, [getFeaturedComponents]);
 
-  // eslint-disable-next-line react/prop-types
   const mappedItems = featuredComponents.map(component => (
-    <Grid item key={component.name} className="_featured_item">
+    <Grid item key={component.name} className="_featured_item" xs={12} sm={4} md={4} lg={3} xl={3}> 
+
       <Link
         to={"/item-details/" + component._id}
         style={{ textDecoration: "none" }}
       >
-        <Card style={{ height: "300px", width: "200px" }}>
-          <img
-            src={component.pictureURL}
-            style={{ width: "100%", height: "50%" }}
-          />
+        <Card style={{ minHeight: "300px", width: "200px" }}>
+          <CardMedia 
+                  component="img"
+                  style={{height: "180px" }}
+                  src={component.pictureURL}
+            />
           <Divider style={{ marginTop: "10px", marginBottom: "5px" }} />
           {component.name}
           <br />
@@ -73,7 +73,10 @@ const HomePage = props => {
             home for electronics{" "}
           </Typography>
 
-          <Divider />
+          <Divider style={{margin: "20px"}}/>
+          <Typography variant="subtitle1">
+            Featured items:
+          </Typography>
 
           <div className="_homepage">
             <Grid

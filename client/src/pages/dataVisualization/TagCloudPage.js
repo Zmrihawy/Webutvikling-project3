@@ -1,30 +1,37 @@
 import React from 'react';
+import { useEffect } from "react";
 import { connect } from 'react-redux';
 
 import TagCloudHeader from './TagCloudHeader';
 import TagCloudView from './TagCloudView';
+import { getComponentStatistics } from '../../redux/actions/componentActions'
 
 const TagCloudPage = props => {
+  const { getComponentStatistics, componentStatistics } = props;
+
+  useEffect(() => {
+    getComponentStatistics();
+  }, [getComponentStatistics])
+
   return (
     <div>
-      <TagCloudHeader/>
-      <TagCloudView/>
+      <TagCloudHeader />
+      <TagCloudView componentStatistics={componentStatistics}/>
     </div>
   )
 }
 
 
-export default TagCloudPage;
-// function mapStateToProps(state) {
-//   const { component } = state;
-//   return { featuredComponents: component.featuredComponents };
-// }
+function mapStateToProps(state) {
+  const { component } = state;
+  return { componentStatistics: component.componentStatistics };
+}
 
-// const actionCreators = {
-//   getFeaturedComponents
-// };
+const actionCreators = {
+  getComponentStatistics
+};
 
-// export default connect(
-//   mapStateToProps,
-//   actionCreators
-// )(HomePage);
+export default connect(
+  mapStateToProps,
+  actionCreators
+)(TagCloudPage);

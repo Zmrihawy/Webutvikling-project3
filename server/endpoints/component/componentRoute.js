@@ -154,6 +154,24 @@ router.get("/pagination/", function(req, res) {
 });
 
 // TYPE: GET
+// ROUTE: /component/statistics
+// DESC: Get various statistics of components. Used for data viz
+router.get("/statistics", function(req, res) {
+  componentModel.find()
+    .then((components) => {
+      let producerCount = {};
+      components.forEach((component) => {
+        producerCount[component.category] = producerCount[component.category] ? producerCount[component.category] + 1 : 1;
+      })
+      res.send(producerCount);
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send(err)
+    })
+})
+
+// TYPE: GET
 // ROUTE: /component/{id}
 // Get request to get component by id
 router.get("/:id", function(req, res) {
@@ -257,5 +275,9 @@ router.delete("/:id", function(req, res) {
       res.status(404).send(err);
     });
 });
+
+
+
+
 
 module.exports = router;

@@ -6,6 +6,11 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
 
 import { getCurrentComponent } from "../../redux/actions/componentActions";
 
@@ -34,8 +39,8 @@ const ItemDetails = (props) => {
 
 
   return (
-    <Grid container justify="center" align="center" >
-      <Grid item xs={12} s={12} m={12} l={12} x={12} style={{marginBottom: "20px"}}>
+    <Grid container justify="center" alignItems="center" spacing={4}>
+      <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{marginBottom: "40px"}}>
         <Typography variant="h2" style={{margin: "30px"}}>
           {currentComponent.name}
         </Typography>
@@ -43,29 +48,48 @@ const ItemDetails = (props) => {
           Add to basket
         </Button>
       </Grid>
-      <Grid item>
+      <Grid item xs={12} sm={12} md={6} lg={6} xl={6} style={{marginBottom: "20px"}}>
         <Paper>
           <img src={currentComponent.pictureURL} style={{maxWidth: "100%", maxHeight: "500px"}}/>
         </Paper>
       </Grid>    
       <Grid item>
-        <Grid container>
-          <Grid item>
-              <Typography variant="subtitle1" >
-                {currentComponent.producer}
+        <Grid container justify="center" alignItems="center" spacing={4}>
+            <Grid item xs={12} sm={6} md={6} lg={6} xl={12} style={{marginBottom: "20px"}}>
+              <Typography variant="body1" style={{margin: "2%"}}>
+                {"Producer: " + currentComponent.producer}
               </Typography>
-              <Typography variant="subtitle1" >
+                <Typography variant="body1" style={{margin: "2%"}}>
                 {currentComponent.category}
               </Typography>
-              <Typography variant="subtitle1" >
+                <Typography variant="subtitle1" style={{margin: "2%"}}>
+                {"Price: " + currentComponent.price + "kr"}
+              </Typography>
+                <Typography variant="subtitle1" style={{margin: "2%"}}>
                 {currentComponent.description}
               </Typography>
-              <Typography variant="subtitle1" >
-                {currentComponent.price}
-              </Typography>
           </Grid>
-            <Grid item>
-              {mappedSpecs}
+            <Grid item xs={12} sm={6} md={6} lg={6} xl={12} style={{marginBottom: "20px"}}>
+               <Table aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Specs</TableCell>
+                    <TableCell align="right">value</TableCell>
+                    <TableCell align="right">description</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {(currentComponent.specs || []).map((row, i) => { return (
+                    <TableRow key={i}>
+                      <TableCell component="th" scope="row">
+                        {row.name}
+                      </TableCell>
+                      <TableCell >{row.value}</TableCell>
+                      <TableCell align="right">{row.description}</TableCell>
+                    </TableRow>
+                  )})}
+                </TableBody>
+          </Table>
             </Grid>
         </Grid>
       </Grid>

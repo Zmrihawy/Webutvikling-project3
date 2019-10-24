@@ -2,7 +2,6 @@ const express = require("express");
 const userModel = require("./userModel.js");
 const router = express.Router();
 
-
 // On every hit, log the time
 router.use(function timeLog(req, res, next) {
   console.log("User endpoint hit:", new Date(Date.now()).toString());
@@ -23,7 +22,7 @@ router.get("/", function(req, res) {
 });
 
 // TYPE: GET
-// ROUTE: /component/{id}
+// ROUTE: /user/{id}
 // Get request to get user by id
 router.get("/:id", function(req, res) {
   userModel
@@ -35,39 +34,32 @@ router.get("/:id", function(req, res) {
     });
 });
 
-
 // TYPE: POST
-// ROUTE /component/{id}
-// Post request to create a new component
+// ROUTE /user/{id}
+// Post request to create a new user
 router.post("/", function(req, res) {
-  const { username, shoppingBasket } = req.body;
+  const { username, shoppingCart } = req.body;
   let user = new userModel({
     username,
-    shoppingBasket: shoppingBasket ? JSON.parse(shoppingBasket) : []
+    shoppingCart: shoppingCart ? JSON.parse(shoppingCart) : []
   });
   user
     .save()
-    .then(updatedUser =>
-      res.status(201).json(updatedUser)
-    )
+    .then(updatedUser => res.status(201).json(updatedUser))
     .catch(err => {
       console.log(err);
       res.status(500).send(err);
     });
 });
 
-
 // TYPE: PATCH
-// ROUTE: /component/id
-// DESC: Updates a certain field, or several fields, of a component. Does not create a
+// ROUTE: /user/id
+// DESC: Updates a certain field, or several fields, of a user. Does not create a
 // new one if id does not exist
 router.patch("/:id", function(req, res) {
   // Get only the required values
   let newObject = req.body;
   // Need to handle specs individually since it needs to be parsed
-  if (req.body.shoppingBasket) {
-    newObject.shoppingBasket = JSON.parse(req.body.shoppingBasket);
-  }
   userModel
     .findByIdAndUpdate(req.params.id, newObject, {
       new: true,
@@ -80,10 +72,9 @@ router.patch("/:id", function(req, res) {
     });
 });
 
-
 // TYPE: DELETE
-// ROUTE: /component/id
-// DESC: Delete component by id
+// ROUTE: /user/id
+// DESC: Delete user by id
 router.delete("/:id", function(req, res) {
   userModel
     .findByIdAndRemove(req.params.id)

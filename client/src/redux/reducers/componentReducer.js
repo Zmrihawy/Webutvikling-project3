@@ -1,15 +1,25 @@
-import { GET_PAGINATION_COMPONENTS, GET_FEATURED_COMPONENTS } from "../actions/types";
+import {
+  GET_PAGINATION_COMPONENTS,
+  GET_FEATURED_COMPONENTS,
+  GET_CURRENT_COMPONENT
+} from "../actions/types";
 
 const initialState = {
   paginationComponents: {
     components: [],
     paginationMetaData: {}
   },
-  featuredComponents: []
+  featuredComponents: [],
+  currentComponent: {}
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case GET_CURRENT_COMPONENT:
+      return {
+        ...state,
+        currentComponent: action.payload
+      };
     case GET_PAGINATION_COMPONENTS:
       return {
         ...state,
@@ -19,7 +29,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         featuredComponents: action.payload
-      }
+      };
     default:
       return state;
   }

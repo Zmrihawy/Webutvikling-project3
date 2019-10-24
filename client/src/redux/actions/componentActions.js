@@ -1,32 +1,47 @@
-import { GET_PAGINATION_COMPONENTS, GET_FEATURED_COMPONENTS } from "./types";
+import {
+  GET_PAGINATION_COMPONENTS,
+  GET_FEATURED_COMPONENTS,
+  GET_CURRENT_COMPONENT
+} from "./types";
 
+const createQueryFromParams = queryParams => {
+  const {
+    filterVal,
+    filterField,
+    nameSearch,
+    sortBy,
+    pageNum,
+    objectsPerPage,
+    isAsc
+  } = queryParams;
+  return (
+    (filterVal ? "filterVal=" + filterVal + "&" : "") +
+    (nameSearch ? "nameSearch=" + nameSearch + "&" : "") +
+    (filterField ? "filterField=" + filterField + "&" : "") +
+    (pageNum ? "pageNum=" + pageNum + "&" : "") +
+    (objectsPerPage ? "objectsPerPage=" + objectsPerPage + "&" : "") +
+    (sortBy ? "sortBy=" + sortBy + "&" : "") +
+    (isAsc === "false" ? "isAsc=false&" : "")
+  );
+};
 
-const createQueryFromParams = (queryParams) => {
-  const { filterVal, filterField, sortBy, pageNum, objectsPerPage, isAsc } = queryParams;
-  return (filterVal ? "filterVal=" + filterVal + "&" : "" )
-  + (filterField ? "filterField=" + filterField  + "&" : "" ) + (sortBy ? "sortBy=" + sortBy : "" )
-      + ( pageNum ? "pageNum=" + pageNum : "") + ( objectsPerPage ? "objectsPerPage=" + objectsPerPage : "")
-      + (sortBy ? "sortBy=" + sortBy : "") + (isAsc ? "isAcc=" + isAsc : "");
-}
-
-  
-
-export const getPaginationComponents = (queryParams) => dispatch => {
+export const getPaginationComponents = queryParams => dispatch => {
   queryParams = queryParams ? queryParams : {};
   let query = createQueryFromParams(queryParams);
   return fetch("api/component/pagination?" + query)
     .then(res => res.json())
     .then(res => {
-      const { pageNum, totPages, objectsPerPage, components } = res;
+      const { pageNum, totPages, totObjects, objectsPerPage, components } = res;
       let paginationComponents = {
         paginationMetaData: {
-            queryParams,
-            pageNum,
-            totPages,
-            objectsPerPage
+          queryParams,
+          pageNum,
+          totPages,
+          totObjects,
+          objectsPerPage
         },
         components
-      }
+      };
       return dispatch({
         type: GET_PAGINATION_COMPONENTS,
         payload: paginationComponents
@@ -35,8 +50,22 @@ export const getPaginationComponents = (queryParams) => dispatch => {
     .catch(err => console.log(err));
 };
 
+export const getCurrentComponent = id => dispatch => {
+  console.log("in current component action ", id);
+  return fetch("/api/component/" + id)
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+      return dispatch({
+        type: GET_CURRENT_COMPONENT,
+        payload: res
+      });
+    })
+    .catch(err => console.log(err));
+};
 
 export const getFeaturedComponents = () => dispatch => {
+  console.log("featured");
   return fetch("api/component/featuredComponents")
     .then(res => res.json())
     .then(res => {
@@ -45,5 +74,5 @@ export const getFeaturedComponents = () => dispatch => {
         payload: res
       });
     })
-    .catch(err => console.log(err))
-}
+    .catch(err => console.log(err));
+};

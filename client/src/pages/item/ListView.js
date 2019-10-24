@@ -8,12 +8,13 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Divider from "@material-ui/core/Divider";
+import {Link} from "react-router-dom";
 
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import StarBorder from "@material-ui/icons/StarBorder";
-
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,7 +49,6 @@ const ListView = props => {
     setOpen(tmpOpen);
   };
 
-
   // Map component to material list elements, with collapse functionality
   // React.Fragment is used to return more than one JSX node
   const mappedComponents = paginationComponents.components.map(component => (
@@ -56,10 +56,6 @@ const ListView = props => {
       <Divider />
       <ListItem button onClick={() => handleClick(component._id)}>
         <ListItemText primary={component.name} />
-
-        <ListItemIcon>
-          <StarBorder />
-        </ListItemIcon>
         {open[component._id] ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse
@@ -90,6 +86,13 @@ const ListView = props => {
             </ListItem>
           ))}
         </List>
+
+          <Link to={"/item-details/" + component._id} >
+            <Button variant="outlined" color="primary" className={classes.button} size='large'>
+                GO TO ITEM PAGE
+            </Button>
+          </Link>
+
       </Collapse>
     </React.Fragment>
   ));
@@ -116,6 +119,6 @@ ListView.propTypes = {
     paginationMetaData: PropTypes.object,
     components: PropTypes.array
   })
-}
+};
 
 export default ListView;

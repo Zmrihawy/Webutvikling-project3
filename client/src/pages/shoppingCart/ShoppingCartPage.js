@@ -19,7 +19,7 @@ class ShoppingCartPage extends Component {
 // We need to logginUserState, so we extract it
 function mapStateToProps(state) {
   const { user } = state;
-  return { users: user.loggedInUser };
+  return { loggedInuser: user.loggedInUser };
 }
 
 // These represents functions for changing redux state

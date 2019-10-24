@@ -25,11 +25,8 @@ const HomePage = props => {
   // const [open, setOpen] = useState({}); didnt need this ? maybe ? - Rahim
 
   useEffect(() => {
-    console.log("getting featured components");
     getFeaturedComponents();
   }, [getFeaturedComponents]);
-
-  console.log("featured components: ", featuredComponents);
 
   // eslint-disable-next-line react/prop-types
   const mappedItems = featuredComponents.map(component => (

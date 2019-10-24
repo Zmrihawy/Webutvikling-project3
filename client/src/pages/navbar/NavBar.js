@@ -41,6 +41,14 @@ function NavBar(props) {
         </Button>
       </Link>
 
+      <Link to="/tag-cloud" style={{ textDecoration: "none" }}>
+        <Button label="Tag Cloud" style={{ textTransform: "none" }}>
+          <TypoGraphy variant="subtitle1" style={{ color: "white" }}>
+            Tag Cloud
+          </TypoGraphy>
+        </Button>
+      </Link>
+
       <div style={{ flex: 1 }} />
 
       <TypoGraphy justify="space-between">

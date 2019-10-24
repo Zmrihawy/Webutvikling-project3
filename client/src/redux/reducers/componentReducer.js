@@ -1,7 +1,8 @@
 import {
   GET_PAGINATION_COMPONENTS,
   GET_FEATURED_COMPONENTS,
-  GET_CURRENT_COMPONENT
+  GET_CURRENT_COMPONENT,
+  GET_COMPONENT_STATISTICS
 } from "../actions/types";
 
 const initialState = {
@@ -10,7 +11,8 @@ const initialState = {
     paginationMetaData: {}
   },
   featuredComponents: [],
-  currentComponent: {}
+  currentComponent: {},
+  componentStatistics: null
 };
 
 export default function(state = initialState, action) {
@@ -29,6 +31,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         featuredComponents: action.payload
+      };
+    case GET_COMPONENT_STATISTICS:
+      return {
+        ...state,
+        componentStatistics: action.payload
       };
     default:
       return state;

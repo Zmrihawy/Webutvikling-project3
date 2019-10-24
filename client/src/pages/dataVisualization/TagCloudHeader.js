@@ -1,14 +1,18 @@
-import React from 'react';
+import React from "react";
 import Typography from "@material-ui/core/Typography";
 
-
-
-const TagCloudHeader = (props) => {
+const TagCloudHeader = props => {
   return (
-    <Typography variant="h3">
-      Data Visualization - Tag Cloud
-    </Typography>
-  )
-}
+    <div>
+      <Typography variant="h3" style={{ marginTop: "30px" }}>
+        Data Visualization - Tag cloud
+      </Typography>
+      <Typography variant="subtitle1" style={{ marginTop: "30px" }}>
+        Created by counting components for each producer. More components equal
+        larger font.
+      </Typography>
+    </div>
+  );
+};
 
 export default TagCloudHeader;

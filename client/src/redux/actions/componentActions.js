@@ -52,11 +52,9 @@ export const getPaginationComponents = queryParams => dispatch => {
 };
 
 export const getCurrentComponent = id => dispatch => {
-  console.log("in current component action ", id);
   return fetch("/api/component/" + id)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
       return dispatch({
         type: GET_CURRENT_COMPONENT,
         payload: res
@@ -66,7 +64,6 @@ export const getCurrentComponent = id => dispatch => {
 };
 
 export const getFeaturedComponents = () => dispatch => {
-  console.log("featured");
   return fetch("api/component/featuredComponents")
     .then(res => res.json())
     .then(res => {
@@ -79,7 +76,6 @@ export const getFeaturedComponents = () => dispatch => {
 };
 
 export const getComponentStatistics = () => dispatch => {
-  console.log("in get component statistics");
   return fetch("api/component/statistics")
     .then(res => res.json())
     .then(res => {

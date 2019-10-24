@@ -1,92 +1,179 @@
 import React from "react";
-import "../../styles/item-details.css";
+import { useEffect } from "react";
+import { connect } from "react-redux";
 
-// Material Ui elements
-import Typography from "@material-ui/core/Typography";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
 
-// ItemDetails layout
-export default class ItemDetail extends React.Component {
-  constructor(props) {
-    super(props);
+import { getCurrentComponent } from "../../redux/actions/componentActions";
+import { addItemToShoppingCart } from "../../redux/actions/userActions";
 
-    this.state = {
-      image: null,
-      name: null,
-      des: null,
-      amount: null
-    };
-  }
+const ItemDetails = props => {
+  const {
+    currentComponent,
+    getCurrentComponent,
+    addItemToShoppingCart,
+    loggedInUser,
+    match
+  } = props;
+  const { id } = match.params;
 
-  componentDidMount() {
-    // eslint-disable-next-line react/prop-types
-    const { img, description, title, price } = this.props.location.state;
+  useEffect(() => {
+    getCurrentComponent(id);
+  }, [getCurrentComponent]);
 
-    this.setState({
-      image: img,
-      name: title,
-      des: description,
-      amount: price
-    });
-  }
+  const handleAddToCart = () => {
+    addItemToShoppingCart(loggedInUser, currentComponent);
+  };
 
-  render() {
-    // Material Ui styling
-    const useStyles = makeStyles(theme => ({
-      button: {
-        margin: theme.spacing(1)
-      },
-      input: {
-        display: "none"
-      }
-    }));
+  const mappedSpecs = (currentComponent.specs || []).map(spec => (
+    <div>
+      <Typography variant="subtitle1">name: {spec.name}</Typography>
+      <Typography variant="subtitle1">
+        description: {spec.description}
+      </Typography>
+      <Typography variant="subtitle1">value: {spec.value}</Typography>
+    </div>
+  ));
 
-    return (
-      <Grid container justify="center" className="_item_container">
-        <Grid className="_content">
-          <div className="_item_image">
-            <CardMedia
-              component="img"
-              alt="Component Image"
-              height="100%"
-              width="100%"
-              image={
-                this.state.image
-                  ? this.state.image
-                  : "https://dummyimage.com/600x400/000/fff"
-              }
-            />
-          </div>
-        </Grid>
-
-        <div className="_item_description">
-          <CardContent className="_content">
-            <Typography gutterBottom variant="h5" component="h2">
-              {this.state.name}
-            </Typography>
-
-            <Typography variant="body2" color="textSecondary" component="p">
-              {this.state.des}
-            </Typography>
-
-            <Typography variant="body2" color="textSecondary" component="p">
-              {this.state.amount}
-            </Typography>
-
-            <Button
-              variant="outlined"
-              color="primary"
-              className={useStyles.button}
-            >
-              Add to Basket
+  return (
+    <Grid container justify="center" alignItems="center" spacing={4}>
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={12}
+        lg={12}
+        xl={12}
+        style={{ marginBottom: "40px" }}
+      >
+        <Typography variant="h2" style={{ margin: "30px" }}>
+          {currentComponent.name}
+        </Typography>
+        {loggedInUser && JSON.stringify(loggedInUser) !== JSON.stringify({}) ? (
+          <Button onClick={handleAddToCart} color="primary" variant="outlined">
+            {" "}
+            Add to cart{" "}
+          </Button>
+        ) : (
+          <div
+            onClick={() => alert("please go to the user page and log in first")}
+          >
+            <Button variant="outlined" disabled>
+              {" "}
+              Add to cart{" "}
             </Button>
-          </CardContent>
-        </div>
+          </div>
+        )}
       </Grid>
-    );
-  }
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={5}
+        lg={5}
+        xl={5}
+        style={{ marginBottom: "20px" }}
+      >
+        <Paper>
+          <img
+            src={currentComponent.pictureURL}
+            style={{ maxWidth: "100%", maxHeight: "500px" }}
+          />
+        </Paper>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={5}
+        lg={5}
+        xl={5}
+        style={{ marginBottom: "20px" }}
+      >
+        <Grid container justify="center" alignItems="center" spacing={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={6}
+            lg={6}
+            xl={12}
+            style={{ marginBottom: "20px" }}
+          >
+            <Typography variant="body1" style={{ margin: "2%" }}>
+              {"Producer: " + currentComponent.producer}
+            </Typography>
+            <Typography variant="body1" style={{ margin: "2%" }}>
+              {currentComponent.category}
+            </Typography>
+            <Typography variant="subtitle1" style={{ margin: "2%" }}>
+              {"Price: " + currentComponent.price + "kr"}
+            </Typography>
+            <Typography variant="subtitle1" style={{ margin: "2%" }}>
+              {currentComponent.description}
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={6}
+            lg={6}
+            xl={12}
+            style={{ marginBottom: "20px" }}
+          >
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Specs</TableCell>
+                  <TableCell>value</TableCell>
+                  <TableCell align="right">description</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {(currentComponent.specs || []).map((row, i) => {
+                  return (
+                    <TableRow key={i}>
+                      <TableCell component="th" scope="row">
+                        {row.name}
+                      </TableCell>
+                      <TableCell>{row.value}</TableCell>
+                      <TableCell align="right">{row.description}</TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+};
+
+// Map redux state and actionCreators to props
+function mapStateToProps(state) {
+  const { component, user } = state;
+  return {
+    currentComponent: component.currentComponent,
+    loggedInUser: user.loggedInUser
+  };
 }
+
+const actionCreators = {
+  getCurrentComponent,
+  addItemToShoppingCart
+};
+
+export default connect(
+  mapStateToProps,
+  actionCreators
+)(ItemDetails);

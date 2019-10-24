@@ -36,7 +36,7 @@ class MainBar extends Component {
 MainBar.propTypes = {
   loggedInUser: PropTypes.shape({
     username: PropTypes.string,
-    shoppingBasket: PropTypes.array
+    shoppingCart: PropTypes.array
   })
 };
 

@@ -22,7 +22,7 @@ router.get("/", function(req, res) {
 });
 
 // TYPE: GET
-// ROUTE: /component/{id}
+// ROUTE: /user/{id}
 // Get request to get user by id
 router.get("/:id", function(req, res) {
   userModel
@@ -35,8 +35,8 @@ router.get("/:id", function(req, res) {
 });
 
 // TYPE: POST
-// ROUTE /component/{id}
-// Post request to create a new component
+// ROUTE /user/{id}
+// Post request to create a new user
 router.post("/", function(req, res) {
   const { username, shoppingCart } = req.body;
   let user = new userModel({
@@ -53,16 +53,13 @@ router.post("/", function(req, res) {
 });
 
 // TYPE: PATCH
-// ROUTE: /component/id
-// DESC: Updates a certain field, or several fields, of a component. Does not create a
+// ROUTE: /user/id
+// DESC: Updates a certain field, or several fields, of a user. Does not create a
 // new one if id does not exist
 router.patch("/:id", function(req, res) {
   // Get only the required values
   let newObject = req.body;
   // Need to handle specs individually since it needs to be parsed
-  if (req.body.shoppingCart) {
-    newObject.shoppingCart = JSON.parse(req.body.shoppingCart);
-  }
   userModel
     .findByIdAndUpdate(req.params.id, newObject, {
       new: true,
@@ -76,8 +73,8 @@ router.patch("/:id", function(req, res) {
 });
 
 // TYPE: DELETE
-// ROUTE: /component/id
-// DESC: Delete component by id
+// ROUTE: /user/id
+// DESC: Delete user by id
 router.delete("/:id", function(req, res) {
   userModel
     .findByIdAndRemove(req.params.id)

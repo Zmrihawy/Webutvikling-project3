@@ -17,26 +17,10 @@ function NavBar(props) {
         </Button>
       </Link>
 
-      <Link to="/item-details" style={{ textDecoration: "none" }}>
-        <Button label="item-details" style={{ textTransform: "none" }}>
-          <TypoGraphy variant="subtitle1" style={{ color: "white" }}>
-            Item details
-          </TypoGraphy>
-        </Button>
-      </Link>
-
       <Link to="/component-list" style={{ textDecoration: "none" }}>
         <Button label="component-list" style={{ textTransform: "none" }}>
           <TypoGraphy variant="subtitle1" style={{ color: "white" }}>
             Component list
-          </TypoGraphy>
-        </Button>
-      </Link>
-
-      <Link to="/categories" style={{ textDecoration: "none" }}>
-        <Button label="categories" style={{ textTransform: "none" }}>
-          <TypoGraphy variant="subtitle1" style={{ color: "white" }}>
-            Categories
           </TypoGraphy>
         </Button>
       </Link>
@@ -71,7 +55,7 @@ function NavBar(props) {
 NavBar.propTypes = {
   loggedInUser: PropTypes.shape({
     username: PropTypes.string,
-    shoppingBasket: PropTypes.array
+    shoppingCart: PropTypes.array
   })
 };
 

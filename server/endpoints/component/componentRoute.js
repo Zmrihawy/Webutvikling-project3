@@ -157,6 +157,7 @@ router.get("/pagination/", function(req, res) {
 // ROUTE: /component/{id}
 // Get request to get component by id
 router.get("/:id", function(req, res) {
+  console.log("copmonent by id", req.params)
   componentModel
     .findById(req.params.id)
     .then(component => res.send(component))

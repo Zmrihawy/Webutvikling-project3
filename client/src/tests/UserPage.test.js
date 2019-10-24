@@ -9,6 +9,7 @@ it("renders user login page", () => {
     const tree = renderer
         .create(<UserLogin users={users}
                            setLoggedInUser={setLoggedInUser}
-                           createNewUser={createNewUser}/>).toJSON();
+                           createNewUser={createNewUser}/>)
+        .toJSON();
     expect(tree).toMatchSnapshot();
 });

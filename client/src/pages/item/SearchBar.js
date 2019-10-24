@@ -123,6 +123,21 @@ export default class SearchBar extends React.Component {
     this.setState({ sortDesc: e.target.checked });
   }
 
+  EnterKeyValue = e => {
+    if (e.key === 'Enter') {
+      this.handleFilterTextChange(e);
+      this.handleSubmit(e);
+    }
+  };
+
+
+  EnterKeyName = e => {
+    if (e.key === 'Enter') {
+      this.handleSearchTextChange(e);
+      this.handleSubmit(e);
+    }
+  };
+
   render() {
     const {
       searchTextState,
@@ -147,6 +162,7 @@ export default class SearchBar extends React.Component {
               <TextField
                 label="search"
                 placeholder="Search by name"
+                onKeyDown={this.EnterKeyName}
                 onChange={this.handleSearchTextChange}
               />
             </Grid>
@@ -181,6 +197,7 @@ export default class SearchBar extends React.Component {
               <TextField
                 label="filter"
                 placeholder="Filter by value"
+                onKeyDown={this.EnterKeyValue}
                 onChange={this.handleFilterTextChange}
               />
             </Grid>

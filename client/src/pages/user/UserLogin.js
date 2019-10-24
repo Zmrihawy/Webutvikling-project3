@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import _ from "lodash";
-
+import {useHistory} from 'react-router-dom'
 const useStyles = makeStyles(theme => ({
   "@global": {
     body: {
@@ -41,6 +41,8 @@ const UserLogin = props => {
 
   const { users, setLoggedInUser, createNewUser } = props;
 
+  let history = useHistory();
+
   const [usernameText, setUsernameText] = useState("");
 
   const handleUsernameTextChange = e => {
@@ -48,13 +50,22 @@ const UserLogin = props => {
   };
 
   const handleSignInSubmit = () => {
+    console.log("submit normal")
     if (users.map(user => user.username).indexOf(usernameText) > -1) {
       setLoggedInUser(_.find(users, user => user.username === usernameText));
-      alert("logged in as " + usernameText);
+      console.log(props)
+      history.push('/')
     } else {
       alert(usernameText + " is not registered user");
     }
   };
+
+  const EnterKey = e => {
+
+    if (e.key === 'Enter') {
+     handleSignInSubmit(e);
+    };
+  }
 
   const handleCreateUserSubmit = () => {
     if (users.map(user => user.username).indexOf(usernameText) > -1) {
@@ -77,7 +88,7 @@ const UserLogin = props => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+
           <TextField
             variant="outlined"
             margin="normal"
@@ -88,10 +99,12 @@ const UserLogin = props => {
             name="username"
             autoComplete="username"
             autoFocus
+            onKeyDown={EnterKey}
             onChange={handleUsernameTextChange}
           />
           <Button
             fullWidth
+
             variant="contained"
             color="primary"
             className={classes.submit}
@@ -109,7 +122,7 @@ const UserLogin = props => {
           >
             Create user
           </Button>
-        </form>
+
       </div>
     </Container>
   );

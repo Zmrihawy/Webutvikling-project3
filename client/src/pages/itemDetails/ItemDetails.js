@@ -16,12 +16,16 @@ import { getCurrentComponent } from "../../redux/actions/componentActions";
 
 const ItemDetails = (props) => {
 
-  const { currentComponent, getCurrentComponent, match } = props;
+  const { currentComponent, getCurrentComponent, loggedInUser, match } = props;
   const { id } = match.params;
 
   useEffect(() => {
     getCurrentComponent(id);
   }, [getCurrentComponent]);
+
+  const handleAddToBasket = () => {
+    console.log("Adding item to basket")
+  }
 
   const mappedSpecs = (currentComponent.specs || []).map(spec => (
     <div>
@@ -37,13 +41,19 @@ const ItemDetails = (props) => {
     </div>
   ))
 
-
   return (
     <Grid container justify="center" alignItems="center" spacing={4}>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{marginBottom: "40px"}}>
         <Typography variant="h2" style={{margin: "30px"}}>
           {currentComponent.name}
         </Typography>
+          {loggedInUser && JSON.stringify(loggedInUser) !== JSON.stringify({}) ? 
+              <Button onClick={handleAddToBasket} color="primary" variant="outlined"> Add to basket </Button>
+              :
+              <div onClick={() => alert("please go to the user page and log in first")}>
+                <Button variant="outlined" disabled> Add to basket </Button>
+              </div>
+          }
       </Grid>
       <Grid item xs={12} sm={12} md={5} lg={5} xl={5} style={{marginBottom: "20px"}}>
         <Paper>
@@ -98,8 +108,8 @@ const ItemDetails = (props) => {
 
 // Map redux state and actionCreators to props
 function mapStateToProps(state) {
-  const { component } = state;
-  return { currentComponent: component.currentComponent };
+  const { component, user } = state;
+  return { currentComponent: component.currentComponent, loggedInUser: user.loggedInUser };
 }
 
 const actionCreators = {

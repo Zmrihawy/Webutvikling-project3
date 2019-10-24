@@ -23,6 +23,13 @@ export const setLoggedInUser = user => dispatch => {
   });
 };
 
+export const addItemToShoppingCart = (user, component) => dispatch => {
+  return fetch("/api/user", {
+    method: "PATCH",
+    body: JSON.stringify({shoppingBasket: [...user.shoppingBasket, ...component]}
+
+
+
 export const createNewUser = username => dispatch => {
   return fetch("api/user", {
     method: "POST",

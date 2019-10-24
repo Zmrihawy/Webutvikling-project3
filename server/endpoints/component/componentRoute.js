@@ -159,11 +159,11 @@ router.get("/pagination/", function(req, res) {
 router.get("/statistics", function(req, res) {
   componentModel.find()
     .then((components) => {
-      let producerCount = {};
+      let categoryCount = {};
       components.forEach((component) => {
-        producerCount[component.category] = producerCount[component.category] ? producerCount[component.category] + 1 : 1;
+        categoryCount[component.category] = categoryCount[component.category] ? categoryCount[component.category] + 1 : 1;
       })
-      res.send(producerCount);
+      res.send(categoryCount);
     })
     .catch(err => {
       console.log(err)

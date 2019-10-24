@@ -12,13 +12,13 @@ class TagCloudView extends Component {
   }
 
   render() {
-    // componentStatistics is an object where each key is the name of a producer and each value is the number
-    // of objects in the db by that producer
+    // componentStatistics is an object where each key is the name of a category and each value is the number
+    // of objects in the db by that category
     const { componentStatistics } = this.props;
     let mappedProjectedVals = [];
     if (componentStatistics) {
       const statisticsValues = Object.keys(componentStatistics).map(
-        producer => componentStatistics[producer]
+        category => componentStatistics[category]
       );
       const oldMax = Math.max(...statisticsValues);
       const oldMin = Math.min(...statisticsValues);
@@ -26,16 +26,16 @@ class TagCloudView extends Component {
       const newMin = 10;
       const newMax = 100;
       const newRange = newMax - newMin;
-      // Create a new array of objects, where each object contains the name of the producer and the projected count value
-      const projectedVals = Object.keys(componentStatistics).map(producer => {
-        let oldVal = componentStatistics[producer];
+      // Create a new array of objects, where each object contains the name of the category and the projected count value
+      const projectedVals = Object.keys(componentStatistics).map(category => {
+        let oldVal = componentStatistics[category];
         let newVal = ((oldVal - oldMin) * newRange) / oldRange + newMin;
-        return { producer, value: newVal };
+        return { category, value: newVal };
       });
       // Map to JSX
       mappedProjectedVals = projectedVals.map((object, i) => (
         <div key={i} style={{ fontSize: object.value }}>
-          {object.producer}
+          {object.category}
         </div>
       ));
     }

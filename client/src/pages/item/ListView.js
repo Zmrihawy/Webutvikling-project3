@@ -14,7 +14,6 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import StarBorder from "@material-ui/icons/StarBorder";
 
-
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
@@ -47,7 +46,6 @@ const ListView = props => {
       tmpOpen[componentId] === undefined ? true : !tmpOpen[componentId];
     setOpen(tmpOpen);
   };
-
 
   // Map component to material list elements, with collapse functionality
   // React.Fragment is used to return more than one JSX node
@@ -116,6 +114,6 @@ ListView.propTypes = {
     paginationMetaData: PropTypes.object,
     components: PropTypes.array
   })
-}
+};
 
 export default ListView;

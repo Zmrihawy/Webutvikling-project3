@@ -1,5 +1,5 @@
 import React from "react";
-import Item from "../components/Item";
+import Item from "../item/Item";
 
 // Material Ui elements
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,11 +11,11 @@ import Divider from "@material-ui/core/Divider";
 // Database linking
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { getFeaturedComponents } from "../redux/actions/componentActions";
+import { getFeaturedComponents } from "../../redux/actions/componentActions";
 import { Link } from "react-router-dom";
 
 // Styles
-import "../styles/homepage.css";
+import "../../styles/homepage.css";
 
 // HomePage layout
 const HomePage = props => {
@@ -30,11 +30,17 @@ const HomePage = props => {
   // eslint-disable-next-line react/prop-types
   const mappedItems = featuredComponents.map(component => (
     <Grid key={component.name} className="_featured_item">
-
-      <Link to={{ pathname: "/item-details/" + component._id, state: {
-          img: component.pictureURL, title: component.name,
-          description: component.description,
-          price: component.price} }} style={{ textDecoration: "none" }}
+      <Link
+        to={{
+          pathname: "/item-details/" + component._id,
+          state: {
+            img: component.pictureURL,
+            title: component.name,
+            description: component.description,
+            price: component.price
+          }
+        }}
+        style={{ textDecoration: "none" }}
       >
         <Item
           img={component.pictureURL}
@@ -42,7 +48,6 @@ const HomePage = props => {
           description={component.description}
           price={component.price}
         />
-
       </Link>
     </Grid>
   ));

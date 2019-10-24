@@ -1,15 +1,26 @@
 import React from "react";
+import PropTypes from "prop-types";
 import TypoGraphy from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
-function NavBar() {
+function NavBar(props) {
+  const { loggedInUser } = props;
   return (
     <React.Fragment>
       <Link to="/" style={{ textDecoration: "none" }}>
         <Button label="Home" style={{ textTransform: "none" }}>
           <TypoGraphy variant="subtitle1" style={{ color: "white" }}>
             Home
+          </TypoGraphy>
+        </Button>
+      </Link>
+
+      <Link to="/item-details" style={{ textDecoration: "none" }}>
+        <Button label="item-details" style={{ textTransform: "none" }}>
+          <TypoGraphy variant="subtitle1" style={{ color: "white" }}>
+            Item details
           </TypoGraphy>
         </Button>
       </Link>
@@ -37,8 +48,31 @@ function NavBar() {
           </TypoGraphy>
         </Button>
       </Link>
+
+      <Link to="/user" style={{ textDecoration: "none" }}>
+        <Button label="User" style={{ textTransform: "none" }}>
+          <TypoGraphy variant="subtitle1" style={{ color: "white" }}>
+            User
+          </TypoGraphy>
+        </Button>
+      </Link>
+
+      <div style={{ flex: 1 }} />
+
+      <TypoGraphy justify="space-between">
+        {loggedInUser && loggedInUser.username
+          ? "Logged in as " + props.loggedInUser.username
+          : "Not logged in"}
+      </TypoGraphy>
     </React.Fragment>
   );
 }
+
+NavBar.propTypes = {
+  loggedInUser: PropTypes.shape({
+    username: PropTypes.string,
+    shoppingBasket: PropTypes.array
+  })
+};
 
 export default NavBar;

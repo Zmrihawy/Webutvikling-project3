@@ -2,10 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import TagCloudHeader from './TagCloudHeader';
+import TagCloudView from './TagCloudView';
 
 const TagCloudPage = props => {
   return (
-    <TagCloudHeader/>
+    <div>
+      <TagCloudHeader/>
+      <TagCloudView/>
+    </div>
   )
 }
 

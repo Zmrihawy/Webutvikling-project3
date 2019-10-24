@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-
+import {item} from '../item/Item'
 
 class ShoppingCartPage extends Component {
 
@@ -9,8 +9,19 @@ class ShoppingCartPage extends Component {
     
     // This works because loggedInUser is populated by redux
     const { loggedInUser } = this.props;
+    
+    let mappedItems;
+    if (loggedInUser && JSON.stringify(loggedInUser) !== JSON.stringify({}) && loggedInUser.shoppingCart){
+        console.log("mapping items")
+        mappedItems = loggedInUser.shoppingCart.map(item => {
+            console.log(`mapping item ${item}`)
+            return <div>{item}</div>
+        });
+    }
+    
 
-    return <div>Hello from ShoppingCartPage</div>;
+
+    return <div>{mappedItems }</div>;
   }
 }
 
@@ -19,7 +30,7 @@ class ShoppingCartPage extends Component {
 // We need to logginUserState, so we extract it
 function mapStateToProps(state) {
   const { user } = state;
-  return { loggedInuser: user.loggedInUser };
+  return { loggedInUser: user.loggedInUser };
 }
 
 // These represents functions for changing redux state

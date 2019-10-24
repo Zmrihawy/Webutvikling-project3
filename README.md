@@ -7,17 +7,36 @@ we decided to implement an online electronics catalog with various electronic co
 provide us with a  wide range of components to use and therefor would be a good solution to the problem.
 
 
-## REST API
-The project is built with react js and therefore a REST API server system was implemented to enable navigation within 
-our catalog page routes possible. We proffered the use of REST API over GraphQL because its more easier to understand 
+## Project Structure
+Our project structure is based upon two major end points, a client and a server. The server part contains all the 
+necessary REST API implementations needed for fetching data from the backend and the client part takes on the "user-based"
+actions like searching for an item, showing items, filtering of items and sorting of items.
+
+
+### REST API
+The project is built with react js and therefore a REST API server system was setup to enable navigation within 
+our catalog page routes possible. We preferred to use REST API over GraphQL because its more easier to understand 
 and deal with. In addition some group members had more experience REST API. 
 
-The project structure is based upon two major end points, a client and a server. The server part contains all the 
-necessary REST API implementations needed for fetching data from the backend and the client part takes on the "user-based"
-actions like searching for an item, filtering of items and sorting of items.
+
+## State management 
+### Redux 
+
+
+
+## Components
+
+### Material - UI components 
+Most of our react components are built using Material Ui elements. The Material Ui library comes stocked with elements  
+like `<Grid/>`, `</Typography>`, and custom html elements `<Card/>` and `<Button/>` which made it easier to implement
+our components. This ensured that we didnt need to build much styles and therefore giving our  catalog a 
+consistent frontend design. 
+
 
 
 ## Testing
+
+### UNIT TESTING
 
 
 ### CYPRESS
@@ -35,7 +54,9 @@ The result is a list of all items that have a name, a category, or a producer of
 being written in the search bar.  
 
 
-## About pagination endpoint
+
+
+## Pagination 
 We have an endpoint that implements pagination. It has several features and uses several params.
 
 ### Params

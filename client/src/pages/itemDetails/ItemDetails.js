@@ -44,16 +44,13 @@ const ItemDetails = (props) => {
         <Typography variant="h2" style={{margin: "30px"}}>
           {currentComponent.name}
         </Typography>
-        <Button variant="outlined">
-          Add to basket
-        </Button>
       </Grid>
-      <Grid item xs={12} sm={12} md={6} lg={6} xl={6} style={{marginBottom: "20px"}}>
+      <Grid item xs={12} sm={12} md={5} lg={5} xl={5} style={{marginBottom: "20px"}}>
         <Paper>
           <img src={currentComponent.pictureURL} style={{maxWidth: "100%", maxHeight: "500px"}}/>
         </Paper>
       </Grid>    
-      <Grid item>
+      <Grid item xs={12} sm={12} md={5} lg={5} xl={5} style={{marginBottom: "20px"}}>
         <Grid container justify="center" alignItems="center" spacing={4}>
             <Grid item xs={12} sm={6} md={6} lg={6} xl={12} style={{marginBottom: "20px"}}>
               <Typography variant="body1" style={{margin: "2%"}}>
@@ -74,7 +71,7 @@ const ItemDetails = (props) => {
                 <TableHead>
                   <TableRow>
                     <TableCell>Specs</TableCell>
-                    <TableCell align="right">value</TableCell>
+                    <TableCell>value</TableCell>
                     <TableCell align="right">description</TableCell>
                   </TableRow>
                 </TableHead>
@@ -89,8 +86,8 @@ const ItemDetails = (props) => {
                     </TableRow>
                   )})}
                 </TableBody>
-          </Table>
-            </Grid>
+            </Table>
+          </Grid>
         </Grid>
       </Grid>
     </Grid>

@@ -24,9 +24,35 @@ export const setLoggedInUser = user => dispatch => {
 };
 
 export const addItemToShoppingCart = (user, component) => dispatch => {
-  return fetch("/api/user", {
+  return fetch("/api/user/" + user._id, {
     method: "PATCH",
-    body: JSON.stringify({shoppingBasket: [...user.shoppingBasket, ...component]}
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({shoppingCart: [...user.shoppingCart, component]})
+  })
+    .then(res => res.json())
+    .then((res) => {
+      return fetch("/api/user")
+        .then(res => res.json())
+        .then(res => {
+          dispatch({
+            type: GET_USERS,
+            payload: res ? res : []
+          });
+          const updatedUser = res.find(_user => _user._id === user._id)
+          return dispatch({
+            type: SET_LOGGED_IN_USER,
+            payload: updatedUser
+          })
+        })
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+}
+
+  
+
 
 
 

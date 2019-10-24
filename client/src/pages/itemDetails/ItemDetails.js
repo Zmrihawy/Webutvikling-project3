@@ -13,10 +13,11 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 
 import { getCurrentComponent } from "../../redux/actions/componentActions";
+import { addItemToShoppingCart } from "../../redux/actions/userActions"
 
 const ItemDetails = (props) => {
 
-  const { currentComponent, getCurrentComponent, loggedInUser, match } = props;
+  const { currentComponent, getCurrentComponent, addItemToShoppingCart, loggedInUser, match } = props;
   const { id } = match.params;
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const ItemDetails = (props) => {
   }, [getCurrentComponent]);
 
   const handleAddToBasket = () => {
-    console.log("Adding item to basket")
+    addItemToShoppingCart(loggedInUser, currentComponent);
   }
 
   const mappedSpecs = (currentComponent.specs || []).map(spec => (
@@ -113,7 +114,8 @@ function mapStateToProps(state) {
 }
 
 const actionCreators = {
-  getCurrentComponent
+  getCurrentComponent,
+  addItemToShoppingCart
 };
 
 export default connect(

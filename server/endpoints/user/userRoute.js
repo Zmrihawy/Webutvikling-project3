@@ -60,9 +60,6 @@ router.patch("/:id", function(req, res) {
   // Get only the required values
   let newObject = req.body;
   // Need to handle specs individually since it needs to be parsed
-  if (req.body.shoppingCart) {
-    newObject.shoppingCart = JSON.parse(req.body.shoppingCart);
-  }
   userModel
     .findByIdAndUpdate(req.params.id, newObject, {
       new: true,

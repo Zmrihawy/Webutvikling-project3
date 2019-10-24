@@ -1,45 +1,36 @@
-# Project3
-
 ## Overview
-THe aim of this project was to implement an online catalog where a user can search up items and 
-give a form of interaction with the items that can be saved into the catalog. As a solution to the problem, 
+THe aim of this project was to implement an online catalog where a user is able to search up items and 
+give a review for an item that later can be saved into the catalog. As a solution to the problem, 
 we decided to implement an online electronics catalog with various electronic components. We thought this idea would
-provide us with a  wide range of components to use and therefor would be a good solution to the problem.
+provide us with a variety of components to use and therefor would be a good solution to the problem.
 
+## Project structure
+Our project build is based upon two major end points, a client part and a server part. The server part contains all the 
+necessary REST API implementations needed for fetching data from the backend and the client part contains the frontend "user-based"
+actions like searching for an item, showing items, filtering and sorting of items.
 
-## Project Structure
-Our project structure is based upon two major end points, a client and a server. The server part contains all the 
-necessary REST API implementations needed for fetching data from the backend and the client part takes on the "user-based"
-actions like searching for an item, showing items, filtering of items and sorting of items.
+### REST API (backend)
+A REST API server system was setup to enable navigation within our catalog page routes possible. We preferred to use REST API 
+over GraphQL because its more easier to understand and deal with. In addition some group members had more experience REST API. 
+See section about Redux.
 
-
-### REST API
-The project is built with react js and therefore a REST API server system was setup to enable navigation within 
-our catalog page routes possible. We preferred to use REST API over GraphQL because its more easier to understand 
-and deal with. In addition some group members had more experience REST API. 
-
-
-## State management 
-### Redux 
-
-
-
-## Components
-
-### Material - UI components 
+### Material - UI components (Frontend)
 Most of our react components are built using Material Ui elements. The Material Ui library comes stocked with elements  
 like `<Grid/>`, `</Typography>`, and custom html elements `<Card/>` and `<Button/>` which made it easier to implement
 our components. This ensured that we didnt need to build much styles and therefore giving our  catalog a 
 consistent frontend design. 
 
 
+## State management
+### Redux 
+Redux is a Javascript Library for mananging application state.
 
-## Testing
 
-### UNIT TESTING
+### Testing
+### Unit Testing
 
 
-### CYPRESS
+### Cypress
 For end to end testing we take advantage of cypress' functionality and test what would exactly happen in real time
 when a user searches for an item from the backend. The aim is to test that the item is fetched from the backed and 
 downloaded for the client. With cypress we test this and confirm that a user gets a search result containing at least 
@@ -56,7 +47,7 @@ being written in the search bar.
 
 
 
-## Pagination 
+### Pagination 
 We have an endpoint that implements pagination. It has several features and uses several params.
 
 ### Params

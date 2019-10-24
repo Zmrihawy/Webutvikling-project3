@@ -9,7 +9,7 @@ Our project build is based upon two major end points, a client part and a server
 necessary REST API implementations needed for fetching data from the backend and the client part contains the frontend "user-based"
 actions like searching for an item, showing items, filtering and sorting of items.
 
-### REST API (backend)
+### Node js + exxpress (backend)
 A REST API server system was setup to enable navigation within our catalog page routes possible. We preferred to use REST API 
 over GraphQL because its more easier to understand and deal with. In addition some group members had more experience REST API. 
 See section about Redux.
@@ -23,7 +23,9 @@ consistent frontend design.
 
 ## State management
 ### Redux 
-Redux is a Javascript Library for mananging application state.
+Redux is a Javascript Library for mananging application state. Redux provides a realtime current state of the catalog with all the 
+state variables that the app has at a given time. This helps keep control of how the catalog state changes overtime and it is also
+very useful when debugguing. 
 
 
 ### Testing

@@ -38,10 +38,10 @@ router.get("/:id", function(req, res) {
 // ROUTE /component/{id}
 // Post request to create a new component
 router.post("/", function(req, res) {
-  const { username, shoppingBasket } = req.body;
+  const { username, shoppingCart } = req.body;
   let user = new userModel({
     username,
-    shoppingBasket: shoppingBasket ? JSON.parse(shoppingBasket) : []
+    shoppingCart: shoppingCart ? JSON.parse(shoppingCart) : []
   });
   user
     .save()
@@ -60,8 +60,8 @@ router.patch("/:id", function(req, res) {
   // Get only the required values
   let newObject = req.body;
   // Need to handle specs individually since it needs to be parsed
-  if (req.body.shoppingBasket) {
-    newObject.shoppingBasket = JSON.parse(req.body.shoppingBasket);
+  if (req.body.shoppingCart) {
+    newObject.shoppingCart = JSON.parse(req.body.shoppingCart);
   }
   userModel
     .findByIdAndUpdate(req.params.id, newObject, {

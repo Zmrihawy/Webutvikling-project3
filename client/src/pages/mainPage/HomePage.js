@@ -1,6 +1,5 @@
 import React from "react";
 import Item from "../item/Item";
-import SearchBar from "../item/SearchBar";
 
 // Material Ui elements
 import CssBaseline from "@material-ui/core/CssBaseline";

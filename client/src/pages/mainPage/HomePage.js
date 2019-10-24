@@ -29,7 +29,6 @@ const HomePage = props => {
     getFeaturedComponents();
   }, [getFeaturedComponents]);
 
-
   console.log("featured components: ", featuredComponents);
 
   // eslint-disable-next-line react/prop-types
@@ -39,16 +38,18 @@ const HomePage = props => {
         to={"/item-details/" + component._id}
         style={{ textDecoration: "none" }}
       >
-        <Card style={{height: "300px", width: "200px"}}>
-          <img src={component.pictureURL} style={{ width: "100%", height: "50%"}}/>
-            <Divider style={{ marginTop: "10px", marginBottom: "5px"}} />
-              {component.name}
-            <br />
-              {component.producer}
-            <br />
-              {component.price + "kr"}
+        <Card style={{ height: "300px", width: "200px" }}>
+          <img
+            src={component.pictureURL}
+            style={{ width: "100%", height: "50%" }}
+          />
+          <Divider style={{ marginTop: "10px", marginBottom: "5px" }} />
+          {component.name}
+          <br />
+          {component.producer}
+          <br />
+          {component.price + "kr"}
         </Card>
-
       </Link>
     </Grid>
   ));
@@ -78,7 +79,13 @@ const HomePage = props => {
           <Divider />
 
           <div className="_homepage">
-            <Grid container justify="center" align="center" spacing={4} className="_homepage_featured">
+            <Grid
+              container
+              justify="center"
+              align="center"
+              spacing={4}
+              className="_homepage_featured"
+            >
               {mappedItems}
             </Grid>
           </div>

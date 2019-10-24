@@ -29,10 +29,10 @@ export const addItemToShoppingCart = (user, component) => dispatch => {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({shoppingCart: [...user.shoppingCart, component]})
+    body: JSON.stringify({ shoppingCart: [...user.shoppingCart, component] })
   })
     .then(res => res.json())
-    .then((res) => {
+    .then(res => {
       return fetch("/api/user")
         .then(res => res.json())
         .then(res => {
@@ -40,21 +40,16 @@ export const addItemToShoppingCart = (user, component) => dispatch => {
             type: GET_USERS,
             payload: res ? res : []
           });
-          const updatedUser = res.find(_user => _user._id === user._id)
+          const updatedUser = res.find(_user => _user._id === user._id);
           return dispatch({
             type: SET_LOGGED_IN_USER,
             payload: updatedUser
-          })
+          });
         })
         .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
-}
-
-  
-
-
-
+};
 
 export const createNewUser = username => dispatch => {
   return fetch("api/user", {

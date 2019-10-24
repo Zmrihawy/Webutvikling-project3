@@ -1,7 +1,7 @@
 import {
   GET_PAGINATION_COMPONENTS,
   GET_FEATURED_COMPONENTS,
-  GET_CURRENT_COMPONENT     
+  GET_CURRENT_COMPONENT
 } from "../actions/types";
 
 const initialState = {

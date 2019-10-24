@@ -55,7 +55,7 @@ function NavBar(props) {
 NavBar.propTypes = {
   loggedInUser: PropTypes.shape({
     username: PropTypes.string,
-    shoppingBasket: PropTypes.array
+    shoppingCart: PropTypes.array
   })
 };
 

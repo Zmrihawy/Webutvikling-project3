@@ -117,8 +117,6 @@ results. This represents another form of user generated data.
 We deployed three methods of testing, unit testing with jest, end-to-end testing with cypress and Chai mocha super testing. 
 All unit tests can be found in client directory in tests folder. Run `npm test` run all tests. 
 The cypress tests can be found in the cypress folder. The Chai mocha tests can be found in the server directory.
-In addition we implemented the use of proptypes in our react component structures which is a form of validation that ensures 
-the right type of props are always passed to a react component. 
 
 ### Unit Testing
 We decided to use unit testing for testing individual components. This was done by making snapshot tests for the major
@@ -138,3 +136,8 @@ We have implemented backend tests using chai, mocha and super-tests. With these 
 that the responds our backend returns are as expected. With super-test we can actually start an instance of our server
 and make request to it. Of course, our mongodb instance has to be in reach for this to work. To run the tests, make sure
 you are on the NTNU net, go to the server folder, then run `npm test`.
+
+### Prop types
+In addition we implemented the use of proptypes in our react component structures which is a form of validation that ensures 
+the right type of props are always passed to a react component. It is not really a form of testing, but it helps maintain
+correctness in the app.

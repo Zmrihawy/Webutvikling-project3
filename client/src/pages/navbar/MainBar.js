@@ -10,9 +10,8 @@ class MainBar extends Component {
   render() {
     const { loggedInUser } = this.props;
     return (
-      <div>
-        <AppBar color="primary" position="static">
-          <Toolbar>
+      <AppBar color="primary" position="static" style={{zIndex: 5}}>
+          <Toolbar >
             <TypoGraphy
               variant="subtitle1"
               color="inherit"
@@ -28,7 +27,6 @@ class MainBar extends Component {
             <NavBar loggedInUser={loggedInUser} />
           </Toolbar>
         </AppBar>
-      </div>
     );
   }
 }

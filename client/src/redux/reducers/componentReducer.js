@@ -1,7 +1,8 @@
 import {
   GET_PAGINATION_COMPONENTS,
   GET_FEATURED_COMPONENTS,
-  GET_CURRENT_COMPONENT
+  GET_CURRENT_COMPONENT,
+  GET_COMPONENT_STATISTICS
 } from "../actions/types";
 
 const initialState = {
@@ -30,6 +31,7 @@ export default function(state = initialState, action) {
         ...state,
         featuredComponents: action.payload
       };
+
     default:
       return state;
   }

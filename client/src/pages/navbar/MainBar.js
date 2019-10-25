@@ -5,14 +5,14 @@ import Toolbar from "@material-ui/core/Toolbar";
 import TypoGraphy from "@material-ui/core/Typography";
 import NavBar from "./NavBar";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class MainBar extends Component {
   render() {
     const { loggedInUser } = this.props;
     return (
-      <div>
-        <AppBar color="primary" position="static">
-          <Toolbar>
+      <AppBar color="primary" position="static" style={{zIndex: 5}}>
+          <Toolbar >
             <TypoGraphy
               variant="subtitle1"
               color="inherit"
@@ -22,13 +22,18 @@ class MainBar extends Component {
                 borderRight: "0.05em solid rgba(255, 255, 255, 0.5)"
               }}
             >
-              LOGO
+              <Link to={"/"} style={{ textDecoration: "none"}}>
+                 <p style={{fontSize: "20px",
+                     color: "white",
+                     display: "block",
+                     height: "30px",
+                     width: "30px"}}> EC </p>
+              </Link>
             </TypoGraphy>
 
             <NavBar loggedInUser={loggedInUser} />
           </Toolbar>
         </AppBar>
-      </div>
     );
   }
 }

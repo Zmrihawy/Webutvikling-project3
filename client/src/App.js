@@ -9,8 +9,11 @@ import MainBar from "./pages/navbar/MainBar";
 import ItemDetails from "./pages/itemDetails/ItemDetails";
 import ComponentListPage from "./pages/item/ComponentListPage";
 import UserPage from "./pages/user/UserPage";
-import "./App.css";
 import ShoppingCartPage from "./pages/shoppingCart/ShoppingCartPage";
+import TagCloudPage from "./pages/dataVisualization/TagCloudPage";
+import "./App.css";
+
+import Grid from "@material-ui/core/Grid";
 
 function App() {
   return (
@@ -24,6 +27,7 @@ function App() {
             <Route path="/component-list" component={ComponentListPage} />
             <Route path="/shopping-cart" component={ShoppingCartPage} />
             <Route path="/user" component={UserPage} />
+            <Route path="/tag-cloud" component={TagCloudPage} />
             <Route
               component={() => (
                 <Typography variant="h1"> Sorry, page not found </Typography>

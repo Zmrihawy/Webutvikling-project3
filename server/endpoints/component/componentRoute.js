@@ -1,5 +1,6 @@
 const express = require("express");
 const componentModel = require("./componentModel.js");
+const logModel = require("../log/logModel.js");
 const router = express.Router();
 const _ = require("lodash");
 
@@ -141,6 +142,18 @@ router.get("/pagination/", function(req, res) {
             totObjects
           };
           res.send(paginationRes);
+          let log = new logModel({
+            pageNum,
+            objectsPerPage,
+            sortBy,
+            isAsc,
+            nameSearch,
+            filterField,
+            filterVal,
+            resultComponents: components
+          })
+          log.save()
+            .catch(err => console.log(err))
         })
         .catch(err => {
           console.log("Error fetching components", err);
@@ -152,6 +165,25 @@ router.get("/pagination/", function(req, res) {
       res.status(500).send(err);
     });
 });
+
+// TYPE: GET
+// ROUTE: /component/statistics
+// DESC: Get various statistics of components. Used for data viz
+router.get("/statistics", function(req, res) {
+  componentModel.find()
+    .then((components) => {
+      let statisticsCount = {};
+      components.forEach((component) => {
+        statisticsCount[component.category] = statisticsCount[component.category] ? statisticsCount[component.category] + 1 : 1;
+        statisticsCount[component.producer] = statisticsCount[component.producer] ? statisticsCount[component.producer] + 1 : 1;
+      })
+      res.send(statisticsCount);
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send(err)
+    })
+})
 
 // TYPE: GET
 // ROUTE: /component/{id}
@@ -257,5 +289,6 @@ router.delete("/:id", function(req, res) {
       res.status(404).send(err);
     });
 });
+
 
 module.exports = router;

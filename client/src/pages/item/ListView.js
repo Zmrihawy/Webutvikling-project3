@@ -8,13 +8,13 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Divider from "@material-ui/core/Divider";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import StarBorder from "@material-ui/icons/StarBorder";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -69,30 +69,21 @@ const ListView = props => {
         <ListItem>
           <ListItemText primary={"Procuder: " + component.producer} />
         </ListItem>
-        <List
-          component="div"
-          disablePadding
-          aria-labelledby="nested-list-subheader"
-          subheader={
-            <ListSubheader component="div" id="nested-list-subheader">
-              Specs
-            </ListSubheader>
-          }
-          className={classes.root}
-        >
-          {component.specs.map(spec => (
-            <ListItem className={classes.nested} key={spec._id}>
-              <ListItemText primary={spec.name + ": " + spec.value} />
-            </ListItem>
-          ))}
-        </List>
+        <ListItem>
+          <ListItemText primary={"Price: " + component.price} NOK />
+        </ListItem>
+       
 
-          <Link to={"/item-details/" + component._id} >
-            <Button variant="outlined" color="primary" className={classes.button} size='large'>
-                GO TO ITEM PAGE
-            </Button>
-          </Link>
-
+        <Link to={"/item-details/" + component._id}>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.button}
+            size="large"
+          >
+            GO TO ITEM PAGE
+          </Button>
+        </Link>
       </Collapse>
     </React.Fragment>
   ));

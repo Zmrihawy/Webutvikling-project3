@@ -1,5 +1,5 @@
 import React from "react";
-import Item from "../item/Item";
+import FadeIn from "react-fade-in"
 
 // Material Ui elements
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -8,6 +8,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
 
 // Database linking
 import { useEffect } from "react";
@@ -20,38 +21,38 @@ import "../../styles/homepage.css";
 
 // HomePage layout
 const HomePage = props => {
-  // eslint-disable-next-line react/prop-types
   const { getFeaturedComponents, featuredComponents } = props;
-  // const [open, setOpen] = useState({}); didnt need this ? maybe ? - Rahim
+
+  const baseDelay = 500;
 
   useEffect(() => {
-    console.log("getting featured components");
     getFeaturedComponents();
   }, [getFeaturedComponents]);
 
-  console.log("featured components: ", featuredComponents);
+  const mappedItems = featuredComponents.map((component, index) => (
+      <Grid item key={index} className="_featured_item" xs={12} sm={4} md={4} lg={3} xl={3}> 
+        <FadeIn delay={baseDelay + 2000 + (500*index)} transitionDuration="2000">
 
-  // eslint-disable-next-line react/prop-types
-  const mappedItems = featuredComponents.map(component => (
-    <Grid item key={component.name} className="_featured_item">
-      <Link
-        to={"/item-details/" + component._id}
-        style={{ textDecoration: "none" }}
-      >
-        <Card style={{ height: "300px", width: "200px" }}>
-          <img
-            src={component.pictureURL}
-            style={{ width: "100%", height: "50%" }}
-          />
-          <Divider style={{ marginTop: "10px", marginBottom: "5px" }} />
-          {component.name}
-          <br />
-          {component.producer}
-          <br />
-          {component.price + "kr"}
-        </Card>
-      </Link>
-    </Grid>
+        <Link
+          to={"/item-details/" + component._id}
+          style={{ textDecoration: "none" }}
+        >
+          <Card style={{ minHeight: "300px", width: "200px", backgroundColor: "rgba(255, 255, 255, 0.5)" }}>
+            <CardMedia 
+                    component="img"
+                    style={{height: "180px" }}
+                    src={component.pictureURL}
+              />
+            <Divider style={{ marginTop: "10px", marginBottom: "5px" }} />
+            {component.name}
+            <br />
+            {component.producer}
+            <br />
+            {component.price + "kr"}
+          </Card>
+        </Link>
+        </FadeIn>
+      </Grid>
   ));
 
   return (
@@ -67,16 +68,26 @@ const HomePage = props => {
             borderRadius: "4px"
           }}
         >
-          <Typography variant="h3" style={{ margin: "20px" }}>
-            E.Catalog
-          </Typography>
+          
+          <FadeIn delay={baseDelay} transitionDuration="1000">
+            <Typography variant="h3" style={{ margin: "20px" }}>
+              eCatalog
+            </Typography>
+          </FadeIn>
 
-          <Typography variant="subtitle1" style={{ marginTop: "2px" }}>
-            {" "}
-            home for electronics{" "}
-          </Typography>
+          <FadeIn delay={baseDelay + 1000} transitionDuration="1000">
+            <Typography variant="subtitle1" style={{ marginTop: "2px" }}>
+              {" "}
+              home for electronics{" "}
+            </Typography>
+            <Divider style={{margin: "20px"}}/>
+          </FadeIn>
 
-          <Divider />
+          <FadeIn delay={baseDelay + 2000} transitionDuration="2000">
+            <Typography variant="subtitle1">
+              Featured items:
+            </Typography>
+          </FadeIn>
 
           <div className="_homepage">
             <Grid

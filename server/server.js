@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 
 const componentRoute = require("./endpoints/component/componentRoute.js");
 const userRoute = require("./endpoints/user/userRoute.js");
+const logRoute = require("./endpoints/log/logRoute.js");
 
 const app = express();
 const port = 5000;
@@ -22,6 +23,7 @@ db.once("open", function() {
 
 app.use("/api/component", componentRoute);
 app.use("/api/user", userRoute);
+app.use("/api/log", logRoute);
 
 app.get("/", (req, res) => res.send("Hello World!"));
 

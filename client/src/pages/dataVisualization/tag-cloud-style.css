@@ -27,7 +27,8 @@ h1 {
 	padding: 20px 0;
 	position: absolute;
 	right: 0;
-	top: 270px;
+	top: 500px;
+  z-index: -1;
 }
 
 .app-inner {

@@ -3,6 +3,12 @@ import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 
+/**
+ * Buttons for controlling pagination. Basically
+ * just button with numbers for pages, that has onClick
+ * functions that send the same query as the previously sent query,
+ * but with new pageNum
+ */
 const PaginationControlBar = props => {
   const { paginationMetaData, getPaginationComponents } = props;
   const { totPages } = paginationMetaData;

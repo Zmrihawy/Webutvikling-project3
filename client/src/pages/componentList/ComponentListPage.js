@@ -8,6 +8,10 @@ import PaginationControlBar from "./PaginationControlBar";
 import { connect } from "react-redux";
 import { getPaginationComponents } from "../../redux/actions/componentActions";
 
+/**
+ * Page for displaying list of components. Connects to 
+ * redux and delegates state to children
+ */
 const ComponentListPage = props => {
   const { getPaginationComponents, paginationComponents } = props;
 

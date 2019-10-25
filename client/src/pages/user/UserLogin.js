@@ -36,6 +36,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
+/** 
+ * React component for handling user login and user creation.
+ * Does some input validation. Checks if user already exists when
+ * attempting to create user.
+ */
 const UserLogin = props => {
   const classes = useStyles();
 
@@ -51,10 +57,8 @@ const UserLogin = props => {
   };
 
   const handleSignInSubmit = () => {
-    console.log("submit normal");
     if (users.map(user => user.username).indexOf(usernameText) > -1) {
       setLoggedInUser(_.find(users, user => user.username === usernameText));
-      console.log(props);
       history.push("/");
     } else {
       alert(usernameText + " is not registered user");

@@ -14,6 +14,9 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import Button from "@material-ui/core/Button";
 
+/**
+ * The actual list view
+ */
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",

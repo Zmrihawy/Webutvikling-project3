@@ -17,7 +17,7 @@ router.get("/", function(req, res) {
 
 // TYPE: GET
 // ROUTE: /log/statistics
-// DESC: Get various statistics of logs. Used for data viz
+// DESC: Get various statistics of logs. Used for data visualization.
 router.get("/statistics", function(req, res) {
   logModel
     .find()

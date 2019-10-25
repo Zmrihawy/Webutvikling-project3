@@ -36,8 +36,10 @@ very useful when debugging. To use redux on our catalog, open our project in goo
 `Redux DevTools` plugin is installed.
 
 ## Testing
-We deployed to methods of testing, unit testing with jest and end-to-end testing with cypress. All tests can be found in
-client directory in tests folder. Run `npm test` run all tests. The cypress tests can be found in the cypress folder. 
+## Testing
+We deployed three methods of testing, unit testing with jest, end-to-end testing with cypress and Chai mocha super testing. 
+All unit tests can be found in client directory in tests folder. Run `npm test` run all tests. The cypress tests can be found in the cypress folder. 
+All unit tests can be found in client directory in tests folder. Run `npm test` run all tests. The cypress tests can be found in the cypress folder. 
 
 ### Unit Testing
 We decided to use unit testing for testing individual components. This was done by making snapshot tests for the major
@@ -51,6 +53,9 @@ one component if the item is available in the backend. The test fails if the com
 
 To use cypress navigate to the client directory and the run the following command: `npx cypress open` 
 Then select a test file to begin running it.
+
+
+## Chai Mocha Testing [TODO: needs updating]
 
 ## Design and Functionality
 ### Sorting and filtering 

@@ -37,27 +37,6 @@ of action creators and the `thunk` package. This means that all the relevant sta
 in redux. We have structured our code such that React components that represent pages connect to redux, and then delegate the redux
 state to their child compoents that often do most of the work.
 
-## Testing
-We deployed three methods of testing, unit testing with jest, end-to-end testing with cypress and Chai mocha super testing. 
-All unit tests can be found in client directory in tests folder. Run `npm test` run all tests. 
-The cypress tests can be found in the cypress folder. The Chai mocha tests can be found in the server directory.
-
-### Unit Testing
-We decided to use unit testing for testing individual components. This was done by making snapshot tests for the major
-components. 
-  
-### Cypress
-For end to end testing we take advantage of cypress' functionality and test what would exactly happen in real time
-when a user searches for an item from the backend. The aim is to test that the item is fetched from the backed and 
-downloaded for the client. With cypress we test this and confirm that a user gets a search result containing at least 
-one component if the item is available in the backend. The test fails if the component is not available.
-
-To use cypress navigate to the client directory and the run the following command: `npx cypress open` 
-Then select a test file to begin running it.
-
-
-## Chai Mocha Testing [TODO: needs updating]
-
 ## Design and Functionality
 ### Sorting and filtering 
 To search a component, navigate to the "Browse" page. A user can search for a particular item by simply typing the name of 
@@ -93,16 +72,48 @@ components that are from a producer and category.
 In the user shopping cart visualisation, all items in the users shopping cart are displayed according to their quantity. 
 The visualisation is in form of words whose font size changes depending on the number of that item in the user's 
 shopping cart. This visualisation gets all the users in the database who have added items to their shopping carts 
-an displays these items at ounce. 
+an displays these items at ounce. In order to be guarantee that our webapp can handle large amounts of data, a limit
+on the amount of items possible to have in the shoppingcart is set.
 
 ### Tag cloud visualization
 A generalized tag cloud view was created. This component accepts an object where keys are the strings that will be
-displayed and the values are the weights for how large the string should appear. The componant projects the values to
-always be in a specified range. This component is used for several visualizations.
+displayed and the values are the weights for how large the string should appear. It projects the values to
+always be in a specified range and is used for several visualizations. 
 
-### Pagination [TODO: Needs Updating
+We have also kept in mind that our webapp should handle large amounts of data when designing this visualization. The data that this feature uses
+is calculated on the backend, and accesed through the various `/statistics` endpoints on the different models. All
+these endpoint return data in the same format, the data is stored in redux under statistics, and then it is used by
+the tag cloud React component
+
+### Pagination 
 We have a solid pagination endpoint that accepts many params and returns a list of components. This endpoint can do
-filtering on any category, searching by name, sorting in ascending or descending order, and of course pagination.
+filtering on any category, searching by name, sorting by any field in ascending or descending order, and of course pagination.
 Pagination is controlled by specifying which page to be retrieved and the number of objects per page. Pagination 
 metadata such as the total number of pages for the corresponding query is included in the result. On the client, 
 the pagination data is stored in redux and used by the appropriate React components. 
+
+## Testing
+We deployed three methods of testing, unit testing with jest, end-to-end testing with cypress and Chai mocha super testing. 
+All unit tests can be found in client directory in tests folder. Run `npm test` run all tests. 
+The cypress tests can be found in the cypress folder. The Chai mocha tests can be found in the server directory.
+
+### Unit Testing
+We decided to use unit testing for testing individual components. This was done by making snapshot tests for the major
+components. 
+  
+### Cypress
+For end to end testing we take advantage of cypress' functionality and test what would exactly happen in real time
+when a user searches for an item from the backend. The aim is to test that the item is fetched from the backed and 
+downloaded for the client. With cypress we test this and confirm that a user gets a search result containing at least 
+one component if the item is available in the backend. The test fails if the component is not available.
+
+To use cypress navigate to the client directory and the run the following command: `npx cypress open` 
+Then select a test file to begin running it.
+
+### Chai Mocha Testing 
+We have implemented backend tests using chai, mocha and supertests. With these framework, we can automatically check 
+that the responds our backend returns are as expected. With supertest we can actually start an instance of our server
+and make request to it. Ofcourse, our mongodb instance has to be in reach for this to work. To run the tests, make sure
+you are on the NTNU net, go to the server folder, then run `npm test`.
+
+

@@ -68,92 +68,86 @@ class ShoppingCartPage extends Component {
 
       let mappedComponents;
       let uniqueComponents = [];
-      loggedInUser.shoppingCart.forEach(component => {
-        if (!(uniqueComponents.map(x => x._id).indexOf(component._id) > -1)) {
-          uniqueComponents.push(component);
-        }
-      });
-      mappedComponents = uniqueComponents.map(component => {
-      let uniqueComponents = [];
-      loggedInUser.shoppingCart.forEach(component => {
-        if (!(uniqueComponents.map(x => x._id).indexOf(component._id) > -1)) {
-          uniqueComponents.push(component);
-        }
-      });
-      })
-      mappedComponents = uniqueComponents.map(component => {
-        return (
-          <Grid item key={component._id}>
-            <Card style={{ maxWidth: 325 }}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={component.pictureURL}
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {component.name}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    {component.description}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    Price : {component.price} NOK
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    Amount :{" "}
-                    {
-                      loggedInUser.shoppingCart.filter(x => x._id === component._id)
-                        .length
-                    }
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  <Link to={"/component-details/" + component._id}>GO TO ITEM PAGE</Link>
-                </Button>
+      if (loggedInUser && loggedInUser.shoppingCart) {
+        loggedInUser.shoppingCart.forEach(component => {
+          if (!(uniqueComponents.map(x => x._id).indexOf(component._id) > -1)) {
+            uniqueComponents.push(component);
+          }
+        });
+        mappedComponents = uniqueComponents.map(component => {
+          return (
+            <Grid item key={component._id}>
+              <Card style={{ maxWidth: 325 }}>
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={component.pictureURL}
+                    title="Contemplative Reptile"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {component.name}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      {component.description}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      Price : {component.price} NOK
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      Amount :{" "}
+                      {
+                        loggedInUser.shoppingCart.filter(x => x._id === component._id)
+                          .length
+                      }
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <Button size="small" color="primary">
+                    <Link to={"/component-details/" + component._id}>GO TO ITEM PAGE</Link>
+                  </Button>
 
-                <Fab
-                  size="small"
-                  color="secondary"
-                  aria-label="add"
-                  style={{ marginRight: 10 }}
-                >
-                  <RemoveIcon
-                    onClick={() =>
-                      removeComponentFromShoppingCart(loggedInUser, component)
-                    }
-                  />
-                </Fab>
-                <Fab
-                  size="small"
-                  color="secondary"
-                  aria-label="add"
-                  style={{ marginRight: 10 }}
-                >
-                  <AddIcon
-                    onClick={() => addComponentToShoppingCart(loggedInUser, component)}
-                  />
-                </Fab>
-              </CardActions>
-            </Card>
-          </Grid>
-    )})
+                  <Fab
+                    size="small"
+                    color="secondary"
+                    aria-label="add"
+                    style={{ marginRight: 10 }}
+                  >
+                    <RemoveIcon
+                      onClick={() =>
+                        removeComponentFromShoppingCart(loggedInUser, component)
+                      }
+                    />
+                  </Fab>
+                  <Fab
+                    size="small"
+                    color="secondary"
+                    aria-label="add"
+                    style={{ marginRight: 10 }}
+                  >
+                    <AddIcon
+                      onClick={() => addComponentToShoppingCart(loggedInUser, component)}
+                    />
+                  </Fab>
+                </CardActions>
+              </Card>
+            </Grid>
+      )})
+    }
 
     return (
       <div>

@@ -3,7 +3,7 @@ The aim of this project was to implement an online catalog with possibility for 
 give a form of review for an item that later can be saved into the catalog. As a solution to the problem, 
 we decided to implement an online electronics catalog with various electronic components were a user has a
 shopping cart that can be used to buy components. We thought this idea would provide us with a variety of 
-components to use and therefore would be a good solution to the problem. Important to mention that we refer to our
+components to use and therefore would be a good solution to the problem. Important to mention that we refer to our 
 catalog items as components, this should not be confused with basic react components.
 
 ## Project structure
@@ -33,8 +33,8 @@ our components. This ensured that we did not need to build much styles for our c
 consistent frontend design. 
 
 ### Item Details 
-To view details about a component, simply search for it (from the “Browse” link in the Navbar), expand on the result tab 
-and click “Go to item page” button. This can also be accessed directly from the homepage by simply clicking on a component. 
+To view details about a component, simply search for it (from the “Browse” link in the Navbar), expand on the result 
+tab and click “Go to item page” button. This can also be accessed directly from the homepage by simply clicking on a component. 
 
 ### Data visualisation
 Three forms of user generated data visualisation were setup, a user shopping cart visualisation, a tag cloud visualisation of
@@ -57,23 +57,23 @@ A generalized tag cloud view was created. This component accepts an object where
 displayed and the values are the weights for how large the string should appear. It projects the values to
 always be in a specified range and is used for several visualizations. 
 
-We have also kept in mind that our webapp should handle large amounts of data when designing this visualization. The data that this feature uses
-is calculated on the backend, and accessed through the various `/statistics` endpoints on the different models. All
-these endpoint return data in the same format, the data is stored in redux under statistics, and then it is used by
-the tag cloud React component
+We have also kept in mind that our webapp should handle large amounts of data when designing this visualization. The 
+data that this feature uses is calculated on the backend, and accessed through the various `/statistics` endpoints on 
+the different models. All these endpoint return data in the same format, the data is stored in redux under statistics, 
+and then it is used by the tag cloud React component
 
 ## Functionality
-
 ### REST API
-We have implemented a REST API with pagination capabilities on our server. Our REST resources are users and components.
-For components, there are endpoints for POST, PATCH, PUT, DELETE, and several GET requests. The requests are designed in a 
-RESTful way, where the endpoint is `/api/component`, and to access a specific component you add the id. The exceptions
+We have implemented a REST API with pagination capabilities on our server. Our REST resources are users and components. 
+For components, there are endpoints for POST, PATCH, PUT, DELETE, and several GET requests. The requests are designed 
+in a RESTful way, where the endpoint is `/api/component`, and to access a specific component you add the id. The exceptions 
 are the pagination endpoint and statistics endpoint which are GET requests to `/api/component/pagination?<pagination-params>` 
 and `api/component/statistics` accordingly. Some of the endpoints are not used by the webapp, but we used it in development 
-with the `curl` command to always manage data through our backend to ensure the same format (which could otherwise 
-represent an issue since mongodb is schemaless). We also keep them in the codebase to show a complete REST implementation. 
-For users, we have POST, GET, PATCH and DELETE requests in the same manner as components, in addition to a statistics endpoint. 
-We also have a `log` model and endpoint used to store search queries, which only has a statistics and an unused GET request (for development). 
+with the `curl` command to always manage data through our backend to ensure the same format (which could otherwise represent 
+an issue since mongodb is schemaless). We also keep them in the codebase to show a complete REST implementation. For users, 
+we have POST, GET, PATCH and DELETE requests in the same manner as components, in addition to a statistics endpoint. 
+We also have a `log` model and endpoint used to store search queries, which only has a statistics and an unused GET 
+request (for development). 
 
 ### Redux 
 Redux is a Javascript Library for managing application state. Redux provides a real time current state of the catalog with all the 
@@ -83,6 +83,8 @@ very useful when debugging. We utilize redux extensively in our solution. All AP
 of action creators and the `thunk` package. This means that all the relevant state data for our app is always stored and updated 
 in redux. We have structured our code such that React components that represent pages connect to redux, and then delegate the redux
 state to their child components that often do most of the work.
+
+
 
 
 ### Search, Sorting and filtering 
@@ -113,6 +115,7 @@ A user can add up to 40 items of a particular item to the cart. This limit const
 at ounce which would crash the browser. In addition, a log model was implemented to store all searches and results. This
 represents another form of user generated data.
 
+
 ## Testing
 We deployed three methods of testing, unit testing with jest, end-to-end testing with cypress and Chai mocha super testing. 
 All unit tests can be found in client directory in tests folder. Run `npm test` run all tests. 
@@ -132,7 +135,7 @@ To use cypress navigate to the client directory and run the following command: `
 Then select a test file to begin running it.
 
 ### Chai Mocha Testing 
-We have implemented backend tests using chai, mocha and supertests. With these framework, we can automatically check 
-that the responds our backend returns are as expected. With supertest we can actually start an instance of our server
-and make request to it. Ofcourse, our mongodb instance has to be in reach for this to work. To run the tests, make sure
+We have implemented backend tests using chai, mocha and super-tests. With these framework, we can automatically check 
+that the responds our backend returns are as expected. With super-test we can actually start an instance of our server
+and make request to it. Of course, our mongodb instance has to be in reach for this to work. To run the tests, make sure
 you are on the NTNU net, go to the server folder, then run `npm test`.

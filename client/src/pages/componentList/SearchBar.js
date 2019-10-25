@@ -102,12 +102,6 @@ export default class SearchBar extends React.Component {
       queryParams = sortbyFieldState
         ? { ...queryParams, ...{ sortBy: sortbyFieldState } }
         : queryParams;
-    } else {
-      if (filterFieldState !== "") {
-        console.log(
-          "Error! " + sortbyFieldState + " is not a valid field to sort by"
-        );
-      }
     }
 
     // Add nameSearch if it is set

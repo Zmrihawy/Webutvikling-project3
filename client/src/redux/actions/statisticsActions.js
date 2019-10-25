@@ -23,7 +23,6 @@ export const getComponentStatistics = () => dispatch => {
  * Statistics for user action creator
  */
 export const getUserStatistics = () => dispatch => {
-  console.log("in user statistics");
   return fetch("api/user/statistics")
     .then(res => res.json())
     .then(res => {
@@ -39,7 +38,6 @@ export const getUserStatistics = () => dispatch => {
  * Statistics for log (search queries and results) action creator
  */
 export const getLogStatistics = () => dispatch => {
-  console.log("in user statistics");
   return fetch("api/log/statistics")
     .then(res => res.json())
     .then(res => {

@@ -7,10 +7,11 @@ import NavBar from "./NavBar";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+// The MainBar component uses the NavBar component to view the whole navbar
 class MainBar extends Component {
   render() {
     const { loggedInUser } = this.props;
-    return (
+    return (    // Here we use AppBar which is provided from material ui 
       <AppBar color="primary" position="static" style={{ zIndex: 5 }}>
         <Toolbar>
           <TypoGraphy
@@ -22,7 +23,7 @@ class MainBar extends Component {
               borderRight: "0.05em solid rgba(255, 255, 255, 0.5)"
             }}
           >
-            <Link to={"/"} style={{ textDecoration: "none" }}>
+            <Link to={"/"} style={{ textDecoration: "none" }}>   {/*Our logo */}
               <p
                 style={{
                   fontSize: "20px",

@@ -15,6 +15,12 @@ import TableHead from "@material-ui/core/TableHead";
 import { getCurrentComponent } from "../../redux/actions/componentActions";
 import { addComponentToShoppingCart } from "../../redux/actions/userActions";
 
+/**
+ * Component representing the page for displaying a detailed view.
+ * It gets component id from URL params, and then interfaces with redux to 
+ * get the component to view from the backend. It also gets the current logged in
+ * user and shows an add to cart button that adds the item to the logged in users cart
+ */
 const ComponentDetails = props => {
   const {
     currentComponent,
@@ -47,6 +53,7 @@ const ComponentDetails = props => {
         <Typography variant="h2" style={{ margin: "30px" }}>
           {currentComponent.name}
         </Typography>
+        {/* Add to cart button, disabled and displays alert if user is not logged in */}
         {loggedInUser && JSON.stringify(loggedInUser) !== JSON.stringify({}) ? (
           <Button onClick={handleAddToCart} color="primary" variant="outlined">
             {" "}
@@ -130,6 +137,7 @@ const ComponentDetails = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
+                {/* Map the component specs to JSX elements */}
                 {(currentComponent.specs || []).map((row, i) => {
                   return (
                     <TableRow key={i}>
@@ -150,7 +158,6 @@ const ComponentDetails = props => {
   );
 };
 
-// Map redux state and actionCreators to props
 function mapStateToProps(state) {
   const { component, user } = state;
   return {

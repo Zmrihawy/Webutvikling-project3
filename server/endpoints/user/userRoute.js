@@ -24,7 +24,7 @@ router.get("/", function(req, res) {
 
 // TYPE: GET
 // ROUTE: /user/statistics
-// DESC: Get various statistics of components. Used for data viz
+// DESC: Get various statistics of users. Used for data visualization.
 router.get("/statistics", function(req, res) {
   userModel
     .find()
@@ -32,9 +32,9 @@ router.get("/statistics", function(req, res) {
     .then(users => {
       let statisticsCount = {};
       users.forEach(user => {
-        user.shoppingCart.forEach(component => {
-          statisticsCount[component.name] = statisticsCount[component.name]
-            ? statisticsCount[component.name] + 1
+        user.shoppingCart.forEach(user => {
+          statisticsCount[user.name] = statisticsCount[user.name]
+            ? statisticsCount[user.name] + 1
             : 1;
         });
       });
@@ -83,9 +83,7 @@ router.post("/", function(req, res) {
 // DESC: Updates a certain field, or several fields, of a user. Does not create a
 // new one if id does not exist
 router.patch("/:id", function(req, res) {
-  // Get only the required values
   let newObject = req.body;
-  // Need to handle specs individually since it needs to be parsed
   userModel
     .findByIdAndUpdate(req.params.id, newObject, {
       new: true,

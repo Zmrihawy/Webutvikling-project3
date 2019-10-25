@@ -27,7 +27,7 @@ router.get("/", function(req, res) {
 // ROUTE: /component/featuredComponents
 // DESC: Get request to get some featuredComponents. It gets random components, number of
 // components returned depend on the size query param (default is 6). It also checks
-// if components have imgURL but if to few have it, it will stop trying to enforce
+// if components have pictureURL but if to few have it, it will stop trying to enforce
 // this and just return random.
 router.get("/featuredComponents", function(req, res) {
   const paramSize = parseInt(req.query.size);
@@ -167,7 +167,7 @@ router.get("/pagination/", function(req, res) {
 
 // TYPE: GET
 // ROUTE: /component/statistics
-// DESC: Get various statistics of components. Used for data viz
+// DESC: Get various statistics of components. Used for data visualization.
 router.get("/statistics", function(req, res) {
   componentModel
     .find()
@@ -233,7 +233,7 @@ router.post("/", function(req, res) {
 
 // TYPE: PUT
 // ROUTE: /component/id
-// DESC: Update a component with all new values. Created a new one
+// DESC: Update a component with all new values. Creates a new one
 // if id does not already exist
 router.put("/:id", function(req, res) {
   let component = {

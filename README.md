@@ -36,9 +36,7 @@ very useful when debugging. To use redux on our catalog, open our project in goo
 `Redux DevTools` plugin is installed.
 
 ## Testing
-## Testing
 We deployed three methods of testing, unit testing with jest, end-to-end testing with cypress and Chai mocha super testing. 
-All unit tests can be found in client directory in tests folder. Run `npm test` run all tests. The cypress tests can be found in the cypress folder. 
 All unit tests can be found in client directory in tests folder. Run `npm test` run all tests. The cypress tests can be found in the cypress folder. 
 
 ### Unit Testing

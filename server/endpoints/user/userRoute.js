@@ -13,7 +13,7 @@ router.use(function timeLog(req, res, next) {
 // DESC: Get request to get all users
 router.get("/", function(req, res) {
   userModel
-    .find()
+    .find().populate("shoppingCart")
     .then(user => res.send(user))
     .catch(err => {
       console.log(err);

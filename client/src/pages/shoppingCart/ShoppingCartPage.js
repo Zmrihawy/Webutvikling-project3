@@ -13,6 +13,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import {addItemToShoppingCart, removeItemFromShoppingCart} from '../../redux/actions/userActions'
+import { typography } from "@material-ui/system";
 
 
 class ShoppingCartPage extends Component {
@@ -93,8 +94,12 @@ class ShoppingCartPage extends Component {
     }
     
 
-
-    return <div><h1 style={{margin:"50px"}}>shopping  Cart</h1><Grid container justify="center" spacing={4} alignItems="center">{mappedItems }</Grid></div>;
+   if (loggedInUser.shoppingCart && loggedInUser.shoppingCart.length === 0){
+         return <div><Typography variant="h3" style={{ margin: "20px" }}>Your shopping cart is empty</Typography></div>;
+   }else{
+        return <div><Typography variant="h3" style={{ margin: "20px" }}>Shopping cart</Typography><Grid container justify="center" spacing={4} alignItems="center">{mappedItems }</Grid></div>;
+   }
+    
   }
 }
 

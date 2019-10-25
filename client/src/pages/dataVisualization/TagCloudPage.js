@@ -4,15 +4,24 @@ import { connect } from "react-redux";
 
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid"
+import Grid from "@material-ui/core/Grid";
 
 import TagCloudHeader from "./TagCloudHeader";
 import TagCloudView from "./TagCloudView";
-import { getComponentStatistics, getUserStatistics, getLogStatistics } from "../../redux/actions/statisticsActions";
+import {
+  getComponentStatistics,
+  getUserStatistics,
+  getLogStatistics
+} from "../../redux/actions/statisticsActions";
 import Divider from "@material-ui/core/Divider";
 
 const TagCloudPage = props => {
-  const { getComponentStatistics, getUserStatistics, getLogStatistics, statistics } = props;
+  const {
+    getComponentStatistics,
+    getUserStatistics,
+    getLogStatistics,
+    statistics
+  } = props;
 
   const handleComponentClick = () => {
     getComponentStatistics();
@@ -33,13 +42,13 @@ const TagCloudPage = props => {
   return (
     <div>
       <TagCloudHeader />
-        <Grid item>
-          <ButtonGroup color="primary" aria-label="outlined primary button group">
-            <Button onClick={handleComponentClick}>Components</Button>
-            <Button onClick={handleUserClick}>Shopping Cart</Button>
-            <Button onClick={handleSearchHistoryClick}>Search History</Button>
-          </ButtonGroup>
-        </Grid>
+      <Grid item>
+        <ButtonGroup color="primary" aria-label="outlined primary button group">
+          <Button onClick={handleComponentClick}>Components</Button>
+          <Button onClick={handleUserClick}>Shopping Cart</Button>
+          <Button onClick={handleSearchHistoryClick}>Search History</Button>
+        </ButtonGroup>
+      </Grid>
       <Divider style={{ margin: "50px" }} />
 
       <TagCloudView statistics={statistics} />

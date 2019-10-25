@@ -1,4 +1,8 @@
-import { GET_COMPONENT_STATISTICS, GET_USER_STATISTICS, GET_LOG_STATISTICS } from "./types"
+import {
+  GET_COMPONENT_STATISTICS,
+  GET_USER_STATISTICS,
+  GET_LOG_STATISTICS
+} from "./types";
 
 export const getComponentStatistics = () => dispatch => {
   return fetch("api/component/statistics")
@@ -13,7 +17,7 @@ export const getComponentStatistics = () => dispatch => {
 };
 
 export const getUserStatistics = () => dispatch => {
-  console.log("in user statistics")
+  console.log("in user statistics");
   return fetch("api/user/statistics")
     .then(res => res.json())
     .then(res => {
@@ -26,7 +30,7 @@ export const getUserStatistics = () => dispatch => {
 };
 
 export const getLogStatistics = () => dispatch => {
-  console.log("in user statistics")
+  console.log("in user statistics");
   return fetch("api/log/statistics")
     .then(res => res.json())
     .then(res => {

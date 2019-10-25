@@ -3,19 +3,19 @@ var Schema = mongoose.Schema;
 
 var logSchema = new Schema({
   nameSearch: {
-    type: String,
+    type: String
   },
   pageNum: {
-    type: String,
+    type: String
   },
   objectsPerPage: {
-    type: String,
+    type: String
   },
   sortBy: {
-    type: String,
+    type: String
   },
   isAsc: {
-    type: String,
+    type: String
   },
   filterField: {
     type: String
@@ -24,10 +24,10 @@ var logSchema = new Schema({
     type: String
   },
   resultComponents: [
-  {
-    type: Schema.Types.ObjectId,
-    ref: "component"
-  }
+    {
+      type: Schema.Types.ObjectId,
+      ref: "component"
+    }
   ]
 });
 

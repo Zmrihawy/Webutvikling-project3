@@ -2,14 +2,14 @@ import {
   GET_COMPONENT_STATISTICS,
   GET_USER_STATISTICS,
   GET_LOG_STATISTICS
-} from "../actions/types"
+} from "../actions/types";
 
 const initialState = {
   statistics: {}
-}
+};
 
 export default function(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case GET_COMPONENT_STATISTICS:
       return {
         ...state,
@@ -25,7 +25,7 @@ export default function(state = initialState, action) {
         ...state,
         statistics: action.payload
       };
-    default: 
+    default:
       return state;
   }
 }

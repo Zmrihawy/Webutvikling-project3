@@ -151,9 +151,8 @@ router.get("/pagination/", function(req, res) {
             filterField,
             filterVal,
             resultComponents: components
-          })
-          log.save()
-            .catch(err => console.log(err))
+          });
+          log.save().catch(err => console.log(err));
         })
         .catch(err => {
           console.log("Error fetching components", err);
@@ -170,26 +169,35 @@ router.get("/pagination/", function(req, res) {
 // ROUTE: /component/statistics
 // DESC: Get various statistics of components. Used for data viz
 router.get("/statistics", function(req, res) {
-  componentModel.find()
-    .then((components) => {
+  componentModel
+    .find()
+    .then(components => {
       let statisticsCount = {};
-      components.forEach((component) => {
-        statisticsCount[component.category] = statisticsCount[component.category] ? statisticsCount[component.category] + 1 : 1;
-        statisticsCount[component.producer] = statisticsCount[component.producer] ? statisticsCount[component.producer] + 1 : 1;
-      })
+      components.forEach(component => {
+        statisticsCount[component.category] = statisticsCount[
+          component.category
+        ]
+          ? statisticsCount[component.category] + 1
+          : 1;
+        statisticsCount[component.producer] = statisticsCount[
+          component.producer
+        ]
+          ? statisticsCount[component.producer] + 1
+          : 1;
+      });
       res.send(statisticsCount);
     })
     .catch(err => {
-      console.log(err)
-      res.status(500).send(err)
-    })
-})
+      console.log(err);
+      res.status(500).send(err);
+    });
+});
 
 // TYPE: GET
 // ROUTE: /component/{id}
 // Get request to get component by id
 router.get("/:id", function(req, res) {
-  console.log("copmonent by id", req.params)
+  console.log("copmonent by id", req.params);
   componentModel
     .findById(req.params.id)
     .then(component => res.send(component))
@@ -289,6 +297,5 @@ router.delete("/:id", function(req, res) {
       res.status(404).send(err);
     });
 });
-
 
 module.exports = router;

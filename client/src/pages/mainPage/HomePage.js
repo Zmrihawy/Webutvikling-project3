@@ -34,7 +34,7 @@ const HomePage = props => {
         to={"/item-details/" + component._id}
         style={{ textDecoration: "none" }}
       >
-        <Card style={{ minHeight: "300px", width: "200px" }}>
+        <Card style={{ minHeight: "300px", width: "200px", backgroundColor: "rgba(255, 255, 255, 0.5)" }}>
           <CardMedia 
                   component="img"
                   style={{height: "180px" }}

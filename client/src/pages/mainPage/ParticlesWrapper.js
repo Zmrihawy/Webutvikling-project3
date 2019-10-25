@@ -3,7 +3,7 @@ import Particles from "react-particles-js";
 
 const ParticlesWrapper = () => (
   <Particles
-    height="1000px"
+    height="1500px"
     style={{
       position: "fixed",
       left: 0,

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders tag cloud view 1`] = `
+<div
+  className="app-outer"
+>
+  <div
+    className="app-inner"
+  >
+    <div
+      className="tag-cloud"
+      style={Object {}}
+    />
+  </div>
+</div>
+`;

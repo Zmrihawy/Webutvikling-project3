@@ -32,6 +32,7 @@ consistent frontend design.
 ### Redux 
 Redux is a Javascript Library for managing application state. Redux provides a realtime current state of the catalog with all the 
 state variables that the app has at a given time. This helps keep control of how the catalog state changes overtime and it is also
+
 very useful when debugging. We utilize redux extensively in our solution. All API requests are handled through redux with the use
 of action creators and the `thunk` package. This means that all the relevant state data for our app is always stored and updated 
 in redux. We have structured our code such that React components that represent pages connect to redux, and then delegate the redux

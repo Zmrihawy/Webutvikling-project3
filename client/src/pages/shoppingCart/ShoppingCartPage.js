@@ -12,6 +12,7 @@ import {Link} from "react-router-dom";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import {addItemToShoppingCart, removeItemFromShoppingCart} from '../../redux/actions/userActions'
 
 
 class ShoppingCartPage extends Component {
@@ -24,7 +25,7 @@ class ShoppingCartPage extends Component {
 
     
     // This works because loggedInUser is populated by redux
-    const { loggedInUser } = this.props;
+    const { loggedInUser, addItemToShoppingCart, removeItemFromShoppingCart } = this.props;
     
     let mappedItems;
     if (loggedInUser && JSON.stringify(loggedInUser) !== JSON.stringify({}) && loggedInUser.shoppingCart){
@@ -62,7 +63,7 @@ class ShoppingCartPage extends Component {
                               Price : {item.price} NOK
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                              Price : {loggedInUser.shoppingCart.filter(x => x._id === item._id ).length} NOK
+                              Amount : {loggedInUser.shoppingCart.filter(x => x._id === item._id ).length} 
                         </Typography>
                          </CardContent>
                         </CardActionArea>
@@ -76,10 +77,10 @@ class ShoppingCartPage extends Component {
                      </Button>
 
                      <Fab size="small" color="secondary" aria-label="add" style={{marginRight:10}}>
-                        <RemoveIcon />
+                        <RemoveIcon onClick={() => removeItemFromShoppingCart(loggedInUser, item)} />
                     </Fab>
                      <Fab size="small" color="secondary" aria-label="add" style={{marginRight:10}}>
-                        <AddIcon />
+                        <AddIcon onClick={() => addItemToShoppingCart(loggedInUser, item)}/>
                     </Fab>
                     </CardActions>
                 </Card>
@@ -108,6 +109,8 @@ function mapStateToProps(state) {
 // These represents functions for changing redux state
 // currently commented out, but we will need them later
 const actionCreators = {
+    addItemToShoppingCart,
+    removeItemFromShoppingCart
   // setLoggedInUser,
   // createNewUser
 };

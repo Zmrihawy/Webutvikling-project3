@@ -51,6 +51,40 @@ export const addItemToShoppingCart = (user, component) => dispatch => {
     .catch(err => console.log(err));
 };
 
+export const removeItemFromShoppingCart = (user, component) => dispatch => {
+  const { shoppingCart } = user
+  const index = shoppingCart.map(item => item._id).indexOf(component._id)
+  if (index === -1){
+    return
+  }
+  shoppingCart.splice(index, 1)
+  return fetch("/api/user/" + user._id, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ shoppingCart })
+  })
+    .then(res => res.json())
+    .then(res => {
+      return fetch("/api/user")
+        .then(res => res.json())
+        .then(res => {
+          dispatch({
+            type: GET_USERS,
+            payload: res ? res : []
+          });
+          const updatedUser = res.find(_user => _user._id === user._id);
+          return dispatch({
+            type: SET_LOGGED_IN_USER,
+            payload: updatedUser
+          });
+        })
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+};
+
 export const createNewUser = username => dispatch => {
   return fetch("api/user", {
     method: "POST",

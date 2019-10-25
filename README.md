@@ -98,11 +98,12 @@ objects per page, get first page:
 `curl "localhost:5000/api/component/pagination?pageNum=0&objectsPerPage=4&filterField=category&filterVal=Lapto"`
 
 
-## Data visualisation
+## User generated data
 To store user generated data a user model was implemented. A user has a shopping cart where items can be added or removed.
 A user can add up to 40 items of a particular item to the cart. This limit constricts a user from adding lots of items
 at ounce which would crash the browser.
 
+## Data visualisation
 Two forms of visualisation were setup, a user shopping cart visualisation and a visualisation for all available items. 
 
 ## Shopping Cart Visualisation

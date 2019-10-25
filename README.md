@@ -117,6 +117,8 @@ results. This represents another form of user generated data.
 We deployed three methods of testing, unit testing with jest, end-to-end testing with cypress and Chai mocha super testing. 
 All unit tests can be found in client directory in tests folder. Run `npm test` run all tests. 
 The cypress tests can be found in the cypress folder. The Chai mocha tests can be found in the server directory.
+In addition we implemented the use of proptypes in our react component structures which is a form of validation that ensures 
+the right type of props are always passed to a react component. 
 
 ### Unit Testing
 We decided to use unit testing for testing individual components. This was done by making snapshot tests for the major

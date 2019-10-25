@@ -1,18 +1,21 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import {Link} from "react-router-dom";
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
-import {addItemToShoppingCart, removeItemFromShoppingCart} from '../../redux/actions/userActions'
+import { connect } from "react-redux";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import { Link } from "react-router-dom";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
+import {
+  addComponentToShoppingCart,
+  removeComponentFromShoppingCart
+} from "../../redux/actions/userActions";
 import { typography } from "@material-ui/system";
 
 
@@ -21,24 +24,24 @@ class ShoppingCartPage extends Component {
     // This works because loggedInUser is populated by redux
     const {
       loggedInUser,
-      addItemToShoppingCart,
-      removeItemFromShoppingCart
+      addComponentoShoppingCart,
+      removeComponentFromShoppingCart
     } = this.props;
 
-    let mappedItems;
+    let mappedComponents;
     if (
       loggedInUser &&
       JSON.stringify(loggedInUser) !== JSON.stringify({}) &&
       loggedInUser.shoppingCart
     ) {
       console.log("mapping items");
-      let uniqueItems = [];
+      let uniqueComponents = [];
       loggedInUser.shoppingCart.forEach(item => {
-        if (!(uniqueItems.map(x => x._id).indexOf(item._id) > -1)) {
-          uniqueItems.push(item);
+        if (!(uniqueComponents.map(x => x._id).indexOf(item._id) > -1)) {
+          uniqueComponents.push(item);
         }
       });
-      mappedItems = uniqueItems.map(item => {
+      mappedComponents = uniqueComponents.map(item => {
         console.log(`mapping item ${item}`);
         return (
           <Grid item key={item._id}>
@@ -94,7 +97,7 @@ class ShoppingCartPage extends Component {
                 >
                   <RemoveIcon
                     onClick={() =>
-                      removeItemFromShoppingCart(loggedInUser, item)
+                      removeComponentFromShoppingCart(loggedInUser, item)
                     }
                   />
                 </Fab>
@@ -105,7 +108,7 @@ class ShoppingCartPage extends Component {
                   style={{ marginRight: 10 }}
                 >
                   <AddIcon
-                    onClick={() => addItemToShoppingCart(loggedInUser, item)}
+                    onClick={() => addComponentToShoppingCart(loggedInUser, item)}
                   />
                 </Fab>
               </CardActions>
@@ -119,7 +122,7 @@ class ShoppingCartPage extends Component {
    if (loggedInUser.shoppingCart && loggedInUser.shoppingCart.length === 0){
          return <div><Typography variant="h3" style={{ margin: "20px" }}>Your shopping cart is empty</Typography></div>;
    }else{
-        return <div><Typography variant="h3" style={{ margin: "20px" }}>Shopping cart</Typography><Grid container justify="center" spacing={4} alignItems="center">{mappedItems }</Grid></div>;
+        return <div><Typography variant="h3" style={{ margin: "20px" }}>Shopping cart</Typography><Grid container justify="center" spacing={4} alignItems="center">{mappedComponents }</Grid></div>;
    }
     
 
@@ -136,10 +139,8 @@ function mapStateToProps(state) {
 // These represents functions for changing redux state
 // currently commented out, but we will need them later
 const actionCreators = {
-  addItemToShoppingCart,
-  removeItemFromShoppingCart
-  // setLoggedInUser,
-  // createNewUser
+  addComponentToShoppingCart,
+  removeComponentFromShoppingCart
 };
 
 export default connect(

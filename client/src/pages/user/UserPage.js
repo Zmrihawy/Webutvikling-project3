@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import ParticleComponent from "../mainPage/ParticleComponent"
+import ParticlesWrapper from "../mainPage/ParticlesWrapper"
 
 import {
   getUsers,
@@ -31,7 +31,7 @@ const UserPage = props => {
             zIndex: -1
           }}
       >
-        <ParticleComponent/>
+        <ParticlesWrapper/>
           <div
             style={{
               position: "absolute",

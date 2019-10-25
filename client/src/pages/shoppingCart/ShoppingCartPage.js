@@ -14,62 +14,101 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import {
   addComponentToShoppingCart,
-  removeComponentFromShoppingCart
+  removeComponentFromShoppingCart,
+  emptyShoppingCart
 } from "../../redux/actions/userActions";
-import { typography } from "@material-ui/system";
 
 
 class ShoppingCartPage extends Component {
+
+  constructor(props) {
+    super(props)
+
+    this.handleCases = this.handleCases.bind(this);
+  }
+
+  handleCases() {
+    const {
+      loggedInUser,
+      addItemToShoppingCart,
+      removeItemFromShoppingCart,
+      emptyShoppingCart
+    } = this.props;
+
+    if (!loggedInUser || JSON.stringify(loggedInUser) === JSON.stringify({})) {
+      console.log("user not logged int")
+      return (
+        <div>
+          <Typography variant="subtitle1" style={{ margin: "20px" }}>
+            Please log in to view your shopping
+          </Typography>
+        </div>
+      )
+    } 
+    if (!loggedInUser.shoppingCart || loggedInUser.shoppingCart.length === 0) {
+      return (
+      <div>
+        <Typography variant="subtitle1" style={{ margin: "20px" }}>
+          Your shopping cart is empty
+        </Typography>
+      </div>
+      )
+    }
+    return null
+  }
+
   render() {
     // This works because loggedInUser is populated by redux
     const {
       loggedInUser,
       addComponentoShoppingCart,
-      removeComponentFromShoppingCart
+      removeComponentFromShoppingCart,
+      emptyShoppingCart
     } = this.props;
 
-    let mappedComponents;
-    if (
-      loggedInUser &&
-      JSON.stringify(loggedInUser) !== JSON.stringify({}) &&
-      loggedInUser.shoppingCart
-    ) {
-      console.log("mapping items");
+      let mappedComponents;
       let uniqueComponents = [];
-      loggedInUser.shoppingCart.forEach(item => {
-        if (!(uniqueComponents.map(x => x._id).indexOf(item._id) > -1)) {
-          uniqueComponents.push(item);
+      loggedInUser.shoppingCart.forEach(component => {
+        if (!(uniqueComponents.map(x => x._id).indexOf(component._id) > -1)) {
+          uniqueComponents.push(component);
         }
       });
-      mappedComponents = uniqueComponents.map(item => {
-        console.log(`mapping item ${item}`);
+      mappedComponents = uniqueComponents.map(component => {
+      let uniqueComponents = [];
+      loggedInUser.shoppingCart.forEach(component => {
+        if (!(uniqueComponents.map(x => x._id).indexOf(component._id) > -1)) {
+          uniqueComponents.push(component);
+        }
+      });
+      })
+      mappedComponents = uniqueComponents.map(component => {
         return (
-          <Grid item key={item._id}>
+          <Grid item key={component._id}>
             <Card style={{ maxWidth: 325 }}>
               <CardActionArea>
                 <CardMedia
                   component="img"
                   height="140"
-                  image={item.pictureURL}
+                  image={component.pictureURL}
                   title="Contemplative Reptile"
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
-                    {item.name}
+                    {component.name}
                   </Typography>
                   <Typography
                     variant="body2"
                     color="textSecondary"
                     component="p"
                   >
-                    {item.description}
+                    {component.description}
                   </Typography>
                   <Typography
                     variant="body2"
                     color="textSecondary"
                     component="p"
                   >
-                    Price : {item.price} NOK
+                    Price : {component.price} NOK
                   </Typography>
                   <Typography
                     variant="body2"
@@ -78,7 +117,7 @@ class ShoppingCartPage extends Component {
                   >
                     Amount :{" "}
                     {
-                      loggedInUser.shoppingCart.filter(x => x._id === item._id)
+                      loggedInUser.shoppingCart.filter(x => x._id === component._id)
                         .length
                     }
                   </Typography>
@@ -86,7 +125,7 @@ class ShoppingCartPage extends Component {
               </CardActionArea>
               <CardActions>
                 <Button size="small" color="primary">
-                  <Link to={"/item-details/" + item._id}>GO TO ITEM PAGE</Link>
+                  <Link to={"/component-details/" + component._id}>GO TO ITEM PAGE</Link>
                 </Button>
 
                 <Fab
@@ -97,7 +136,7 @@ class ShoppingCartPage extends Component {
                 >
                   <RemoveIcon
                     onClick={() =>
-                      removeComponentFromShoppingCart(loggedInUser, item)
+                      removeComponentFromShoppingCart(loggedInUser, component)
                     }
                   />
                 </Fab>
@@ -108,25 +147,39 @@ class ShoppingCartPage extends Component {
                   style={{ marginRight: 10 }}
                 >
                   <AddIcon
-                    onClick={() => addComponentToShoppingCart(loggedInUser, item)}
+                    onClick={() => addComponentToShoppingCart(loggedInUser, component)}
                   />
                 </Fab>
               </CardActions>
             </Card>
           </Grid>
-        );
-      });
-    }
+    )})
 
-
-   if (loggedInUser.shoppingCart && loggedInUser.shoppingCart.length === 0){
-         return <div><Typography variant="h3" style={{ margin: "20px" }}>Your shopping cart is empty</Typography></div>;
-   }else{
-        return <div><Typography variant="h3" style={{ margin: "20px" }}>Shopping cart</Typography><Grid container justify="center" spacing={4} alignItems="center">{mappedComponents }</Grid></div>;
-   }
-    
-
-  }
+    return (
+      <div>
+        <Typography variant="h3" style={{ margin: "20px" }}>
+          Shopping cart
+        </Typography>
+        {this.handleCases()}
+        <Grid container justify="center" spacing={4} alignItems="center">
+          {mappedComponents}
+        </Grid>
+        {mappedComponents && mappedComponents.length > 0 ? 
+          <div style={{margin: "50px"}}>
+            <Button variant="contained" color="primary" onClick={() => emptyShoppingCart(loggedInUser)}>
+              Buy items
+            </Button>
+              <Typography variant="subtitle1">
+                Total price: {loggedInUser.shoppingCart.map(x => x.price).reduce((accumulator, current) => {
+                  return (accumulator + current)
+                })}
+              </Typography>
+          </div>
+            : null
+        }
+    </div>
+  )
+  }  
 }
 
 // This is the actual readonly redux state
@@ -140,7 +193,10 @@ function mapStateToProps(state) {
 // currently commented out, but we will need them later
 const actionCreators = {
   addComponentToShoppingCart,
-  removeComponentFromShoppingCart
+  removeComponentFromShoppingCart,
+  emptyShoppingCart
+  // setLoggedInUser,
+  // createNewUser
 };
 
 export default connect(

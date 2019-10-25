@@ -68,7 +68,7 @@ const ListView = props => {
           <ListItemText primary={"Procuder: " + component.producer} />
         </ListItem>
         <ListItem>
-          <ListItemText primary={"Price: " + component.price} NOK />
+          <ListItemText primary={"Price: " + component.price + "kr"} />
         </ListItem>
        
 

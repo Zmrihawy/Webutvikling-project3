@@ -1,7 +1,7 @@
 import {
   GET_PAGINATION_COMPONENTS,
   GET_FEATURED_COMPONENTS,
-  GET_CURRENT_COMPONENT,
+  GET_CURRENT_COMPONENT
   // GET_COMPONENT_STATISTICS
 } from "./types";
 
@@ -74,5 +74,3 @@ export const getFeaturedComponents = () => dispatch => {
     })
     .catch(err => console.log(err));
 };
-
-

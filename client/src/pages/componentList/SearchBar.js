@@ -124,15 +124,14 @@ export default class SearchBar extends React.Component {
   }
 
   EnterKeyValue = e => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       this.handleFilterTextChange(e);
       this.handleSubmit(e);
     }
   };
 
-
   EnterKeyName = e => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       this.handleSearchTextChange(e);
       this.handleSubmit(e);
     }
@@ -169,47 +168,42 @@ export default class SearchBar extends React.Component {
           </Grid>
         </Grid>
         <Grid item xs={12} sm={4} md={4} lg={2} xl={2}>
-
-              <TextField
-                label="filter"
-                placeholder="Filter by value"
-                onKeyDown={this.EnterKeyValue}
-                onChange={this.handleFilterTextChange}
-              />
-            </Grid>
+          <TextField
+            label="filter"
+            placeholder="Filter by value"
+            onKeyDown={this.EnterKeyValue}
+            onChange={this.handleFilterTextChange}
+          />
+        </Grid>
 
         <Grid item xs={12} sm={4} md={4} lg={2} xl={2}>
-              <Button
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={this.handleFilterMenuClick}
-                variant="outlined"
-              >
-                {filterFieldState && typeof filterFieldState === "string"
-                  ? "Filter " + filterFieldState
-                  : "Filter By?"}
-              </Button>
-              <Menu
-                id="filter-menu"
-                anchorEl={filterAnchorEl}
-                keepMounted
-                open={Boolean(filterAnchorEl)}
-                onClose={this.handleFilterMenuClose}
-              >
-                <MenuItem
-                  onClick={() => this.handleFilterMenuClose("category")}
-                >
-                  Categories
-                </MenuItem>
-                <MenuItem
-                  onClick={() => this.handleFilterMenuClose("producer")}
-                >
-                  Producer
-                </MenuItem>
-                <MenuItem onClick={() => this.handleFilterMenuClose("")}>
-                  None
-                </MenuItem>
-              </Menu>
+          <Button
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={this.handleFilterMenuClick}
+            variant="outlined"
+          >
+            {filterFieldState && typeof filterFieldState === "string"
+              ? "Filter " + filterFieldState
+              : "Filter By?"}
+          </Button>
+          <Menu
+            id="filter-menu"
+            anchorEl={filterAnchorEl}
+            keepMounted
+            open={Boolean(filterAnchorEl)}
+            onClose={this.handleFilterMenuClose}
+          >
+            <MenuItem onClick={() => this.handleFilterMenuClose("category")}>
+              Categories
+            </MenuItem>
+            <MenuItem onClick={() => this.handleFilterMenuClose("producer")}>
+              Producer
+            </MenuItem>
+            <MenuItem onClick={() => this.handleFilterMenuClose("")}>
+              None
+            </MenuItem>
+          </Menu>
         </Grid>
         <Grid item xs={12} sm={4} md={4} lg={2} xl={2}>
           <Grid container justify="center" align="center" spacing={2}>

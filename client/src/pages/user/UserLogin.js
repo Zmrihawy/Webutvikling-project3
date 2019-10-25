@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import _ from "lodash";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 const useStyles = makeStyles(theme => ({
   "@global": {
     body: {
@@ -51,22 +51,21 @@ const UserLogin = props => {
   };
 
   const handleSignInSubmit = () => {
-    console.log("submit normal")
+    console.log("submit normal");
     if (users.map(user => user.username).indexOf(usernameText) > -1) {
       setLoggedInUser(_.find(users, user => user.username === usernameText));
-      console.log(props)
-      history.push('/')
+      console.log(props);
+      history.push("/");
     } else {
       alert(usernameText + " is not registered user");
     }
   };
 
   const EnterKey = e => {
-
-    if (e.key === 'Enter') {
-     handleSignInSubmit(e);
-    };
-  }
+    if (e.key === "Enter") {
+      handleSignInSubmit(e);
+    }
+  };
 
   const handleCreateUserSubmit = () => {
     if (users.map(user => user.username).indexOf(usernameText) > -1) {
@@ -89,41 +88,38 @@ const UserLogin = props => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            autoComplete="username"
-            autoFocus
-            onKeyDown={EnterKey}
-            onChange={handleUsernameTextChange}
-          />
-          <Button
-            fullWidth
-
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={handleSignInSubmit}
-          >
-            Sign In
-          </Button>
-          or
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={handleCreateUserSubmit}
-          >
-            Create user
-          </Button>
-
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="username"
+          label="Username"
+          name="username"
+          autoComplete="username"
+          autoFocus
+          onKeyDown={EnterKey}
+          onChange={handleUsernameTextChange}
+        />
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          onClick={handleSignInSubmit}
+        >
+          Sign In
+        </Button>
+        or
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          onClick={handleCreateUserSubmit}
+        >
+          Create user
+        </Button>
       </div>
     </Container>
   );

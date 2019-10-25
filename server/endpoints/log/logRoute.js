@@ -19,23 +19,29 @@ router.get("/", function(req, res) {
 // ROUTE: /log/statistics
 // DESC: Get various statistics of logs. Used for data viz
 router.get("/statistics", function(req, res) {
-  logModel.find().populate("resultComponents")
-    .then((logs) => {
+  logModel
+    .find()
+    .populate("resultComponents")
+    .then(logs => {
       let statisticsCount = {};
-      logs.forEach((log) => {
+      logs.forEach(log => {
         if (log.nameSearch) {
-          statisticsCount[log.nameSearch] = statisticsCount[log.nameSearch] ? statisticsCount[log.nameSearch] + 1 : 1;
+          statisticsCount[log.nameSearch] = statisticsCount[log.nameSearch]
+            ? statisticsCount[log.nameSearch] + 1
+            : 1;
         }
         if (log.filterVal) {
-          statisticsCount[log.filterVal] = statisticsCount[log.filterVal] ? statisticsCount[log.filterVal] + 1 : 1;
+          statisticsCount[log.filterVal] = statisticsCount[log.filterVal]
+            ? statisticsCount[log.filterVal] + 1
+            : 1;
         }
-      })
+      });
       res.send(statisticsCount);
     })
     .catch(err => {
-      console.log(err)
-      res.status(500).send(err)
-    })
-})
+      console.log(err);
+      res.status(500).send(err);
+    });
+});
 
 module.exports = router;

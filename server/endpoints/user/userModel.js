@@ -6,7 +6,7 @@ var userSchema = new Schema({
     type: String,
     required: true
   },
-    shoppingCart: [
+  shoppingCart: [
     {
       type: Schema.Types.ObjectId,
       ref: "component"

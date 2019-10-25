@@ -55,13 +55,16 @@ export const addComponentToShoppingCart = (user, component) => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const removeComponentFromShoppingCart = (user, component) => dispatch => {
-  const { shoppingCart } = user
-  const index = shoppingCart.map(item => item._id).indexOf(component._id)
-  if (index === -1){
-    return
+export const removeComponentFromShoppingCart = (
+  user,
+  component
+) => dispatch => {
+  const { shoppingCart } = user;
+  const index = shoppingCart.map(item => item._id).indexOf(component._id);
+  if (index === -1) {
+    return;
   }
-  shoppingCart.splice(index, 1)
+  shoppingCart.splice(index, 1);
   return fetch("/api/user/" + user._id, {
     method: "PATCH",
     headers: {
@@ -89,34 +92,33 @@ export const removeComponentFromShoppingCart = (user, component) => dispatch => 
     .catch(err => console.log(err));
 };
 
-export const emptyShoppingCart = (user)  => dispatch => {
-
-    return fetch("/api/user/" + user._id, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ shoppingCart: [] })
-    })
+export const emptyShoppingCart = user => dispatch => {
+  return fetch("/api/user/" + user._id, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ shoppingCart: [] })
+  })
+    .then(res => res.json())
+    .then(res => {
+      return fetch("/api/user")
         .then(res => res.json())
         .then(res => {
-            return fetch("/api/user")
-                .then(res => res.json())
-                .then(res => {
-                    dispatch({
-                        type: GET_USERS,
-                        payload: res ? res : []
-                    });
-                    const updatedUser = res.find(_user => _user._id === user._id);
-                    alert("Thank you for your purchase!");
-                    return dispatch({
-                        type: SET_LOGGED_IN_USER,
-                        payload: updatedUser
-                    });
-                })
-                .catch(err => console.log(err));
+          dispatch({
+            type: GET_USERS,
+            payload: res ? res : []
+          });
+          const updatedUser = res.find(_user => _user._id === user._id);
+          alert("Thank you for your purchase!");
+          return dispatch({
+            type: SET_LOGGED_IN_USER,
+            payload: updatedUser
+          });
         })
         .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
 };
 
 export const createNewUser = username => dispatch => {
@@ -132,5 +134,3 @@ export const createNewUser = username => dispatch => {
       return fetchUsers(dispatch);
     });
 };
-
-

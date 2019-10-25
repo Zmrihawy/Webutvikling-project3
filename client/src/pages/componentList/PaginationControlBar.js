@@ -16,7 +16,11 @@ const PaginationControlBar = props => {
   let buttons = [];
   if (totPages && totPages > 1) {
     for (let i = 0; i < totPages; i++) {
-      buttons.push(<Button onClick={() => handleClick(i)} key={i}>{i + 1}</Button>);
+      buttons.push(
+        <Button onClick={() => handleClick(i)} key={i}>
+          {i + 1}
+        </Button>
+      );
     }
   } else {
     buttons.push(<Button key={1}> 1 </Button>);

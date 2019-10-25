@@ -70,7 +70,6 @@ const ListView = props => {
         <ListItem>
           <ListItemText primary={"Price: " + component.price + "kr"} />
         </ListItem>
-       
 
         <Link to={"/component-details/" + component._id}>
           <Button

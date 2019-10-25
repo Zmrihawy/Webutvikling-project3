@@ -1,0 +1,259 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders tag search bar 1`] = `
+Array [
+  <a
+    href="/"
+    onClick={[Function]}
+    style={
+      Object {
+        "textDecoration": "none",
+      }
+    }
+  >
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-text"
+      disabled={false}
+      label="Home"
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      style={
+        Object {
+          "textTransform": "none",
+        }
+      }
+      tabIndex={0}
+      type="button"
+    >
+      <span
+        className="MuiButton-label"
+      >
+        <h6
+          className="MuiTypography-root MuiTypography-subtitle1"
+          style={
+            Object {
+              "color": "white",
+            }
+          }
+        >
+          Home
+        </h6>
+      </span>
+    </button>
+  </a>,
+  <a
+    href="/component-list"
+    onClick={[Function]}
+    style={
+      Object {
+        "textDecoration": "none",
+      }
+    }
+  >
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-text"
+      disabled={false}
+      label="component-list"
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      style={
+        Object {
+          "textTransform": "none",
+        }
+      }
+      tabIndex={0}
+      type="button"
+    >
+      <span
+        className="MuiButton-label"
+      >
+        <h6
+          className="MuiTypography-root MuiTypography-subtitle1"
+          style={
+            Object {
+              "color": "white",
+            }
+          }
+        >
+          Browse
+        </h6>
+      </span>
+    </button>
+  </a>,
+  <a
+    href="/shopping-cart"
+    onClick={[Function]}
+    style={
+      Object {
+        "textDecoration": "none",
+      }
+    }
+  >
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-text"
+      disabled={false}
+      label="shopping-cart"
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      style={
+        Object {
+          "textTransform": "none",
+        }
+      }
+      tabIndex={0}
+      type="button"
+    >
+      <span
+        className="MuiButton-label"
+      >
+        <h6
+          className="MuiTypography-root MuiTypography-subtitle1"
+          style={
+            Object {
+              "color": "white",
+            }
+          }
+        >
+          Cart
+        </h6>
+      </span>
+    </button>
+  </a>,
+  <a
+    href="/user"
+    onClick={[Function]}
+    style={
+      Object {
+        "textDecoration": "none",
+      }
+    }
+  >
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-text"
+      disabled={false}
+      label="User"
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      style={
+        Object {
+          "textTransform": "none",
+        }
+      }
+      tabIndex={0}
+      type="button"
+    >
+      <span
+        className="MuiButton-label"
+      >
+        <h6
+          className="MuiTypography-root MuiTypography-subtitle1"
+          style={
+            Object {
+              "color": "white",
+            }
+          }
+        >
+          User
+        </h6>
+      </span>
+    </button>
+  </a>,
+  <a
+    href="/tag-cloud"
+    onClick={[Function]}
+    style={
+      Object {
+        "textDecoration": "none",
+      }
+    }
+  >
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-text"
+      disabled={false}
+      label="Tag Cloud"
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      style={
+        Object {
+          "textTransform": "none",
+        }
+      }
+      tabIndex={0}
+      type="button"
+    >
+      <span
+        className="MuiButton-label"
+      >
+        <h6
+          className="MuiTypography-root MuiTypography-subtitle1"
+          style={
+            Object {
+              "color": "white",
+            }
+          }
+        >
+          Visualization
+        </h6>
+      </span>
+    </button>
+  </a>,
+  <div
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  />,
+  <p
+    className="MuiTypography-root MuiTypography-body1"
+    justify="space-between"
+  >
+    Logged in as foo
+  </p>,
+]
+`;

@@ -58,9 +58,6 @@ button.  The search result is then returned in form of a list.
 Sorting items can be done by clicking "Sort by" button. Its possible to sort by name, price, category and so on. In addition 
 its possible to sort in ascending or defending order.
 
-### Pagination [TODO: Needs Updating]
-We have an endpoint that implements pagination. It has several features and uses several params.
-
 ### User generated data
 To store user generated data a user model was implemented. A user has a shopping cart where items can be added or removed.
 A user can add up to 40 items of a particular item to the cart. This limit constricts a user from adding lots of items
@@ -77,4 +74,7 @@ an displays these items at ounce.
 
 ### Visualisation for all items
 Similar to the shopping cart visualisation this visualisation works in the same way. The difference is that it shows all 
-available items in the database by their quantity and all manufacturers.  
+available items in the database by their quantity and all manufacturers.
+
+### Pagination [TODO: Needs Updating]
+We have an endpoint that implements pagination. It has several features and uses several params.

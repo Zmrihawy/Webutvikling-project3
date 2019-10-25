@@ -29,8 +29,8 @@ model in mongoose schemas, and then we can easily do CRUD operations with mongoo
 ### Material - UI components (Frontend)
 Most of our react components are built using Material Ui elements. The Material Ui library comes stocked with elements  
 like `<Grid/>`, `</Typography>`, and custom html elements `<Card/>` and `<Button/>` which made it easier to implement
-our components. This ensured that we did not need to build much styles for our components and furthermore giving our catalog a 
-consistent frontend design. 
+our components. This ensured that we did not need to build much styles for our components and furthermore giving our catalog 
+a very responsive design.
 
 ### Data visualisation
 Three forms of user generated data visualisation were setup, a user shopping cart visualisation, a tag cloud visualisation of

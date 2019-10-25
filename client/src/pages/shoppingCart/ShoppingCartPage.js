@@ -30,9 +30,6 @@ class ShoppingCartPage extends Component {
   handleCases() {
     const {
       loggedInUser,
-      addItemToShoppingCart,
-      removeItemFromShoppingCart,
-      emptyShoppingCart
     } = this.props;
 
     if (!loggedInUser || JSON.stringify(loggedInUser) === JSON.stringify({})) {
@@ -61,7 +58,7 @@ class ShoppingCartPage extends Component {
     // This works because loggedInUser is populated by redux
     const {
       loggedInUser,
-      addComponentoShoppingCart,
+      addComponentToShoppingCart,
       removeComponentFromShoppingCart,
       emptyShoppingCart
     } = this.props;

@@ -27,7 +27,7 @@ const ComponentDetails = props => {
 
   useEffect(() => {
     getCurrentComponent(id);
-  }, [getCurrentComponent]);
+  }, [getCurrentComponent, id]);
 
   const handleAddToCart = () => {
     addComponentToShoppingCart(loggedInUser, currentComponent);
@@ -74,7 +74,7 @@ const ComponentDetails = props => {
       >
         <Paper>
           <img
-            alt="Item Image"
+            alt="Item"
             src={currentComponent.pictureURL}
             style={{ maxWidth: "100%", maxHeight: "500px" }}
           />

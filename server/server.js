@@ -21,6 +21,7 @@ var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function() {
   console.log("Succesfully connected to mongodb server");
+  app.emit("mongodbConnected");
 });
 
 app.use("/api/component", componentRoute);
@@ -34,3 +35,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+module.exports = app;

@@ -30,11 +30,11 @@ const HomePage = props => {
   }, [getFeaturedComponents]);
 
   const mappedItems = featuredComponents.map((component, index) => (
-      <Grid item key={index} className="_featured_item" xs={12} sm={4} md={4} lg={3} xl={3}> 
+      <Grid item key={index} className="_featured_component" xs={12} sm={4} md={4} lg={3} xl={3}> 
         <FadeIn delay={baseDelay + 2000 + (500*index)} transitionDuration="2000">
 
         <Link
-          to={"/item-details/" + component._id}
+          to={"/component-details/" + component._id}
           style={{ textDecoration: "none" }}
         >
           <Card style={{ minHeight: "300px", width: "200px", backgroundColor: "rgba(255, 255, 255, 0.5)" }}>

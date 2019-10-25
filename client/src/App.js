@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import MainPage from "./pages/mainPage/MainPage";
 import MainBar from "./pages/navbar/MainBar";
-import ItemDetails from "./pages/itemDetails/ItemDetails";
-import ComponentListPage from "./pages/item/ComponentListPage";
+import ComponentDetails from "./pages/componentDetails/ComponentDetails";
+import ComponentListPage from "./pages/componentList/ComponentListPage";
 import UserPage from "./pages/user/UserPage";
 import ShoppingCartPage from "./pages/shoppingCart/ShoppingCartPage";
 import TagCloudPage from "./pages/dataVisualization/TagCloudPage";
@@ -23,7 +23,7 @@ function App() {
           <MainBar />
           <Switch>
             <Route exact path="/" component={MainPage} />
-            <Route path="/item-details/:id" component={ItemDetails} />
+            <Route path="/component-details/:id" component={ComponentDetails} />
             <Route path="/component-list" component={ComponentListPage} />
             <Route path="/shopping-cart" component={ShoppingCartPage} />
             <Route path="/user" component={UserPage} />

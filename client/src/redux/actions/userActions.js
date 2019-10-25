@@ -23,7 +23,7 @@ export const setLoggedInUser = user => dispatch => {
   });
 };
 
-export const addItemToShoppingCart = (user, component) => dispatch => {
+export const addComponentToShoppingCart = (user, component) => dispatch => {
   if (user.shoppingCart.length >= 40) {
     alert("Shopping cart limit reached (40). Please remove some items");
     return;
@@ -55,7 +55,7 @@ export const addItemToShoppingCart = (user, component) => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const removeItemFromShoppingCart = (user, component) => dispatch => {
+export const removeComponentFromShoppingCart = (user, component) => dispatch => {
   const { shoppingCart } = user
   const index = shoppingCart.map(item => item._id).indexOf(component._id)
   if (index === -1){

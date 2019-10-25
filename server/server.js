@@ -1,11 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
 
 const componentRoute = require("./endpoints/component/componentRoute.js");
 const userRoute = require("./endpoints/user/userRoute.js");
 const logRoute = require("./endpoints/log/logRoute.js");
 
 const app = express();
+app.use(express.static(path.join(__dirname, '../client/build')));
 const port = 5000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -25,6 +27,10 @@ app.use("/api/component", componentRoute);
 app.use("/api/user", userRoute);
 app.use("/api/log", logRoute);
 
-app.get("/", (req, res) => res.send("Hello World!"));
+app.get('*', (req,res) =>{
+  console.log("serving")
+  console.log(__dirname)
+  res.sendFile(path.join(__dirname+'/../client/build/index.html'));
+});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

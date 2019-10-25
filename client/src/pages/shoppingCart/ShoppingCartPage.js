@@ -13,10 +13,11 @@ import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import {
-  addItemToShoppingCart,
-  removeItemFromShoppingCart,
+  addComponentToShoppingCart,
+  removeComponentFromShoppingCart,
   emptyShoppingCart
 } from "../../redux/actions/userActions";
+
 
 class ShoppingCartPage extends Component {
 
@@ -60,24 +61,27 @@ class ShoppingCartPage extends Component {
     // This works because loggedInUser is populated by redux
     const {
       loggedInUser,
-      addItemToShoppingCart,
-      removeItemFromShoppingCart,
+      addComponentoShoppingCart,
+      removeComponentFromShoppingCart,
       emptyShoppingCart
     } = this.props;
-    
-    let mappedItems;
-    if (
-      loggedInUser &&
-      JSON.stringify(loggedInUser) !== JSON.stringify({}) &&
-      loggedInUser.shoppingCart
-    ) {
-      let uniqueItems = [];
+
+      let mappedComponents;
+      let uniqueComponents = [];
       loggedInUser.shoppingCart.forEach(component => {
-        if (!(uniqueItems.map(x => x._id).indexOf(component._id) > -1)) {
-          uniqueItems.push(component);
+        if (!(uniqueComponents.map(x => x._id).indexOf(component._id) > -1)) {
+          uniqueComponents.push(component);
         }
       });
-      mappedItems = uniqueItems.map(component => {
+      mappedComponents = uniqueComponents.map(component => {
+      let uniqueComponents = [];
+      loggedInUser.shoppingCart.forEach(component => {
+        if (!(uniqueComponents.map(x => x._id).indexOf(component._id) > -1)) {
+          uniqueComponents.push(component);
+        }
+      });
+      })
+      mappedComponents = uniqueComponents.map(component => {
         return (
           <Grid item key={component._id}>
             <Card style={{ maxWidth: 325 }}>
@@ -132,7 +136,7 @@ class ShoppingCartPage extends Component {
                 >
                   <RemoveIcon
                     onClick={() =>
-                      removeItemFromShoppingCart(loggedInUser, component)
+                      removeComponentFromShoppingCart(loggedInUser, component)
                     }
                   />
                 </Fab>
@@ -143,15 +147,13 @@ class ShoppingCartPage extends Component {
                   style={{ marginRight: 10 }}
                 >
                   <AddIcon
-                    onClick={() => addItemToShoppingCart(loggedInUser, component)}
+                    onClick={() => addComponentToShoppingCart(loggedInUser, component)}
                   />
                 </Fab>
               </CardActions>
             </Card>
           </Grid>
-        );
-      });
-    }
+    )})
 
     return (
       <div>
@@ -160,9 +162,9 @@ class ShoppingCartPage extends Component {
         </Typography>
         {this.handleCases()}
         <Grid container justify="center" spacing={4} alignItems="center">
-          {mappedItems}
+          {mappedComponents}
         </Grid>
-        {mappedItems && mappedItems.length > 0 ? 
+        {mappedComponents && mappedComponents.length > 0 ? 
           <div style={{margin: "50px"}}>
             <Button variant="contained" color="primary" onClick={() => emptyShoppingCart(loggedInUser)}>
               Buy items
@@ -176,8 +178,8 @@ class ShoppingCartPage extends Component {
             : null
         }
     </div>
-    )
-  }
+  )
+  }  
 }
 
 // This is the actual readonly redux state
@@ -190,8 +192,8 @@ function mapStateToProps(state) {
 // These represents functions for changing redux state
 // currently commented out, but we will need them later
 const actionCreators = {
-  addItemToShoppingCart,
-  removeItemFromShoppingCart,
+  addComponentToShoppingCart,
+  removeComponentFromShoppingCart,
   emptyShoppingCart
   // setLoggedInUser,
   // createNewUser

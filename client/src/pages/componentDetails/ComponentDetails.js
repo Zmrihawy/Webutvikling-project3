@@ -13,13 +13,13 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 
 import { getCurrentComponent } from "../../redux/actions/componentActions";
-import { addItemToShoppingCart } from "../../redux/actions/userActions";
+import { addComponentToShoppingCart } from "../../redux/actions/userActions";
 
-const ItemDetails = props => {
+const ComponentDetails = props => {
   const {
     currentComponent,
     getCurrentComponent,
-    addItemToShoppingCart,
+    addComponentToShoppingCart,
     loggedInUser,
     match
   } = props;
@@ -30,7 +30,7 @@ const ItemDetails = props => {
   }, [getCurrentComponent]);
 
   const handleAddToCart = () => {
-    addItemToShoppingCart(loggedInUser, currentComponent);
+    addComponentToShoppingCart(loggedInUser, currentComponent);
   };
 
   const mappedSpecs = (currentComponent.specs || []).map(spec => (
@@ -170,10 +170,10 @@ function mapStateToProps(state) {
 
 const actionCreators = {
   getCurrentComponent,
-  addItemToShoppingCart
+  addComponentToShoppingCart
 };
 
 export default connect(
   mapStateToProps,
   actionCreators
-)(ItemDetails);
+)(ComponentDetails);

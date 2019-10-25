@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -16,15 +16,15 @@ const TagCloudPage = props => {
 
   const handleComponentClick = () => {
     getComponentStatistics();
-  }
+  };
 
   const handleUserClick = () => {
     getUserStatistics();
-  }
+  };
 
   const handleSearchHistoryClick = () => {
     getLogStatistics();
-  }
+  };
 
   useEffect(() => {
     getComponentStatistics();

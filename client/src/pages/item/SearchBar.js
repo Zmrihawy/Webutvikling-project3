@@ -140,8 +140,8 @@ export default class SearchBar extends React.Component {
 
   render() {
     const {
-      searchTextState,
-      filterTextState,
+      // searchTextState,
+      // filterTextState,
       filterFieldState,
       filterAnchorEl,
       sortbyFieldState,

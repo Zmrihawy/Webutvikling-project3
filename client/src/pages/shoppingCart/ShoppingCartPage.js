@@ -13,7 +13,6 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import {addItemToShoppingCart, removeItemFromShoppingCart} from '../../redux/actions/userActions'
-import { typography } from "@material-ui/system";
 
 
 class ShoppingCartPage extends Component {

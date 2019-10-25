@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import TypoGraphy from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 function NavBar(props) {
   const { loggedInUser } = props;

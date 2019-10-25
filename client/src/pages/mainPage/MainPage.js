@@ -12,16 +12,8 @@ class MainPage extends Component {
             top: 0,
             left: 0,
             width: "100%",
-            height: "100%"
-          }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%"
+            height: "100%",
+            zIndex: -1
           }}
       >
         <ParticleComponent/>
@@ -38,7 +30,6 @@ class MainPage extends Component {
             <HomePage />
               </div>
             </div>
-      </div>
     );
   }
 }

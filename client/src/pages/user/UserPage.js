@@ -24,20 +24,22 @@ const UserPage = props => {
         <div
           style={{
             position: "absolute",
-            top: 70,
+            top: 0,
             left: 0,
             width: "100%",
-            height: "100%"
+            height: "100%",
+            zIndex: -1
           }}
       >
         <ParticleComponent/>
           <div
             style={{
               position: "absolute",
-              top: 0,
+              top: 80,
               left: 0,
               width: "100%",
-              height: "100%"
+              height: "100%",
+              zIndex: -1
             }}
           >
       <UserLogin

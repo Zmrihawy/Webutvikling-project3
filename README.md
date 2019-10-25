@@ -32,10 +32,6 @@ like `<Grid/>`, `</Typography>`, and custom html elements `<Card/>` and `<Button
 our components. This ensured that we did not need to build much styles for our components and furthermore giving our catalog a 
 consistent frontend design. 
 
-### Item Details 
-To view details about a component, simply search for it (from the “Browse” link in the Navbar), expand on the result 
-tab and click “Go to item page” button. This can also be accessed directly from the homepage by simply clicking on a component. 
-
 ### Data visualisation
 Three forms of user generated data visualisation were setup, a user shopping cart visualisation, a tag cloud visualisation of
 the amount of times components appear in shopping carts, and a tag cloud visualisation of search queries.
@@ -98,6 +94,10 @@ done through redux.
 
 Sorting items can be done by clicking "Sort by" button. It is possible to sort by name, price, category and so on. In addition 
 It is possible to sort in ascending or descending order. Again, this is done on the server side.
+
+### Item Details 
+To view details about a component, simply search for it (from the “Browse” link in the Navbar), expand on the result 
+tab and click “Go to item page” button. This can also be accessed directly from the homepage by simply clicking on a component. 
 
 ### Pagination 
 We have a solid pagination endpoint that accepts many params and returns a list of components. This endpoint can do

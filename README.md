@@ -50,28 +50,15 @@ Then select a test file to begin running it.
 
 
 ## Design and Functionality
+
+## Sorting and filtering 
 To search a component, navigate to the "Browse" page. A user can search for a particular item by simply typing the name of 
 the component in the search field "filter by name". Filtering is also possible and is done by typing the value that should 
 be filtered in the "filter by value" search field and then selecting what type of value this is by clicking the "Filter by" 
-button.  The search result is then returned in form of a list.  
+button.  The search result is then returned in form of a list. 
 
-
-## Data visualisation
-To store user generated data a user model was implemented. A user has a shopping cart where items can be added or removed. 
-Two forms of visualisation were setup, a user shopping cart visualisation and a visualisation for all available items. 
-
-## Shopping Cart Visualisation
-In the user shopping cart visualisation, all items in the users shopping cart are displayed according to their quantity. 
-The visualisation is in form of words whose font size changes depending on the number of that item in the user's 
-shopping cart. This visualisation gets all the users in the database who have added items to their shopping carts 
-an displays these items at ounce. 
-
-## Visualisation for all items
-Similar to the shopping cart visualisation this visualisation works in the same way. The difference is that it shows all 
-available items in the database by their quantity and all manufacturers.  
-
-
-
+Sorting items can be done by clicking "Sort by" button. Its possible to sort by name, price, category and so on. In addition 
+its possible to sort in ascending or defending order.
 
 
 ### Pagination 
@@ -109,3 +96,21 @@ Get components, sort by name, sort descending, get 4 objects per page, get secon
 Get components, filter categories on all category values that contain the string "Lapto" (So it gets all laptops), get 4
 objects per page, get first page:
 `curl "localhost:5000/api/component/pagination?pageNum=0&objectsPerPage=4&filterField=category&filterVal=Lapto"`
+
+
+## Data visualisation
+To store user generated data a user model was implemented. A user has a shopping cart where items can be added or removed.
+A user can add up to 40 items of a particular item to the cart. This limit constricts a user from adding lots of items
+at ounce which would crash the browser.
+
+Two forms of visualisation were setup, a user shopping cart visualisation and a visualisation for all available items. 
+
+## Shopping Cart Visualisation
+In the user shopping cart visualisation, all items in the users shopping cart are displayed according to their quantity. 
+The visualisation is in form of words whose font size changes depending on the number of that item in the user's 
+shopping cart. This visualisation gets all the users in the database who have added items to their shopping carts 
+an displays these items at ounce. 
+
+## Visualisation for all items
+Similar to the shopping cart visualisation this visualisation works in the same way. The difference is that it shows all 
+available items in the database by their quantity and all manufacturers.  

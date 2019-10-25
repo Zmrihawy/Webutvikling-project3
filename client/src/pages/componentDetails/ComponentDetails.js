@@ -27,21 +27,11 @@ const ComponentDetails = props => {
 
   useEffect(() => {
     getCurrentComponent(id);
-  }, [getCurrentComponent]);
+  }, [getCurrentComponent, id]);
 
   const handleAddToCart = () => {
     addComponentToShoppingCart(loggedInUser, currentComponent);
   };
-
-  const mappedSpecs = (currentComponent.specs || []).map(spec => (
-    <div>
-      <Typography variant="subtitle1">name: {spec.name}</Typography>
-      <Typography variant="subtitle1">
-        description: {spec.description}
-      </Typography>
-      <Typography variant="subtitle1">value: {spec.value}</Typography>
-    </div>
-  ));
 
   return (
     <Grid container justify="center" alignItems="center" spacing={4}>
@@ -84,6 +74,7 @@ const ComponentDetails = props => {
       >
         <Paper>
           <img
+            alt="Item"
             src={currentComponent.pictureURL}
             style={{ maxWidth: "100%", maxHeight: "500px" }}
           />

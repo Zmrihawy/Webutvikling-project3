@@ -30,9 +30,6 @@ class ShoppingCartPage extends Component {
   handleCases() {
     const {
       loggedInUser,
-      addItemToShoppingCart,
-      removeItemFromShoppingCart,
-      emptyShoppingCart
     } = this.props;
 
     if (!loggedInUser || JSON.stringify(loggedInUser) === JSON.stringify({})) {
@@ -44,7 +41,7 @@ class ShoppingCartPage extends Component {
           </Typography>
         </div>
       )
-    } 
+    }
     if (!loggedInUser.shoppingCart || loggedInUser.shoppingCart.length === 0) {
       return (
       <div>
@@ -61,7 +58,7 @@ class ShoppingCartPage extends Component {
     // This works because loggedInUser is populated by redux
     const {
       loggedInUser,
-      addComponentoShoppingCart,
+      addComponentToShoppingCart,
       removeComponentFromShoppingCart,
       emptyShoppingCart
     } = this.props;
@@ -158,7 +155,7 @@ class ShoppingCartPage extends Component {
         <Grid container justify="center" spacing={4} alignItems="center">
           {mappedComponents}
         </Grid>
-        {mappedComponents && mappedComponents.length > 0 ? 
+        {mappedComponents && mappedComponents.length > 0 ?
           <div style={{margin: "50px"}}>
             <Button variant="contained" color="primary" onClick={() => emptyShoppingCart(loggedInUser)}>
               Buy items
@@ -173,7 +170,7 @@ class ShoppingCartPage extends Component {
         }
     </div>
   )
-  }  
+  }
 }
 
 // This is the actual readonly redux state

@@ -69,23 +69,10 @@ const ListView = props => {
         <ListItem>
           <ListItemText primary={"Procuder: " + component.producer} />
         </ListItem>
-        <List
-          component="div"
-          disablePadding
-          aria-labelledby="nested-list-subheader"
-          subheader={
-            <ListSubheader component="div" id="nested-list-subheader">
-              Specs
-            </ListSubheader>
-          }
-          className={classes.root}
-        >
-          {component.specs.map(spec => (
-            <ListItem className={classes.nested} key={spec._id}>
-              <ListItemText primary={spec.name + ": " + spec.value} />
-            </ListItem>
-          ))}
-        </List>
+        <ListItem>
+          <ListItemText primary={"Price: " + component.price} NOK />
+        </ListItem>
+       
 
         <Link to={"/component-details/" + component._id}>
           <Button

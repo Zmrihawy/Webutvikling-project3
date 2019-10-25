@@ -71,7 +71,7 @@ const HomePage = props => {
           
           <FadeIn delay={baseDelay} transitionDuration="1000">
             <Typography variant="h3" style={{ margin: "20px" }}>
-              E.Catalog
+              eCatalog
             </Typography>
           </FadeIn>
 

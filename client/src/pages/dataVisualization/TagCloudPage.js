@@ -36,7 +36,7 @@ const TagCloudPage = props => {
         <Grid item>
           <ButtonGroup color="primary" aria-label="outlined primary button group">
             <Button onClick={handleComponentClick}>Components</Button>
-            <Button onClick={handleUserClick}>User</Button>
+            <Button onClick={handleUserClick}>Shopping Cart</Button>
             <Button onClick={handleSearchHistoryClick}>Search History</Button>
           </ButtonGroup>
         </Grid>

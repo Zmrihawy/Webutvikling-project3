@@ -75,14 +75,4 @@ export const getFeaturedComponents = () => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const getComponentStatistics = () => dispatch => {
-  return fetch("api/component/statistics")
-    .then(res => res.json())
-    .then(res => {
-      return dispatch({
-        type: GET_COMPONENT_STATISTICS,
-        payload: res
-      });
-    })
-    .catch(err => console.log(err));
-};
+

@@ -1,14 +1,26 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
+
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid"
 
 import TagCloudHeader from "./TagCloudHeader";
 import TagCloudView from "./TagCloudView";
-import { getComponentStatistics } from "../../redux/actions/componentActions";
+import { getComponentStatistics, getUserStatistics } from "../../redux/actions/statisticsActions";
 import Divider from "@material-ui/core/Divider";
 
 const TagCloudPage = props => {
-  const { getComponentStatistics, componentStatistics } = props;
+  const { getComponentStatistics, getUserStatistics, statistics } = props;
+
+  const handleComponentClick = () => {
+    getComponentStatistics();
+  }
+
+  const handleUserClick = () => {
+    getUserStatistics();
+  }
 
   useEffect(() => {
     getComponentStatistics();
@@ -17,19 +29,27 @@ const TagCloudPage = props => {
   return (
     <div>
       <TagCloudHeader />
+        <Grid item>
+          <ButtonGroup color="primary" aria-label="outlined primary button group">
+            <Button onClick={handleComponentClick}>Components</Button>
+            <Button onClick={handleUserClick}>User</Button>
+          </ButtonGroup>
+        </Grid>
       <Divider style={{ margin: "50px" }} />
-      <TagCloudView componentStatistics={componentStatistics} />
+
+      <TagCloudView statistics={statistics} />
     </div>
   );
 };
 
 function mapStateToProps(state) {
-  const { component } = state;
-  return { componentStatistics: component.componentStatistics };
+  const { statistics } = state;
+  return { statistics: statistics.statistics };
 }
 
 const actionCreators = {
-  getComponentStatistics
+  getComponentStatistics,
+  getUserStatistics
 };
 
 export default connect(

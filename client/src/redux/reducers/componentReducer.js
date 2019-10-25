@@ -11,8 +11,7 @@ const initialState = {
     paginationMetaData: {}
   },
   featuredComponents: [],
-  currentComponent: {},
-  componentStatistics: null
+  currentComponent: {}
 };
 
 export default function(state = initialState, action) {
@@ -32,11 +31,7 @@ export default function(state = initialState, action) {
         ...state,
         featuredComponents: action.payload
       };
-    case GET_COMPONENT_STATISTICS:
-      return {
-        ...state,
-        componentStatistics: action.payload
-      };
+
     default:
       return state;
   }

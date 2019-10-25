@@ -20,7 +20,7 @@ function NavBar(props) {
       <Link to="/component-list" style={{ textDecoration: "none" }}>
         <Button label="component-list" style={{ textTransform: "none" }}>
           <TypoGraphy variant="subtitle1" style={{ color: "white" }}>
-            Component list
+            Browse
           </TypoGraphy>
         </Button>
       </Link>
@@ -28,7 +28,7 @@ function NavBar(props) {
       <Link to="/shopping-cart" style={{ textDecoration: "none" }}>
         <Button label="shopping-cart" style={{ textTransform: "none" }}>
           <TypoGraphy variant="subtitle1" style={{ color: "white" }}>
-            Shopping cart
+            Cart
           </TypoGraphy>
         </Button>
       </Link>
@@ -44,7 +44,7 @@ function NavBar(props) {
       <Link to="/tag-cloud" style={{ textDecoration: "none" }}>
         <Button label="Tag Cloud" style={{ textTransform: "none" }}>
           <TypoGraphy variant="subtitle1" style={{ color: "white" }}>
-            Tag Cloud
+            Visualization
           </TypoGraphy>
         </Button>
       </Link>

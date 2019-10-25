@@ -152,11 +152,11 @@ export default class SearchBar extends React.Component {
       <Grid
         container
         justify="center"
-        align="center"
+        alignItems="center"
         spacing={4}
         style={{ margin: "30px" }}
       >
-        <Grid item>
+        <Grid item xs={12} sm={4} md={4} lg={2} xl={2}>
           <Grid container justify="center" align="center" spacing={2}>
             <Grid item>
               <TextField
@@ -168,9 +168,27 @@ export default class SearchBar extends React.Component {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item>
-          <Grid container justify="center" align="center" spacing={2}>
-            <Grid item>
+        <Grid item xs={12} sm={4} md={4} lg={2} xl={2}>
+
+              <TextField
+                label="filter"
+                placeholder="Filter by value"
+                onKeyDown={this.EnterKeyValue}
+                onChange={this.handleFilterTextChange}
+              />
+            </Grid>
+
+        <Grid item xs={12} sm={4} md={4} lg={2} xl={2}>
+              <Button
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={this.handleFilterMenuClick}
+                variant="outlined"
+              >
+                {filterFieldState && typeof filterFieldState === "string"
+                  ? "Filter " + filterFieldState
+                  : "Filter By?"}
+              </Button>
               <Menu
                 id="filter-menu"
                 anchorEl={filterAnchorEl}
@@ -192,30 +210,8 @@ export default class SearchBar extends React.Component {
                   None
                 </MenuItem>
               </Menu>
-            </Grid>
-            <Grid item>
-              <TextField
-                label="filter"
-                placeholder="Filter by value"
-                onKeyDown={this.EnterKeyValue}
-                onChange={this.handleFilterTextChange}
-              />
-            </Grid>
-            <Grid item>
-              <Button
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={this.handleFilterMenuClick}
-                variant="outlined"
-              >
-                {filterFieldState && typeof filterFieldState === "string"
-                  ? "Filter " + filterFieldState
-                  : "Filter By?"}
-              </Button>
-            </Grid>
-          </Grid>
         </Grid>
-        <Grid item>
+        <Grid item xs={12} sm={4} md={4} lg={2} xl={2}>
           <Grid container justify="center" align="center" spacing={2}>
             <Grid item>
               <Menu
@@ -265,11 +261,11 @@ export default class SearchBar extends React.Component {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item>
+        <Grid item xs={12} sm={4} md={4} lg={2} xl={2}>
           <Checkbox checked={sortDesc} onChange={this.handleSortDirChange} />
           Sort descending
         </Grid>
-        <Grid item>
+        <Grid item xs={12} sm={4} md={4} lg={2} xl={2}>
           <Button
             onClick={this.handleSubmit}
             variant="contained"

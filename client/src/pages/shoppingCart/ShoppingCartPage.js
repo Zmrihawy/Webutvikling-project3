@@ -13,8 +13,8 @@ import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import {
-  addItemToShoppingCart,
-  removeItemFromShoppingCart
+  addComponentToShoppingCart,
+  removeComponentFromShoppingCart
 } from "../../redux/actions/userActions";
 
 class ShoppingCartPage extends Component {
@@ -22,24 +22,24 @@ class ShoppingCartPage extends Component {
     // This works because loggedInUser is populated by redux
     const {
       loggedInUser,
-      addItemToShoppingCart,
-      removeItemFromShoppingCart
+      addComponentoShoppingCart,
+      removeComponentFromShoppingCart
     } = this.props;
 
-    let mappedItems;
+    let mappedComponents;
     if (
       loggedInUser &&
       JSON.stringify(loggedInUser) !== JSON.stringify({}) &&
       loggedInUser.shoppingCart
     ) {
       console.log("mapping items");
-      let uniqueItems = [];
+      let uniqueComponents = [];
       loggedInUser.shoppingCart.forEach(item => {
-        if (!(uniqueItems.map(x => x._id).indexOf(item._id) > -1)) {
-          uniqueItems.push(item);
+        if (!(uniqueComponents.map(x => x._id).indexOf(item._id) > -1)) {
+          uniqueComponents.push(item);
         }
       });
-      mappedItems = uniqueItems.map(item => {
+      mappedComponents = uniqueComponents.map(item => {
         console.log(`mapping item ${item}`);
         return (
           <Grid item key={item._id}>
@@ -95,7 +95,7 @@ class ShoppingCartPage extends Component {
                 >
                   <RemoveIcon
                     onClick={() =>
-                      removeItemFromShoppingCart(loggedInUser, item)
+                      removeComponentFromShoppingCart(loggedInUser, item)
                     }
                   />
                 </Fab>
@@ -106,7 +106,7 @@ class ShoppingCartPage extends Component {
                   style={{ marginRight: 10 }}
                 >
                   <AddIcon
-                    onClick={() => addItemToShoppingCart(loggedInUser, item)}
+                    onClick={() => addComponentToShoppingCart(loggedInUser, item)}
                   />
                 </Fab>
               </CardActions>
@@ -120,7 +120,7 @@ class ShoppingCartPage extends Component {
       <div>
         <h1 style={{ margin: "50px" }}>shopping Cart</h1>
         <Grid container justify="center" spacing={4} alignItems="center">
-          {mappedItems}
+          {mappedComponents}
         </Grid>
       </div>
     );
@@ -137,10 +137,8 @@ function mapStateToProps(state) {
 // These represents functions for changing redux state
 // currently commented out, but we will need them later
 const actionCreators = {
-  addItemToShoppingCart,
-  removeItemFromShoppingCart
-  // setLoggedInUser,
-  // createNewUser
+  addComponentToShoppingCart,
+  removeComponentFromShoppingCart
 };
 
 export default connect(

@@ -87,7 +87,7 @@ const ListView = props => {
           ))}
         </List>
 
-        <Link to={"/item-details/" + component._id}>
+        <Link to={"/component-details/" + component._id}>
           <Button
             variant="outlined"
             color="primary"

@@ -6,7 +6,8 @@ const ParticleComponent = () => (
               height="1000px"
               style= {{
                 position: "fixed",
-                left: 0
+                left: 0,
+                zIndex: -1
               }}
               params={{
                 particles: {

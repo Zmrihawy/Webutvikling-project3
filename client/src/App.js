@@ -13,6 +13,8 @@ import ShoppingCartPage from "./pages/shoppingCart/ShoppingCartPage";
 import TagCloudPage from "./pages/dataVisualization/TagCloudPage";
 import "./App.css";
 
+import Grid from "@material-ui/core/Grid";
+
 function App() {
   return (
     <Provider store={store}>

@@ -9,7 +9,7 @@ class MainPage extends Component {
         <div
           style={{
             position: "absolute",
-            top: 70,
+            top: 0,
             left: 0,
             width: "100%",
             height: "100%"
@@ -17,8 +17,8 @@ class MainPage extends Component {
       >
         <div
           style={{
-            position: "sticky",
-            top: 100,
+            position: "absolute",
+            top: 0,
             left: 0,
             width: "100%",
             height: "100%"
@@ -29,7 +29,7 @@ class MainPage extends Component {
           <div
             style={{
               position: "absolute",
-              top: 0,
+              top: 80,
               left: 0,
               width: "100%",
               height: "100%"

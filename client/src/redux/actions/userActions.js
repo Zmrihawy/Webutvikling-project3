@@ -24,6 +24,10 @@ export const setLoggedInUser = user => dispatch => {
 };
 
 export const addItemToShoppingCart = (user, component) => dispatch => {
+  if (user.shoppingCart.length >= 40) {
+    alert("Shopping cart limit reached (40). Please remove some items");
+    return;
+  }
   return fetch("/api/user/" + user._id, {
     method: "PATCH",
     headers: {

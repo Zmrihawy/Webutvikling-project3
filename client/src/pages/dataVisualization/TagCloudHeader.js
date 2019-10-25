@@ -13,7 +13,8 @@ const TagCloudHeader = props => {
         <br />
         Components: Created by counting components for each producer and category. More
         components equal larger font.
-
+        <br />
+        Search history: Created by counting number of filter searches and name searches
       </Typography>
     </div>
   );

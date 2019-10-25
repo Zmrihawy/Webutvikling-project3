@@ -1,5 +1,6 @@
 const express = require("express");
 const componentModel = require("./componentModel.js");
+const logModel = require("../log/logModel.js");
 const router = express.Router();
 const _ = require("lodash");
 
@@ -141,6 +142,18 @@ router.get("/pagination/", function(req, res) {
             totObjects
           };
           res.send(paginationRes);
+          let log = new logModel({
+            pageNum,
+            objectsPerPage,
+            sortBy,
+            isAsc,
+            nameSearch,
+            filterField,
+            filterVal,
+            resultComponents: components
+          })
+          log.save()
+            .catch(err => console.log(err))
         })
         .catch(err => {
           console.log("Error fetching components", err);
@@ -276,9 +289,6 @@ router.delete("/:id", function(req, res) {
       res.status(404).send(err);
     });
 });
-
-
-
 
 
 module.exports = router;

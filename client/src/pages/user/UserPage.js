@@ -12,6 +12,10 @@ import {
 
 import UserLogin from "../../pages/user/UserLogin";
 
+/**
+ * Main react component for user page. Delegates redux state
+ * and displays the login component over fancy particles effect
+ */
 const UserPage = props => {
   const { users, getUsers, setLoggedInUser, createNewUser } = props;
 

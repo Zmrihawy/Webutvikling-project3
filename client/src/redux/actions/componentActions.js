@@ -5,6 +5,12 @@ import {
   // GET_COMPONENT_STATISTICS
 } from "./types";
 
+/**
+ * createQueryFromParams() accepts an object containing fields
+ * for the query. It then constructs a string that is ready to be 
+ * appended to a URL that is to be used with the component pagination 
+ * endpoint.
+ */
 const createQueryFromParams = queryParams => {
   const {
     filterVal,
@@ -26,6 +32,10 @@ const createQueryFromParams = queryParams => {
   );
 };
 
+/**
+ * Pagination components action creator. Appends pagination 
+ * metadata do object that is dispcathed
+ */
 export const getPaginationComponents = queryParams => dispatch => {
   queryParams = queryParams ? queryParams : {};
   let query = createQueryFromParams(queryParams);
@@ -51,6 +61,9 @@ export const getPaginationComponents = queryParams => dispatch => {
     .catch(err => console.log(err));
 };
 
+/**
+ * Current logged in user action creator
+ */
 export const getCurrentComponent = id => dispatch => {
   return fetch("/api/component/" + id)
     .then(res => res.json())
@@ -63,6 +76,9 @@ export const getCurrentComponent = id => dispatch => {
     .catch(err => console.log(err));
 };
 
+/**
+ * Featured components action creator
+ */
 export const getFeaturedComponents = () => dispatch => {
   return fetch("api/component/featuredComponents")
     .then(res => res.json())

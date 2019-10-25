@@ -14,6 +14,10 @@ import {
   VALID_SORTBY_FIELDS
 } from "../../utility/constants";
 
+/**
+ * Search bar that has controls for searching and filtering etc.
+ * Its basically a large query builder for for the pagination endpoint
+ */
 export default class SearchBar extends React.Component {
   constructor(props) {
     super(props);

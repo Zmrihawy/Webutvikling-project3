@@ -15,6 +15,10 @@ import {
 } from "../../redux/actions/statisticsActions";
 import Divider from "@material-ui/core/Divider";
 
+/** 
+ * Main page for tag cloud visualization. Interfaces with redux
+ * to get statistics, then delegates the state to children.
+ */
 const TagCloudPage = props => {
   const {
     getComponentStatistics,

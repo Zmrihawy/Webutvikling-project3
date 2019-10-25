@@ -3,6 +3,13 @@ import randomColor from "randomcolor";
 import TagCloud from "react-tag-cloud";
 
 import "./tag-cloud-style.css";
+
+/**
+ * The actual tag cloud view. This is a general React component for
+ * viewing data, it accepts an object where each key is the string 
+ * to be displayed and each value is the font size weight. The value
+ * is projected to be in a satisfying range for font sizes
+ */
 class TagCloudView extends Component {
   componentDidMount() {
     setInterval(() => {

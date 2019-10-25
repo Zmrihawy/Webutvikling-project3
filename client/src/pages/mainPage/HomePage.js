@@ -19,7 +19,10 @@ import { Link } from "react-router-dom";
 // Styles
 import "../../styles/homepage.css";
 
-// HomePage layout
+/** 
+ * HomePage layout. Displays fancy featured components over fancy
+ * particles background. Fades in featured components fancily.
+ */
 const HomePage = props => {
   const { getFeaturedComponents, featuredComponents } = props;
 

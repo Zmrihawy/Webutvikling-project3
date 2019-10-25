@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { connect } from "react-redux";
+import ParticleComponent from "../mainPage/ParticleComponent"
 
 import {
   getUsers,
@@ -20,11 +21,32 @@ const UserPage = props => {
 
   return (
     <div>
+        <div
+          style={{
+            position: "absolute",
+            top: 70,
+            left: 0,
+            width: "100%",
+            height: "100%"
+          }}
+      >
+        <ParticleComponent/>
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%"
+            }}
+          >
       <UserLogin
         users={users}
         setLoggedInUser={setLoggedInUser}
         createNewUser={createNewUser}
       />
+          </div>
+        </div>
     </div>
   );
 };

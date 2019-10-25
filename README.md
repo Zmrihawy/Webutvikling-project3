@@ -6,19 +6,22 @@ shopping cart that can be used to buy components. We thought this idea would pro
 components to use and therefor would be a good solution to the problem. 
 
 ## Project structure
-Our project build is based upon two major end points, a client part and a server part. The server part contains all the 
+Our project build is based of two parts, a client part and a server part. The server part contains all the 
 necessary REST API implementations needed for fetching data from the backend and the client part contains the frontend "user-based"
 actions like searching for an item, showing items, filtering and sorting of items.
 
 ### Node js + express (backend) [TODO: Needs updating]
 An Express application is most often used as backend application in a client-server architecture whereas the client could 
-be written in React.js, the server could be written in Express. We used express to setup connections to the server. 
+be written in React.js, the server could be written in Express. We used express as our server.
 Express ensured that all middleware can respond to HTTP requests and routing tables were setup to respond to different actions 
 based on the HTTP method. A REST API server system was setup to enable navigation within our catalog page routes possible. 
 We preferred to use REST API over GraphQL because its more easier to understand and deal with. In addition some group 
 members had more experience REST API. 
 
-TODO: mention something about mongodb server ?? -- Rahim
+We used mongodb as our db. Mongodb is a schemaless database that is easy to setup and use, and is famous for scaling really well, 
+perfect for an app that should be able to handle large amounts of data. To interface with mongodb we chose 
+to use mongoose, which provides a lot of nice functionality such as validation functions. With this setup, we define our database
+model in mongoose schemas, and then we can easily do CRUD operations with mongoose methods.
 
 ### Material - UI components (Frontend)
 Most of our react components are built using Material Ui elements. The Material Ui library comes stocked with elements  

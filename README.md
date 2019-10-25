@@ -23,42 +23,13 @@ perfect for an app that should be able to handle large amounts of data. To inter
 to use mongoose, which provides a lot of nice functionality such as validation functions. With this setup, we define our database
 model in mongoose schemas, and then we can easily do CRUD operations with mongoose methods.
 
+
+## Design 
 ### Material - UI components (Frontend)
 Most of our react components are built using Material Ui elements. The Material Ui library comes stocked with elements  
 like `<Grid/>`, `</Typography>`, and custom html elements `<Card/>` and `<Button/>` which made it easier to implement
 our components. This ensured that we didnt need to build much styles for our components and furthermore giving our catalog a 
 consistent frontend design. 
-
-### Redux 
-Redux is a Javascript Library for managing application state. Redux provides a realtime current state of the catalog with all the 
-state variables that the app has at a given time. This helps keep control of how the catalog state changes overtime and it is also
-
-very useful when debugging. We utilize redux extensively in our solution. All API requests are handled through redux with the use
-of action creators and the `thunk` package. This means that all the relevant state data for our app is always stored and updated 
-in redux. We have structured our code such that React components that represent pages connect to redux, and then delegate the redux
-state to their child compoents that often do most of the work.
-
-## Design and Functionality
-### Sorting and filtering 
-To search a component, navigate to the "Browse" page. A user can search for a particular item by simply typing the name of 
-the component in the search field "search by name". Filtering is also possible and is done by typing the value that should 
-be filtered in the "filter by value" search field and then selecting what type of value this is by clicking the "Filter by" 
-button.  The search result is then returned in form of a list. 
-
-When browsing the results all the paginated components that 
-are loaded is viewed, no more components are loaded. This is done through a pagination endpoint (explained later in this document).
-When browsing and switching to a new page, the client makes a new request for a new page that replace the old components
-with the new compoenents. This way, our app is able to handle (almost) any amount of data. All of this state management is 
-done through redux.
-
-Sorting items can be done by clicking "Sort by" button. Its possible to sort by name, price, category and so on. In addition 
-its possible to sort in ascending or desending order. Again, this is done on the server side.
-
-### User generated data
-To store user generated data a user model was implemented. A user has a shopping cart where items can be added or removed.
-A user can add up to 40 items of a particular item to the cart. This limit constricts a user from adding lots of items
-at ounce which would crash the browser. In addition, a log model was implement to store all searches and results. This
-represents another form of user generated data.
 
 ### Data visualisation
 Three forms of user generated data visualisation were setup, a user shopping cart visualisation, a tag cloud visualisation of
@@ -85,6 +56,38 @@ We have also kept in mind that our webapp should handle large amounts of data wh
 is calculated on the backend, and accesed through the various `/statistics` endpoints on the different models. All
 these endpoint return data in the same format, the data is stored in redux under statistics, and then it is used by
 the tag cloud React component
+
+## Functionality
+### Redux 
+Redux is a Javascript Library for managing application state. Redux provides a realtime current state of the catalog with all the 
+state variables that the app has at a given time. This helps keep control of how the catalog state changes overtime and it is also
+
+very useful when debugging. We utilize redux extensively in our solution. All API requests are handled through redux with the use
+of action creators and the `thunk` package. This means that all the relevant state data for our app is always stored and updated 
+in redux. We have structured our code such that React components that represent pages connect to redux, and then delegate the redux
+state to their child compoents that often do most of the work.
+
+### Sorting and filtering 
+To search a component, navigate to the "Browse" page. A user can search for a particular item by simply typing the name of 
+the component in the search field "search by name". Filtering is also possible and is done by typing the value that should 
+be filtered in the "filter by value" search field and then selecting what type of value this is by clicking the "Filter by" 
+button.  The search result is then returned in form of a list. 
+
+When browsing the results all the paginated components that 
+are loaded is viewed, no more components are loaded. This is done through a pagination endpoint (explained later in this document).
+When browsing and switching to a new page, the client makes a new request for a new page that replace the old components
+with the new compoenents. This way, our app is able to handle (almost) any amount of data. All of this state management is 
+done through redux.
+
+Sorting items can be done by clicking "Sort by" button. Its possible to sort by name, price, category and so on. In addition 
+its possible to sort in ascending or desending order. Again, this is done on the server side.
+
+### User generated data
+To store user generated data a user model was implemented. A user has a shopping cart where items can be added or removed.
+A user can add up to 40 items of a particular item to the cart. This limit constricts a user from adding lots of items
+at ounce which would crash the browser. In addition, a log model was implement to store all searches and results. This
+represents another form of user generated data.
+
 
 ### Pagination 
 We have a solid pagination endpoint that accepts many params and returns a list of components. This endpoint can do

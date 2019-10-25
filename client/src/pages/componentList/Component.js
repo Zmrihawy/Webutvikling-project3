@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Item(props) {
+export default function Component(props) {
   const classes = useStyles();
 
   // We can pass other props here like description and price

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import HomePage from "./HomePage";
-import ParticleComponent from "./ParticleComponent"
+import ParticlesWrapper from "./ParticlesWrapper"
 
 class MainPage extends Component {
   render() {
@@ -16,7 +16,7 @@ class MainPage extends Component {
             zIndex: -1
           }}
       >
-        <ParticleComponent/>
+        <ParticlesWrapper/>
           </div>
           <div
             style={{

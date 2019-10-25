@@ -107,10 +107,11 @@ metadata such as the total number of pages for the corresponding query is includ
 the pagination data is stored in redux and used by the appropriate React components. 
 
 ### User generated data
-To store user generated data a user model was implemented. A user has a shopping cart where items can be added or removed.
-A user can add up to 40 items of a particular item to the cart. This limit constricts a user from adding lots of items
-at ounce which would crash the browser. In addition, a log model was implemented to store all searches and results. This
-represents another form of user generated data.
+To store user generated data a user model was implemented. We ensured that a user requires only a username to create 
+an account since a user is just an abstract object in this case. In addition user has a shopping cart where items can be 
+added or removed. A user can add up to 40 items of a particular item to the cart. This limit constricts a user from adding 
+lots of items at ounce which would crash the browser. In addition, a log model was implemented to store all searches and 
+results. This represents another form of user generated data.
 
 ## Testing
 We deployed three methods of testing, unit testing with jest, end-to-end testing with cypress and Chai mocha super testing. 

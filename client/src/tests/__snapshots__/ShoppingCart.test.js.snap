@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders shopping cart page 1`] = `
+<shoppingCartPage
+  addComponentToShoppingCart={null}
+  emptyShoppingCart={null}
+  loggedInUser={null}
+  removeComponentFromShoppingCart={null}
+/>
+`;

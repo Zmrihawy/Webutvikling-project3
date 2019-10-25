@@ -22,6 +22,26 @@ router.get("/", function(req, res) {
 });
 
 // TYPE: GET
+// ROUTE: /user/statistics
+// DESC: Get various statistics of components. Used for data viz
+router.get("/statistics", function(req, res) {
+  userModel.find().populate("shoppingCart")
+    .then((users) => {
+      let statisticsCount = {};
+      users.forEach(user => {
+        user.shoppingCart.forEach((component) => {
+        statisticsCount[component.name] = statisticsCount[component.name] ? statisticsCount[component.name] + 1 : 1;
+      })
+      })
+      res.send(statisticsCount);
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send(err)
+    })
+})
+
+// TYPE: GET
 // ROUTE: /user/{id}
 // Get request to get user by id
 router.get("/:id", function(req, res) {

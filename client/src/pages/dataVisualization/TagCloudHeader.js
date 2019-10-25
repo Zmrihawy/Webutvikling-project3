@@ -8,8 +8,12 @@ const TagCloudHeader = props => {
         Data Visualization - Tag cloud
       </Typography>
       <Typography variant="subtitle1" style={{ marginTop: "30px" }}>
-        Created by counting components for each producer and category. More
+        User generated: Created by shoppingCarts. The more times a component appears in any
+        users shoppingCart, the larger the font
+        <br />
+        Components: Created by counting components for each producer and category. More
         components equal larger font.
+
       </Typography>
     </div>
   );

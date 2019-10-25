@@ -10,13 +10,13 @@ Our project build is based of two parts, a client part and a server part. The se
 necessary REST API implementations needed for fetching data from the backend and the client part contains the frontend "user-based"
 actions like searching for an item, showing items, filtering and sorting of items.
 
-### Node js + express (backend) [TODO: Needs updating]
+### Node js + express (backend)
 An Express application is most often used as backend application in a client-server architecture whereas the client could 
 be written in React.js, the server could be written in Express. We used express as our server.
 Express ensured that all middleware can respond to HTTP requests and routing tables were setup to respond to different actions 
 based on the HTTP method. A REST API server system was setup to enable navigation within our catalog page routes possible. 
 We preferred to use REST API over GraphQL because its more easier to understand and deal with. In addition some group 
-members had more experience REST API. 
+members had more experience with REST API. 
 
 We used mongodb as our db. Mongodb is a schemaless database that is easy to setup and use, and is famous for scaling really well, 
 perfect for an app that should be able to handle large amounts of data. To interface with mongodb we chose 
@@ -38,8 +38,9 @@ in redux. We have structured our code such that React components that represent 
 state to their child compoents that often do most of the work.
 
 ## Testing
-We deployed to methods of testing, unit testing with jest and end-to-end testing with cypress. All tests can be found in
-client directory in tests folder. Run `npm test` run all tests. The cypress tests can be found in the cypress folder. 
+We deployed three methods of testing, unit testing with jest, end-to-end testing with cypress and Chai mocha super testing. 
+All unit tests can be found in client directory in tests folder. Run `npm test` run all tests. 
+The cypress tests can be found in the cypress folder. The Chai mocha tests can be found in the server directory.
 
 ### Unit Testing
 We decided to use unit testing for testing individual components. This was done by making snapshot tests for the major
@@ -53,6 +54,9 @@ one component if the item is available in the backend. The test fails if the com
 
 To use cypress navigate to the client directory and the run the following command: `npx cypress open` 
 Then select a test file to begin running it.
+
+
+## Chai Mocha Testing [TODO: needs updating]
 
 ## Design and Functionality
 ### Sorting and filtering 

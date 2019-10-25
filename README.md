@@ -1,5 +1,5 @@
 ## Overview
-THe aim of this project was to implement an online catalog with possibility for a user to search up items and 
+The aim of this project was to implement an online catalog with possibility for a user to search up items and 
 give a form of review for an item that later can be saved into the catalog. As a solution to the problem, 
 we decided to implement an online electronics catalog with various electronic components were a user has a
 shopping cart that can be used to buy components. We thought this idea would provide us with a variety of 

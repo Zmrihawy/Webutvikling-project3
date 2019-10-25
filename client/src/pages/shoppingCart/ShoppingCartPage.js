@@ -18,6 +18,8 @@ import {
   emptyShoppingCart
 } from "../../redux/actions/userActions";
 
+//This is the component of shopping cart page
+
 class ShoppingCartPage extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +29,7 @@ class ShoppingCartPage extends Component {
 
   handleCases() {
     const { loggedInUser } = this.props;
-
+    // If the user is not logged in, then he can't access shopping cart page.
     if (!loggedInUser || JSON.stringify(loggedInUser) === JSON.stringify({})) {
       console.log("user not logged int");
       return (
@@ -38,11 +40,12 @@ class ShoppingCartPage extends Component {
         </div>
       );
     }
+    // If the shopping cart is empty, will return appropriate feedback
     if (!loggedInUser.shoppingCart || loggedInUser.shoppingCart.length === 0) {
       return (
         <div>
           <Typography variant="subtitle1" style={{ margin: "20px" }}>
-            Your shopping cart is empty
+            Your shopping cart is empty 
           </Typography>
         </div>
       );
@@ -123,6 +126,7 @@ class ShoppingCartPage extends Component {
                   aria-label="add"
                   style={{ marginRight: 10 }}
                 >
+             {/*Here we can remove a spesific component from the shopping cart using  removeComponentFromShoppingCart function*/ }
                   <RemoveIcon
                     onClick={() =>
                       removeComponentFromShoppingCart(loggedInUser, component)
@@ -135,6 +139,7 @@ class ShoppingCartPage extends Component {
                   aria-label="add"
                   style={{ marginRight: 10 }}
                 >
+                  {/*Here we can emove a spesific component from the shopping cart using addComponentToShoppingCart function*/ }
                   <AddIcon
                     onClick={() =>
                       addComponentToShoppingCart(loggedInUser, component)
@@ -150,6 +155,7 @@ class ShoppingCartPage extends Component {
 
     return (
       <div>
+      {/*If there are components in shopping cart */}
         <Typography variant="h3" style={{ margin: "20px" }}>
           Shopping cart
         </Typography>
@@ -164,10 +170,10 @@ class ShoppingCartPage extends Component {
               color="primary"
               onClick={() => emptyShoppingCart(loggedInUser)}
             >
-              Buy items
-            </Button>
+              Buy items   {/*The buy buttom will remove all items with appropriate feedback */}
+            </Button>  
             <Typography variant="subtitle1">
-              Total price:{" "}
+              Total price:{" "}     {/*show the total price of all components in shopping cart */}
               {loggedInUser.shoppingCart
                 .map(x => x.price)
                 .reduce((accumulator, current) => {

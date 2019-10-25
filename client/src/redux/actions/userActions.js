@@ -89,7 +89,7 @@ export const removeItemFromShoppingCart = (user, component) => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const emptyShopppingCart = (user, component)  => dispatch => {
+export const emptyShopppingCart = (user)  => dispatch => {
 
     return fetch("/api/user/" + user._id, {
         method: "PATCH",

@@ -22,7 +22,8 @@ class ShoppingCartPage extends Component {
     const {
       loggedInUser,
       addItemToShoppingCart,
-      removeItemFromShoppingCart
+      removeItemFromShoppingCart,
+        emptyShopppingCart
     } = this.props;
 
     let mappedItems;
@@ -119,10 +120,20 @@ class ShoppingCartPage extends Component {
    if (loggedInUser.shoppingCart && loggedInUser.shoppingCart.length === 0){
          return <div><Typography variant="h3" style={{ margin: "20px" }}>Your shopping cart is empty</Typography></div>;
    }else{
-        return <div><Typography variant="h3" style={{ margin: "20px" }}>Shopping cart</Typography><Grid container justify="center" spacing={4} alignItems="center">{mappedItems }</Grid></div>;
+       return(
+           <div>
+               <Typography variant="h3" style={{ margin: "20px" }}>Shopping cart</Typography>
+                   <Grid container justify="center" spacing={4} alignItems="center">
+                       {mappedItems }
+                   </Grid>
+               <Typography sytle={{marginTop: "20px"}}>
+                   <Button variant="outlined" color="primary" onClick={() => emptyShopppingCart(loggedInUser)} >
+                       BUY
+                   </Button>
+               </Typography>
+           </div>
+       );
    }
-    
-
   }
 }
 

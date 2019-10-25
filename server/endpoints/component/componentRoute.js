@@ -1,6 +1,8 @@
 const express = require("express");
 const componentModel = require("./componentModel.js");
+const logModel = require("../log/logModel.js");
 const router = express.Router();
+const _ = require("lodash");
 
 // On every hit, log the time
 router.use(function timeLog(req, res, next) {
@@ -22,9 +24,180 @@ router.get("/", function(req, res) {
 });
 
 // TYPE: GET
+// ROUTE: /component/featuredComponents
+// DESC: Get request to get some featuredComponents. It gets random components, number of
+// components returned depend on the size query param (default is 6). It also checks
+// if components have pictureURL but if to few have it, it will stop trying to enforce
+// this and just return random.
+router.get("/featuredComponents", function(req, res) {
+  const paramSize = parseInt(req.query.size);
+  let responseSize = paramSize ? paramSize : 6;
+  componentModel
+    .aggregate([{ $sample: { size: responseSize * 2 } }])
+    .then(components => {
+      // Try to filter on components having a image URL. If not enough are found, dont bother filtering as its just a nice to have.
+      let filteredComponents = components.filter(
+        component =>
+          component.pictureURL != undefined && component.pictureURL != ""
+      );
+      if (filteredComponents.length >= responseSize) {
+        res.send(_.sampleSize(filteredComponents, responseSize));
+      } else {
+        res.send(_.sampleSize(components, responseSize));
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+});
+
+// TYPE: GET
+// ROUTE: /component/pagination/params
+// PARAMS:
+//    pageNum: Which page to get
+//    objectsPerPage: Num of objects pr page
+//    sortBy: What field to sort by
+//    isAsc: sort by ascending or descending
+//    filterField: What field to sort by, must be used with filterVal
+//    filterVal: What value to sort filterField by. Uses regex to check if
+//      the value contains this string. Must be used with filterField
+// Get requests with pagination and paramaters. Paramters are optional, if none
+// are provided, it just returns the 10 first objects sorted by price ascending.
+router.get("/pagination/", function(req, res) {
+  // Get and parse URL query params
+  let {
+    pageNum,
+    objectsPerPage,
+    sortBy,
+    isAsc,
+    nameSearch,
+    filterField,
+    filterVal
+  } = req.query;
+  pageNum = parseInt(pageNum) ? parseInt(pageNum) : 0;
+  objectsPerPage = parseInt(objectsPerPage) ? parseInt(objectsPerPage) : 10;
+  console.log(isAsc);
+  isAsc = isAsc === "false" ? -1 : 1;
+
+  // If pagination params are set, check that they are in ranger
+  if (objectsPerPage < 1 || objectsPerPage > 50) {
+    res.status(500).send("Bad number of objects per page: " + objectsPerPage);
+  }
+
+  // Build filter object if the corresponding query params are set
+  let filter = {};
+  if (nameSearch) {
+    filter.name = { $regex: nameSearch, $options: "i" };
+  }
+  if (filterField && filterVal) {
+    filter[filterField] = { $regex: filterVal, $options: "i" };
+  }
+
+  // Configure sort object if the query param is set. Otherwise, set it to default
+  // This could be done in one if sentence, but doing it in two to achieve
+  // good and correct error reporting
+  let sortByObj = {};
+  if (sortBy) {
+    // Check if sortby is a valid sort query, if it isnt we return error
+    if (componentModel.schema.paths[sortBy]) {
+      sortByObj[sortBy] = isAsc;
+    } else {
+      console.log("Error! Sortby param not correct");
+      // We could set sort to price here, but it is most likely a bug that should
+      // be sorted out, so just return and send error
+      return res
+        .status(500)
+        .send(
+          "Sort by param not found! Not executing as this is probably a bug"
+        );
+    }
+  } else {
+    // Set default sort value
+    sortByObj.price = isAsc;
+  }
+
+  // Mongoose query. Get a count of all component objects of this query, this is used for pagination metadata
+  componentModel
+    .find(filter)
+    .countDocuments()
+    .then(totObjects => {
+      // Compute the total number of pages for this pagination query. Used for metadata.
+      let totPages = Math.ceil(totObjects / objectsPerPage);
+      // This is the main mongoose query. pagination is done with .skip() and .limit() methods
+      return componentModel
+        .find(filter)
+        .limit(objectsPerPage)
+        .skip(pageNum * objectsPerPage)
+        .sort(sortByObj)
+        .then(components => {
+          // Paginated, filtered and sorted components should now be in the
+          // components variable. Send result back and include pagination
+          // metadata in result
+          let paginationRes = {
+            components,
+            objectsPerPage,
+            pageNum,
+            totPages,
+            totObjects
+          };
+          res.send(paginationRes);
+          let log = new logModel({
+            pageNum,
+            objectsPerPage,
+            sortBy,
+            isAsc,
+            nameSearch,
+            filterField,
+            filterVal,
+            resultComponents: components
+          });
+          log.save().catch(err => console.log(err));
+        })
+        .catch(err => {
+          console.log("Error fetching components", err);
+          res.status(500).send(err);
+        });
+    })
+    .catch(err => {
+      console.log("Error getting component count", err);
+      res.status(500).send(err);
+    });
+});
+
+// TYPE: GET
+// ROUTE: /component/statistics
+// DESC: Get various statistics of components. Used for data visualization.
+router.get("/statistics", function(req, res) {
+  componentModel
+    .find()
+    .then(components => {
+      let statisticsCount = {};
+      components.forEach(component => {
+        statisticsCount[component.category] = statisticsCount[
+          component.category
+        ]
+          ? statisticsCount[component.category] + 1
+          : 1;
+        statisticsCount[component.producer] = statisticsCount[
+          component.producer
+        ]
+          ? statisticsCount[component.producer] + 1
+          : 1;
+      });
+      res.send(statisticsCount);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+});
+
+// TYPE: GET
 // ROUTE: /component/{id}
 // Get request to get component by id
 router.get("/:id", function(req, res) {
+  console.log("copmonent by id", req.params);
   componentModel
     .findById(req.params.id)
     .then(component => res.send(component))
@@ -43,6 +216,8 @@ router.post("/", function(req, res) {
     category: req.body.category,
     description: req.body.description,
     producer: req.body.producer,
+    price: req.body.price,
+    pictureURL: req.body.pictureURL,
     specs: JSON.parse(req.body.specs)
   });
   component
@@ -58,7 +233,7 @@ router.post("/", function(req, res) {
 
 // TYPE: PUT
 // ROUTE: /component/id
-// DESC: Update a component with all new values. Created a new one
+// DESC: Update a component with all new values. Creates a new one
 // if id does not already exist
 router.put("/:id", function(req, res) {
   let component = {
@@ -66,6 +241,8 @@ router.put("/:id", function(req, res) {
     category: req.body.category,
     description: req.body.description,
     producer: req.body.producer,
+    price: req.body.price,
+    pictureURL: req.body.pictureURL,
     specs: JSON.parse(req.body.specs)
   };
   // Find the object with given id and update. The third argument is an object containing

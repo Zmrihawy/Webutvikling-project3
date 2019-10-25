@@ -84,9 +84,6 @@ of action creators and the `thunk` package. This means that all the relevant sta
 in redux. We have structured our code such that React components that represent pages connect to redux, and then delegate the redux
 state to their child components that often do most of the work.
 
-
-
-
 ### Search, Sorting and filtering 
 To search for a component, navigate to the "Browse" page. A user can search for a particular item by simply typing the name of 
 the component in the search field "search by name". Filtering is also possible and is done by typing the value that should 
@@ -114,7 +111,6 @@ To store user generated data a user model was implemented. A user has a shopping
 A user can add up to 40 items of a particular item to the cart. This limit constricts a user from adding lots of items
 at ounce which would crash the browser. In addition, a log model was implemented to store all searches and results. This
 represents another form of user generated data.
-
 
 ## Testing
 We deployed three methods of testing, unit testing with jest, end-to-end testing with cypress and Chai mocha super testing. 
